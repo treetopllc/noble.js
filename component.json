@@ -1,0 +1,15 @@
+{
+    "name": "api",
+    "version": "0.0.0",
+    "description": "JS client library for the NH API (internal use only atm)",
+    "dependencies": {
+        "visionmedia/superagent": "*"
+    },
+    "development": {
+        "visionmedia/mocha": "*"
+    },
+    "scripts": [
+        "index.js",
+        "lib/Client.js"
+    ]
+}
