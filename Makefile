@@ -1,27 +1,31 @@
+BIN = ./node_modules/.bin
+MOCHA = $(BIN)/mocha-phantomjs
+COMPONENT = $(BIN)/component
+HTTP = $(BIN)/http-server
+
 PORT := 3000
-REPORTER := dot
 PID := server.pid
 
-BIN = ./node_modules/.bin
+MOCHA_FLAGS := -R dot
+HTTP_FLAGS := -p $(PORT)
+
 SRC = index.js
 
 all: build
 
-deps: node_modules components
-
 node_modules: package.json
 	npm install
 
-components: component.json
+components: node_modules component.json
 	$(BIN)/component install --dev
 
-build: deps $(SRC)
+build: components $(SRC)
 	$(BIN)/component build --dev
 
 server: $(PID)
 
 $(PID):
-	@$(BIN)/http-server -p $(PORT) -s & echo "$$!" > $@
+	@$(HTTP) $(HTTP_FLAGS) -s & echo "$$!" > $@
 	echo "Server running at http://localhost:$(PORT)/"
 
 killserver: $(PID)
@@ -29,11 +33,11 @@ killserver: $(PID)
 	@rm -f $^
 
 runtest: build
-	$(BIN)/mocha-phantomjs -R $(REPORTER) http://localhost:$(PORT)/test/test.html
+	$(MOCHA) $(MOCHA_FLAGS) http://localhost:$(PORT)/test/test.html
 
-test: deps server runtest killserver
+test: server runtest killserver
 
 clean:
 	rm -rf build/ components/ node_modules/
 
-.PHONY: all deps server killserver runtest test clean
+.PHONY: all server killserver runtest test clean
