@@ -9,7 +9,8 @@
   <script src="../build/build.js"></script>
   <script>
     require("visionmedia-mocha");
-    mocha.setup('bdd');
+    mocha.setup("bdd");
+    mocha.slow("1s");
   </script>
   <script src="test.Client.js"></script>
   <script>

@@ -6,7 +6,8 @@
         "visionmedia/superagent": "*"
     },
     "development": {
-        "visionmedia/mocha": "*"
+        "visionmedia/mocha": "*",
+        "dominicbarnes/expect.js": "*"
     },
     "scripts": [
         "index.js",
