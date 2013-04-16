@@ -3,3 +3,5 @@ npm-debug.log
 
 components
 build
+
+test/api.json
