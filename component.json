@@ -1,7 +1,7 @@
 {
-    "name": "api",
+    "name": "noble.js",
     "version": "0.0.0",
-    "description": "JS client library for the NH API (internal use only atm)",
+    "description": "JS client library for the NobleHour API",
     "dependencies": {
         "visionmedia/superagent": "*"
     },
