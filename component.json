@@ -7,7 +7,7 @@
     "segmentio/extend": "*"
   },
   "development": {
-    "visionmedia/mocha": "*",
+    "visionmedia/mocha": "1.9.0",
     "dominicbarnes/expect.js": "*"
   },
   "scripts": [

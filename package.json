@@ -5,6 +5,7 @@
   "devDependencies": {
     "mocha-phantomjs": "~2.0.1",
     "component": "~0.15.1",
-    "http-server": "~0.5.3"
+    "http-server": "~0.5.3",
+    "phantomjs": "~1.9.0-3"
   }
 }
