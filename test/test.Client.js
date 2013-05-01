@@ -105,11 +105,10 @@ describe("Client", function () {
         });
 
         it("should append all params to the querystring", function (done) {
-            var params = { keywords: "hello world", zip: 12345 },
+            var params = { keywords: "test", zip: 12345 },
                 req = client.search(params, ignore(done)).abort();
 
-            expect(req._query[1]).to.equal("keywords=hello world");
-            expect(req._query[2]).to.equal("zip=12345");
+            expect(req._query[1]).to.equal("keywords=test&zip=12345");
         });
 
         it.skip("should return rows of results", function (done) {
