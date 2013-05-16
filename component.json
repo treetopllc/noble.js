@@ -1,0 +1,17 @@
+{
+  "name": "noble.js",
+  "version": "0.0.0",
+  "description": "JS client library for the NobleHour API",
+  "dependencies": {
+    "dominicbarnes/superagent": "empty-query-obj",
+    "segmentio/extend": "*"
+  },
+  "development": {
+    "visionmedia/mocha": "1.9.0",
+    "dominicbarnes/expect.js": "*"
+  },
+  "scripts": [
+    "index.js",
+    "lib/Client.js"
+  ]
+}
