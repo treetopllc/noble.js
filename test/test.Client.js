@@ -91,28 +91,4 @@ describe("Client", function () {
             });
         });
     });
-
-    describe("#search()", function () {
-        it("should return a Request object", function (done) {
-            var req = client.search({}, ignore(done));
-            expect(req).to.be.a(Request);
-        });
-
-        it("should have a (mostly) empty querystring", function (done) {
-            var req = client.search({}, ignore(done)).abort();
-
-            expect(req._query).to.have.length(1);
-        });
-
-        it("should append all params to the querystring", function (done) {
-            var params = { keywords: "test", zip: 12345 },
-                req = client.search(params, ignore(done)).abort();
-
-            expect(req._query[1]).to.equal("keywords=test&zip=12345");
-        });
-
-        it.skip("should return rows of results", function (done) {
-
-        });
-    });
 });
