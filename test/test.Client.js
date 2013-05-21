@@ -112,10 +112,10 @@ describe("Client", function () {
         });
 
         it("should remove zip if lat/lng are specified", function (done) {
-            var params = { zip: 12345, lat: -50, long: 50 },
+            var params = { zip: 12345, lat: -50, lon: 50 },
                 req = client.search(params, ignore(done)).abort();
 
-            expect(req._query[1]).to.equal("lat=-50&long=50");
+            expect(req._query[1]).to.equal("lat=-50&lon=50");
         });
 
         it("should remove range if neither zip nor lat/lng are specified", function (done) {
