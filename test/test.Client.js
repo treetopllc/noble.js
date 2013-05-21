@@ -78,7 +78,7 @@ describe("Client", function () {
             client.login(config.username, config.password, function (err, auth) {
                 if (err) return done(err);
 
-                expect(auth).to.be.ok()
+                expect(auth).to.be.ok();
                 expect(auth).to.equal(client.auth);
                 done();
             });
@@ -87,6 +87,50 @@ describe("Client", function () {
         it("should fail for bad username / password combo", function (done) {
             client.login("not", "real", function (err) {
                 expect(err.message).to.be.equal("Bad username or password");
+                done();
+            });
+        });
+    });
+
+    describe("#search()", function () {
+        it("should return a Request object", function (done) {
+            var req = client.search({}, ignore(done));
+            expect(req).to.be.a(Request);
+        });
+
+        it("should have a (mostly) empty querystring", function (done) {
+            var req = client.search({}, ignore(done)).abort();
+
+            expect(req._query).to.have.length(1);
+        });
+
+        it("should append all params to the querystring", function (done) {
+            var params = { terms: "test", zip: 12345 },
+                req = client.search(params, ignore(done)).abort();
+
+            expect(req._query[1]).to.equal("terms=test&zip=12345");
+        });
+
+        it("should remove zip if lat/lng are specified", function (done) {
+            var params = { zip: 12345, lat: -50, long: 50 },
+                req = client.search(params, ignore(done)).abort();
+
+            expect(req._query[1]).to.equal("lat=-50&long=50");
+        });
+
+        it("should remove range if neither zip nor lat/lng are specified", function (done) {
+            var params = { terms: "test", range: 50 },
+                req = client.search(params, ignore(done)).abort();
+
+            expect(req._query[1]).to.equal("terms=test");
+        });
+
+        it("should return rows of results", function (done) {
+            client.search({ terms: "school" }, function (err, data, res) {
+                if (err) return done(err);
+
+                expect(data).to.be.ok();
+                expect(data.results).to.be.an(Array);
                 done();
             });
         });
