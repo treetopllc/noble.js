@@ -4,6 +4,7 @@
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "dominicbarnes/superagent": "empty-query-obj",
+    "component/map": "*",
     "segmentio/extend": "*"
   },
   "development": {
@@ -12,6 +13,8 @@
   },
   "scripts": [
     "index.js",
-    "lib/Client.js"
+    "lib/Client.js",
+    "lib/search.js",
+    "lib/utils.js"
   ]
 }
