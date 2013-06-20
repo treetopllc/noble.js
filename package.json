@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "mocha-phantomjs": "~2.0.1",
     "component": "~0.16.5",
+    "mocha-phantomjs": "~3.0.0",
     "http-server": "~0.5.3",
-    "phantomjs": "~1.9.0-3"
+    "phantomjs": "~1.9.1-0"
   }
 }
