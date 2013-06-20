@@ -22,7 +22,7 @@ components: node_modules component.json
 build: components $(SRC)
 	$(BIN)/component build --dev
 
-server: $(PID)
+server: | $(PID)
 
 $(PID):
 	@$(HTTP) $(HTTP_FLAGS) -s & echo "$$!" > $@
