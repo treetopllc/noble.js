@@ -3,7 +3,7 @@ MOCHA = $(BIN)/mocha-phantomjs
 COMPONENT = $(BIN)/component
 HTTP = $(BIN)/http-server
 
-PORT := 3000
+PORT ?= 3000
 PID := server.pid
 
 MOCHA_FLAGS := -R dot
