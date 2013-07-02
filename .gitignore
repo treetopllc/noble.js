@@ -5,4 +5,3 @@ components
 build
 
 test/api.json
-server.pid

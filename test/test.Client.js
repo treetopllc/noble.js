@@ -43,14 +43,14 @@ describe("Client", function () {
         });
 
         it("should return a Request object", function () {
-            expect(client.request()).to.be.an.instanceof(Request);
+            expect(client.request()).to.be.an.instanceOf(Request);
         });
     });
 
     describe("#index()", function () {
         it("should return a Request object", function (done) {
             var req = client.index(ignore(done)).abort();
-            expect(req).to.be.an.instanceof(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
         it("should be the NH API root", function (done) {
@@ -72,7 +72,7 @@ describe("Client", function () {
 
         it("should return a Request object", function (done) {
             var req = client.login(null, null, ignore(done)).abort();
-            expect(req).to.be.an.instanceof(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
         it("should attach the returned auth data to the client object", function (done) {
@@ -96,7 +96,7 @@ describe("Client", function () {
     describe("#search()", function () {
         it("should return a Request object", function (done) {
             var req = client.search({}, ignore(done));
-            expect(req).to.be.an.instanceof(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
         it("should automatically add return=geoJSON to the querystring", function (done) {

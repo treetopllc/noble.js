@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
-    "dominicbarnes/superagent": "empty-query-obj",
+    "visionmedia/superagent": "*",
     "component/map": "*",
     "segmentio/extend": "*"
   },
   "development": {
-    "visionmedia/mocha": "1.9.0",
+    "visionmedia/mocha": "*",
     "chaijs/chai": "*"
   },
   "scripts": [
