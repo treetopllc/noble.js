@@ -1,7 +1,8 @@
 var api = require("noble.js"),
     request = require("superagent"),
+    chai = require("chai"),
     Request = request.Request,
-    expect = require("expect.js");
+    expect = chai.expect;
 
 describe("Client", function () {
     var client, config;
@@ -42,14 +43,14 @@ describe("Client", function () {
         });
 
         it("should return a Request object", function () {
-            expect(client.request()).to.be.a(Request);
+            expect(client.request()).to.be.an.instanceOf(Request);
         });
     });
 
     describe("#index()", function () {
         it("should return a Request object", function (done) {
             var req = client.index(ignore(done)).abort();
-            expect(req).to.be.a(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
         it("should be the NH API root", function (done) {
@@ -71,14 +72,14 @@ describe("Client", function () {
 
         it("should return a Request object", function (done) {
             var req = client.login(null, null, ignore(done)).abort();
-            expect(req).to.be.a(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
         it("should attach the returned auth data to the client object", function (done) {
             client.login(config.username, config.password, function (err, auth) {
                 if (err) return done(err);
 
-                expect(auth).to.be.ok();
+                expect(auth).to.be.ok;
                 expect(auth).to.equal(client.auth);
                 done();
             });
@@ -95,42 +96,46 @@ describe("Client", function () {
     describe("#search()", function () {
         it("should return a Request object", function (done) {
             var req = client.search({}, ignore(done));
-            expect(req).to.be.a(Request);
+            expect(req).to.be.an.instanceOf(Request);
         });
 
-        it("should have a (mostly) empty querystring", function (done) {
-            var req = client.search({}, ignore(done)).abort();
+        it("should automatically add return=geoJSON to the querystring", function (done) {
+            var req = client.search({}, ignore(done));
 
-            expect(req._query).to.have.length(1);
+            expect(req._query[1]).to.equal("return=geoJSON");
+            req.abort();
         });
 
         it("should append all params to the querystring", function (done) {
-            var params = { terms: "test", zip: 12345 },
-                req = client.search(params, ignore(done)).abort();
+            var params = { terms: "test", lat: 100, lon: 100 },
+                req = client.search(params, ignore(done));
 
-            expect(req._query[1]).to.equal("terms=test&zip=12345");
+            expect(req._query[2]).to.equal("terms=test&lat=100&lon=100");
+            req.abort();
         });
 
-        it("should remove zip if lat/lng are specified", function (done) {
-            var params = { zip: 12345, lat: -50, lon: 50 },
-                req = client.search(params, ignore(done)).abort();
+        it("should convert an array of types to numbers", function (done) {
+            var params = { types: [ "opportunities", "events", "organizations" ] },
+                req = client.search(params, ignore(done));
 
-            expect(req._query[1]).to.equal("lat=-50&lon=50");
+            expect(req._query[2]).to.equal("types=" + encodeURIComponent("3,5,2"));
+            req.abort();
         });
 
-        it("should remove range if neither zip nor lat/lng are specified", function (done) {
-            var params = { terms: "test", range: 50 },
-                req = client.search(params, ignore(done)).abort();
+        it("should return an array of results", function (done) {
+            client.search({}, function (err, data, res) {
+                if (err) return done(err);
 
-            expect(req._query[1]).to.equal("terms=test");
+                expect(data.results).to.be.ok;
+                done();
+            });
         });
 
-        it("should return rows of results", function (done) {
+        it("should be returned as geoJSON", function (done) {
             client.search({ terms: "school" }, function (err, data, res) {
                 if (err) return done(err);
 
-                expect(data).to.be.ok();
-                expect(data.results).to.be.an(Array);
+                expect(data.results.features).to.be.ok;
                 done();
             });
         });

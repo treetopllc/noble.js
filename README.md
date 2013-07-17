@@ -30,17 +30,17 @@ nh.login("username/email", "password", function (err, auth) {
  * [Node.js / NPM](http://nodejs.org/)
  * [GNU Make](http://www.gnu.org/software/make/)
 
-## Development Dependencies (installed automatically)
-
- * [mocha](http://visionmedia.github.io/mocha/)
- * [mocha-phantomjs](https://github.com/metaskills/mocha-phantomjs)
- * [PhantomJS](http://phantomjs.org/)
- * [expect.js](https://github.com/LearnBoost/expect.js) (to be replaced with [Chai](http://chaijs.com/))
-
 ## Developers
 
  * Build: `make`
- * Run Tests: `make test`
- * Start Development Server: `make server`
- * Stop Development Server: `make killserver`
  * Clean Built Files: `make clean`
+
+Tests cannot be run via the CLI at this time. (some weirdness with PhantomJS and
+Cross-Domain Requests) The test runner is available via the browser though, so
+start up a web server (the [http-server](https://github.com/nodeapps/http-server)
+module is a good example) in the root directory:
+
+    $ http-server -p 3000 /path/to/noble.js
+
+Then, via [http://localhost:3000/test/test.html](http://localhost:3000/test/test.html)
+you will get the test runner.
