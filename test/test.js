@@ -99,18 +99,29 @@ describe("Client", function () {
             expect(req).to.be.an.instanceOf(Request);
         });
 
-        it("should automatically add return=geoJSON to the querystring", function (done) {
+        it("should not automatically add return=geoJSON to the querystring", function (done) {
             var req = client.search({}, ignore(done));
 
-            expect(req._query[1]).to.equal("return=geoJSON");
+            expect(req._query).to.not.contain("return=geoJSON");
             req.abort();
+        });
+
+        it("should add return=geoJSON when the geojson: true", function (done) {
+            var req = client.search({ geojson: true }, function (err, data) {
+                if (err) return done(err);
+
+                expect(data.results.features).to.be.ok;
+                done();
+            });
+
+            expect(req._query).to.contain("return=geoJSON");
         });
 
         it("should append all params to the querystring", function (done) {
             var params = { terms: "test", lat: 100, lon: 100 },
                 req = client.search(params, ignore(done));
 
-            expect(req._query[2]).to.equal("terms=test&lat=100&lon=100");
+            expect(req._query).to.contain("terms=test&lat=100&lon=100");
             req.abort();
         });
 
@@ -118,7 +129,7 @@ describe("Client", function () {
             var params = { types: [ "opportunities", "events", "organizations" ] },
                 req = client.search(params, ignore(done));
 
-            expect(req._query[2]).to.equal("types=" + encodeURIComponent("3,5,2"));
+            expect(req._query).to.contain("types=" + encodeURIComponent("3,5,2"));
             req.abort();
         });
 
@@ -127,15 +138,6 @@ describe("Client", function () {
                 if (err) return done(err);
 
                 expect(data.results).to.be.ok;
-                done();
-            });
-        });
-
-        it("should be returned as geoJSON", function (done) {
-            client.search({ terms: "school" }, function (err, data, res) {
-                if (err) return done(err);
-
-                expect(data.results.features).to.be.ok;
                 done();
             });
         });
