@@ -32,15 +32,22 @@ nh.login("username/email", "password", function (err, auth) {
 
 ## Developers
 
+### Git Flow
+
+Our development flow uses [git-flow](https://github.com/nvie/gitflow). So make
+sure to start a new branch via git-flow for each new change you intend to make.
+
+### Make Targets
+
  * Build: `make`
  * Clean Built Files: `make clean`
 
-Tests cannot be run via the CLI at this time. (some weirdness with PhantomJS and
-Cross-Domain Requests) The test runner is available via the browser though, so
-start up a web server (the [http-server](https://github.com/nodeapps/http-server)
+Tests _cannot_ be run via the CLI at this time. (some weirdness with PhantomJS
+and Cross-Domain Requests) The test runner is available via the browser though,
+so start up a web server (the [http-server](https://github.com/nodeapps/http-server)
 module is a good example) in the root directory:
 
     $ http-server -p 3000 /path/to/noble.js
 
-Then, via [http://localhost:3000/test/test.html](http://localhost:3000/test/test.html)
-you will get the test runner.
+Then, via [http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
+you will get the browser test runner.
