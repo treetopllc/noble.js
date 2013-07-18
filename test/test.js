@@ -1,4 +1,5 @@
 var api = require("noble.js"),
+    utils = require("noble.js/utils.js"),
     request = require("superagent"),
     chai = require("chai"),
     Request = request.Request,
@@ -139,6 +140,15 @@ describe("Client", function () {
 
                 expect(data.results).to.be.ok;
                 done();
+            });
+        });
+    });
+
+    describe("utils", function () {
+        describe(".normalizeurl()", function () {
+            it("should strip trailing slashes", function () {
+                var url = utils.normalizeurl("http://localhost:7000/");
+                expect(url).to.equal("http://localhost:7000");
             });
         });
     });
