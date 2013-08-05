@@ -3,5 +3,6 @@
     "client_secret": "<< secret >>",
     "api_url": "http://localhost:7000",
     "username": "",
-    "password": ""
+    "password": "",
+    "mailbox_id": ""
 }

@@ -15,6 +15,7 @@
     "index.js",
     "lib/Client.js",
     "lib/search.js",
+    "lib/alerts.js",
     "lib/utils.js"
   ]
 }
