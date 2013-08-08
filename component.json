@@ -1,6 +1,6 @@
 {
   "name": "noble.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "visionmedia/superagent": "*",
@@ -15,6 +15,7 @@
     "index.js",
     "lib/Client.js",
     "lib/search.js",
+    "lib/alerts.js",
     "lib/utils.js"
   ]
 }
