@@ -193,10 +193,14 @@ describe("Client", function () {
 
             before(function (done) {
                 client.mailbox(mailboxId, function (err, alerts) {
-                    if (err) return done(err);
-
-                    alertId = [ alerts[0].id ];
-                    done();
+                    if (err) {
+                        done(err);
+                    } else if (!alerts || alerts.length < 1) {
+                        done(new Error("no alerts found in test mailbox"));
+                    } else {
+                        alertId = [ alerts[0].id ];
+                        done();
+                    }
                 });
             });
 
