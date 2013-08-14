@@ -17,6 +17,11 @@ components: node_modules component.json
 build: components $(SRC)
 	$(COMPONENT) build --dev
 
+test: test/api.json
+
+test/api.json: test/api-dist.json
+	cp $< $@
+
 clean:
 	rm -rf build/ components/ node_modules/
 
