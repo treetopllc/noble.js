@@ -189,28 +189,3 @@ Mark the specified alerts as read.
 | `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
-
-
-
-## Developers
-
-### Dependencies
-
- * [Node.js / NPM](http://nodejs.org/)
- * [GNU Make](http://www.gnu.org/software/make/)
- * [git-flow](https://github.com/nvie/gitflow)
-
-### Make Targets
-
- * Build: `make`
- * Clean Built Files: `make clean`
-
-Tests _cannot_ be run via the CLI at this time. (some weirdness with PhantomJS
-and Cross-Domain Requests) The test runner is available via the browser though,
-so start up a web server (the [http-server](https://github.com/nodeapps/http-server)
-module is a good example) in the root directory:
-
-    $ http-server -p 3000 /path/to/noble.js
-
-Then, via [http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
-you will get the browser test runner.
