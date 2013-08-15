@@ -3,30 +3,29 @@ var api = require("noble.js"),
     request = require("superagent"),
     chai = require("chai"),
     Request = request.Request,
-    expect = chai.expect;
+    expect = chai.expect,
+    client, config;
+
+before(function (done) {
+    request("api.json", function (err, res) {
+        if (err) return done(err);
+
+        var data = res.body;
+        config = data;
+        client = api(config.api_url, config.client_id, config.client_secret);
+
+        client.login(data.username, data.password, done);
+    });
+});
+
+// used to ignore errors that we trigger intentionally (like aborting a request)
+function ignore(callback) {
+    return function () {
+        callback();
+    };
+}
 
 describe("Client", function () {
-    var client, config;
-
-    // used to ignore errors that we trigger intentionally (like aborting a request)
-    function ignore(callback) {
-        return function () {
-            callback();
-        };
-    }
-
-    before(function (done) {
-        request("api.json", function (err, res) {
-            if (err) return done(err);
-
-            var data = res.body;
-            config = data;
-            client = api(config.api_url, config.client_id, config.client_secret);
-
-            client.login(data.username, data.password, done);
-        });
-    });
-
     describe("#request()", function () {
         var client; // meant to override the one from the upper scope
 
@@ -405,12 +404,15 @@ describe("Client", function () {
         });
     });
 
-    describe("utils", function () {
-        describe(".normalizeurl()", function () {
-            it("should strip trailing slashes", function () {
-                var url = utils.normalizeurl("http://localhost:7000/");
-                expect(url).to.equal("http://localhost:7000");
-            });
+    describe("#user()", function () {
+        it("should return a User object", function () {
+            expect(client.user("test")).to.be.an.instanceOf(require("noble.js/lib/User"));
+        });
+    });
+
+    describe("#submission()", function () {
+        it("should return a Submission object", function () {
+            expect(client.submission("test")).to.be.an.instanceOf(require("noble.js/lib/Submission"));
         });
     });
 });
