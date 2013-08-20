@@ -189,3 +189,51 @@ Mark the specified alerts as read.
 | `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
+
+### Client#user(id)
+
+Return an object representing a `User`. (Inherits from `Vertex`)
+
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `id`      | `String` | User UUID   |
+
+
+### Vertex(client, id) *constructor*
+
+Represents a generic vertex within the graph.
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | User UUID                                  |
+
+
+### Vertex#get(callback)
+
+Returns the vertex information.
+
+| Parameter  | Type       | Description |
+| ---------- | ---------- | ----------- |
+| `callback` | `Function` | *See above* |
+
+
+### Vertex#related(type, query, callback)
+
+Returns a list of vertices that are related via the `type` parameter.
+
+| Parameter  | Type       | Description             |
+| ---------- | ---------- | ----------------------- |
+| `type`     | `String`   | Varies by vertex type   |
+| `query`    | `Object`   | Query-string parameters |
+| `callback` | `Function` | *See above*             |
+
+
+### User#submissions(query, callback)
+
+Retrieves a list of submissions for this user.
+
+| Parameter  | Type       | Description             |
+| ---------- | ---------- | ----------------------- |
+| `query`    | `Object`   | Query-string parameters |
+| `callback` | `Function` | *See above*             |
