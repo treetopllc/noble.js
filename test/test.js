@@ -147,7 +147,7 @@ describe("Client", function () {
         var mailboxId;
 
         before(function () {
-            mailboxId = config.mailbox_id;
+            mailboxId = config.user_id;
         });
 
         describe("#mailboxes()", function () {

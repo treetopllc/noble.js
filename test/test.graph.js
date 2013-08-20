@@ -3,17 +3,9 @@ describe("Graph", function () {
 
     this.timeout("5s");
 
-    before(function (done) {
-        client.index(function (err, data) {
-            if (err) {
-                done(err);
-            } else {
-                userId = "51084c32-417c-4a65-9609-031f0a1fc6d0";
-                //userId = data.user;
-                user = client.user(userId);
-                done();
-            }
-        });
+    before(function () {
+        userId = config.user_id;
+        user = client.user(userId);
     });
 
     describe("User", function () {
@@ -62,7 +54,7 @@ describe("Graph", function () {
         });
     });
 
-    describe("Submission", function () {
+    describe.skip("Submission", function () {
         var submission, submissionId;
 
         before(function (done) {
