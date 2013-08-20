@@ -1,5 +1,4 @@
 var api = require("noble.js"),
-    utils = require("noble.js/lib/utils"),
     request = require("superagent"),
     chai = require("chai"),
     Request = request.Request,

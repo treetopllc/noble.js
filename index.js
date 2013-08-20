@@ -1,3 +1,1 @@
-var Client = require("./lib/Client");
-
-module.exports = Client;
+module.exports = require("./lib/Client");
