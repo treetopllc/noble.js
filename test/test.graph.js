@@ -3,9 +3,20 @@ describe("Graph", function () {
 
     this.timeout("5s");
 
-    before(function () {
-        userId = config.user_id;
-        user = client.user(userId);
+    before(function (done) {
+        if (config.user_id) {
+            userId = config.user_id;
+            user = client.user(userId);
+            done();
+        } else {
+            client.index(function (err, data) {
+                if (err) return done(err);
+
+                userId = data.user;
+                user = client.user(userId);
+                done();
+            });
+        }
     });
 
     describe("User", function () {
@@ -17,6 +28,21 @@ describe("Graph", function () {
             it("should retrieve the correct user id", function (done) {
                 user.get(function (err, data) {
                     expect(data.id).to.equal(userId);
+                    done();
+                });
+            });
+
+            it("should parse date fields as Date objects", function (done) {
+                user.get(function (err, data) {
+                    if (err) return done(err);
+
+                    each([ "created", "modified" ], function (prop) {
+                        if (data[prop]) {
+                            expect(data[prop]).to.be.an.instanceOf(Date);
+                            expect(isNaN(data[prop].valueOf())).to.be.false;
+                        }
+                    });
+
                     done();
                 });
             });

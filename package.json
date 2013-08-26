@@ -3,6 +3,8 @@
   "version": "0.2.0",
   "private": true,
   "devDependencies": {
-    "component": "~0.16.7"
+    "component": "~0.17.0",
+    "express": "~3.3.5",
+    "simple-http-proxy": "~0.5.5"
   }
 }
