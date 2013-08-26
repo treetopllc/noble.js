@@ -4,13 +4,15 @@
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "visionmedia/superagent": "*",
+    "component/each": "*",
     "component/map": "*",
     "segmentio/extend": "*",
     "component/inherit": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
-    "chaijs/chai": "*"
+    "chaijs/chai": "*",
+    "caolan/async": "*"
   },
   "scripts": [
     "index.js",
