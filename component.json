@@ -3,14 +3,16 @@
   "version": "0.2.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
-    "visionmedia/superagent": "*",
+    "dominicbarnes/superagent": "noblehour",
+    "component/each": "*",
     "component/map": "*",
     "segmentio/extend": "*",
     "component/inherit": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
-    "chaijs/chai": "*"
+    "dominicbarnes/expect.js": "*",
+    "caolan/async": "*"
   },
   "scripts": [
     "index.js",
@@ -21,6 +23,7 @@
     "lib/Vertex.js",
     "lib/User.js",
     "lib/Submission.js",
-    "lib/utils.js"
+    "lib/utils.js",
+    "lib/date-parse-iso.js"
   ]
 }

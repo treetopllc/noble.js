@@ -4,7 +4,7 @@ COMPONENT = $(BIN)/component
 PORT ?= 3000
 PID := server.pid
 
-SRC = index.js
+SRC = index.js $(wildcard lib/*.js)
 
 all: build
 
@@ -22,7 +22,10 @@ test: test/api.json
 test/api.json: test/api-dist.json
 	cp $< $@
 
+server: node_modules
+	PORT=$(PORT) node test/server.js
+
 clean:
 	rm -rf build/ components/ node_modules/
 
-.PHONY: all clean
+.PHONY: all clean server
