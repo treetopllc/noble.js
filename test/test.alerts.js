@@ -28,23 +28,23 @@ describe("Alerts", function () {
     describe("#mailboxes()", function () {
         it("should return a Request object", function (done) {
             var req = client.mailboxes(ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
         });
 
         it("should return an array of results", function (done) {
             client.mailboxes(function (err, results) {
                 if (err) return done(err);
 
-                expect(results).to.be.an.instanceOf(Array);
+                expect(results).to.be.an(Array);
                 done();
             });
         });
     });
 
     describe("#mailbox()", function (done) {
-        it("should return a Request object", function (done) {
-            var req = client.mailbox(mailboxId, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+        it("should return a Request object", function () {
+            var req = client.mailbox(mailboxId, noop);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
@@ -56,7 +56,7 @@ describe("Alerts", function () {
             client.mailbox(mailboxId, function (err, data) {
                 if (err) return done(err);
 
-                expect(data).to.be.an.instanceOf(Array);
+                expect(data).to.be.an(Array);
                 done();
             });
         });
@@ -68,8 +68,8 @@ describe("Alerts", function () {
                 each(data, function (alert) {
                     each([ "created", "modified" ], function (prop) {
                         if (alert[prop]) {
-                            expect(alert[prop]).to.be.an.instanceOf(Date);
-                            expect(isNaN(alert[prop].valueOf())).to.be.false;
+                            expect(alert[prop]).to.be.a(Date);
+                            expect(isNaN(alert[prop].valueOf())).to.be(false);
                         }
                     });
                 });
@@ -101,7 +101,7 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.mailboxUnread(mailboxId, alertId, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
@@ -141,7 +141,7 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.mailboxRead(mailboxId, alertId, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
@@ -174,13 +174,13 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.mailboxCreate(id, attr, pref, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
         it.skip("should not allow us to create an invalid mailbox", function (done) {
             client.mailboxCreate("test-invalid", {}, {}, function (err, data) {
-                expect(err).to.be.ok;
+                expect(err).to.be.ok();
                 done();
             });
         });
@@ -205,7 +205,7 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.mailboxAttributes(id, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
@@ -242,7 +242,7 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.mailboxPreferences(id, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 
@@ -286,7 +286,7 @@ describe("Alerts", function () {
 
         it("should return a Request object", function (done) {
             var req = client.dispatch([ mailboxId ], alertMeta, alertOptions, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
             req.abort();
         });
 

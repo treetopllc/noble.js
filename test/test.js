@@ -2,9 +2,8 @@ var api = require("noble.js"),
     request = require("superagent"),
     each = require("each"),
     async = require("async"),
-    chai = require("chai"),
+    expect = require("expect.js"),
     Request = request.Request,
-    expect = chai.expect,
     client, config;
 
 before(function (done) {
@@ -12,7 +11,7 @@ before(function (done) {
         if (err) return done(err);
 
         var data = res.body;
-        config = data;
+        config = typeof data === "string" ? JSON.parse(data) : data;
         client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
 
         client.login(data.username, data.password, done);
@@ -25,6 +24,8 @@ function ignore(callback) {
         callback();
     };
 }
+
+function noop() {}
 
 describe("Client", function () {
     describe("#request()", function () {
@@ -44,14 +45,14 @@ describe("Client", function () {
         });
 
         it("should return a Request object", function () {
-            expect(client.request()).to.be.an.instanceOf(Request);
+            expect(client.request()).to.be.a(Request);
         });
     });
 
     describe("#index()", function () {
         it("should return a Request object", function (done) {
             var req = client.index(ignore(done)).abort();
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
         });
 
         it("should be the NH API root", function (done) {
@@ -68,19 +69,19 @@ describe("Client", function () {
         var client; // meant to override the one from the upper scope
 
         before(function () {
-            client = api(config.api_url, config.client_id, config.client_secret);
+            client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
         });
 
         it("should return a Request object", function (done) {
             var req = client.login(null, null, ignore(done)).abort();
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
         });
 
         it("should attach the returned auth data to the client object", function (done) {
             client.login(config.username, config.password, function (err, auth) {
                 if (err) return done(err);
 
-                expect(auth).to.be.ok;
+                expect(auth).to.be.ok();
                 expect(auth).to.equal(client.auth);
                 done();
             });
@@ -97,21 +98,22 @@ describe("Client", function () {
     describe("#search()", function () {
         it("should return a Request object", function (done) {
             var req = client.search({}, ignore(done));
-            expect(req).to.be.an.instanceOf(Request);
+            expect(req).to.be.a(Request);
         });
 
         it("should not automatically add return=geoJSON to the querystring", function (done) {
-            var req = client.search({}, ignore(done));
+            var req = client.search({}, function () {});
 
             expect(req._query).to.not.contain("return=geoJSON");
             req.abort();
+            done();
         });
 
         it("should add return=geoJSON when the geojson: true", function (done) {
             var req = client.search({ geojson: true }, function (err, data) {
                 if (err) return done(err);
 
-                expect(data.results.features).to.be.ok;
+                expect(data.results.features).to.be.ok();
                 done();
             });
 
@@ -138,7 +140,7 @@ describe("Client", function () {
             client.search({}, function (err, data) {
                 if (err) return done(err);
 
-                expect(data.results).to.be.ok;
+                expect(data.results).to.be.ok();
                 done();
             });
         });
@@ -153,8 +155,8 @@ describe("Client", function () {
                         "start_ts", "end_ts"
                     ], function (prop) {
                         if (row[prop]) {
-                            expect(row[prop]).to.be.an.instanceOf(Date);
-                            expect(isNaN(row[prop].valueOf())).to.be.false;
+                            expect(row[prop]).to.be.a(Date);
+                            expect(isNaN(row[prop].valueOf())).to.be(false);
                         }
                     });
                 });
@@ -166,13 +168,13 @@ describe("Client", function () {
 
     describe("#user()", function () {
         it("should return a User object", function () {
-            expect(client.user("test")).to.be.an.instanceOf(require("noble.js/lib/User"));
+            expect(client.user("test")).to.be.a(require("noble.js/lib/User"));
         });
     });
 
     describe.skip("#submission()", function () {
         it("should return a Submission object", function () {
-            expect(client.submission("test")).to.be.an.instanceOf(require("noble.js/lib/Submission"));
+            expect(client.submission("test")).to.be.a(require("noble.js/lib/Submission"));
         });
     });
 });

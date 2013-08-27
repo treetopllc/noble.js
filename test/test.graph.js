@@ -38,8 +38,8 @@ describe("Graph", function () {
 
                     each([ "created", "modified" ], function (prop) {
                         if (data[prop]) {
-                            expect(data[prop]).to.be.an.instanceOf(Date);
-                            expect(isNaN(data[prop].valueOf())).to.be.false;
+                            expect(data[prop]).to.be.a(Date);
+                            expect(isNaN(data[prop].valueOf())).to.be(false);
                         }
                     });
 
@@ -57,7 +57,7 @@ describe("Graph", function () {
                 user.submissions(function (err, list) {
                     if (err) return done(err);
 
-                    expect(list.submissions).to.be.an.instanceOf(Array);
+                    expect(list.submissions).to.be.an(Array);
                     done();
                 });
             });
@@ -66,7 +66,7 @@ describe("Graph", function () {
                 var query = { statuses: 3 },
                     req = user.submissions(query, ignore(done));
 
-                expect(req._query).to.include("statuses=3");
+                expect(req._query).to.contain("statuses=3");
                 req.abort();
             });
 
@@ -74,7 +74,7 @@ describe("Graph", function () {
                 var query = { edge_types: [ 2, 3 ] },
                     req = user.submissions(query, ignore(done));
 
-                expect(req._query).to.include("edge_types=" + encodeURIComponent("2,3"));
+                expect(req._query).to.contain("edge_types=" + encodeURIComponent("2,3"));
                 req.abort();
             });
         });
