@@ -3,9 +3,20 @@ describe("Graph", function () {
 
     this.timeout("5s");
 
-    before(function () {
-        userId = config.user_id;
-        user = client.user(userId);
+    before(function (done) {
+        if (config.user_id) {
+            userId = config.user_id;
+            user = client.user(userId);
+            done();
+        } else {
+            client.index(function (err, data) {
+                if (err) return done(err);
+
+                userId = data.user;
+                user = client.user(userId);
+                done();
+            });
+        }
     });
 
     describe("User", function () {
@@ -20,6 +31,21 @@ describe("Graph", function () {
                     done();
                 });
             });
+
+            it("should parse date fields as Date objects", function (done) {
+                user.get(function (err, data) {
+                    if (err) return done(err);
+
+                    each([ "created", "modified" ], function (prop) {
+                        if (data[prop]) {
+                            expect(data[prop]).to.be.a(Date);
+                            expect(isNaN(data[prop].valueOf())).to.be(false);
+                        }
+                    });
+
+                    done();
+                });
+            });
         });
 
         describe("#submissions()", function () {
@@ -31,7 +57,7 @@ describe("Graph", function () {
                 user.submissions(function (err, list) {
                     if (err) return done(err);
 
-                    expect(list.submissions).to.be.an.instanceOf(Array);
+                    expect(list.submissions).to.be.an(Array);
                     done();
                 });
             });
@@ -40,7 +66,7 @@ describe("Graph", function () {
                 var query = { statuses: 3 },
                     req = user.submissions(query, ignore(done));
 
-                expect(req._query).to.include("statuses=3");
+                expect(req._query).to.contain("statuses=3");
                 req.abort();
             });
 
@@ -48,7 +74,7 @@ describe("Graph", function () {
                 var query = { edge_types: [ 2, 3 ] },
                     req = user.submissions(query, ignore(done));
 
-                expect(req._query).to.include("edge_types=" + encodeURIComponent("2,3"));
+                expect(req._query).to.contain("edge_types=" + encodeURIComponent("2,3"));
                 req.abort();
             });
         });

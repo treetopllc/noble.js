@@ -74,16 +74,25 @@ specific version tag or branch)
 
     $ make test
 
-This will generate a `test/api.json` file (based on `test/api-dist.json`). You
-must modify this file to include an API URL, credentials, etc. (basically just
-fill all the JSON properties in)
+This will generate a `test/api.json` file (based on the largely empty `test/api-dist.json`).
 
-Tests _cannot_ be run via the CLI at this time. (some weirdness with PhantomJS
-and Cross-Domain Requests) The test runner is available via the browser though,
-so start up a web server (the [http-server](https://github.com/nodeapps/http-server)
-module is a good example) in the root directory:
+| Property      | Description                                                                    |
+| ------------- | ------------------------------------------------------------------------------ |
+| client_id     | API Client ID (see treetopllc/kingscross) **REQUIRED**                         |
+| client_secret | API Client Secret (see treetopllc/kingscross) **REQUIRED**                     |
+| api_url       | The Base URL for the API (required for tests) **REQUIRED**                     |
+| proxy_url     | If `null`, will be tested via CORS, otherwise a proxy is set at this path      |
+| username      | NobleHour account username **REQUIRED**                                        |
+| password      | NobleHour account password **REQUIRED**                                        |
+| search        | Hash to be used for testing `Client#search()` **REQUIRED**                     |
+| mailbox_id    | If `null`, a mailbox will be chosen automatically (for testing alerts)         |
+| user_id       | If `null`, the logged in user will be used (starting vertex for graph testing) |
 
-    $ http-server -p 3000
+Tests _cannot_ be run via the CLI at this time, (some weirdness with PhantomJS
+and Cross-Domain Requests) but they can be run in a browser. Start up the test
+server:
+
+    $ make server
 
 Then, via [http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
 you will get the browser test runner.
