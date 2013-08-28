@@ -32,7 +32,7 @@ describe("Client", function () {
         var client; // meant to override the one from the upper scope
 
         before(function () {
-            client = api(config.api_url, config.client_id, config.client_secret);
+            client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
 
             client.auth = {
                 access_token: "foo",
