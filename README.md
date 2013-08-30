@@ -134,18 +134,36 @@ Retrieves a list of available mailboxes from the API.
 | `callback` | `Function` | *See above* |
 
 
-### Client#mailbox(id, [query], callback)
+### Client#mailbox(id)
 
-Retrieves information about a specific mailbox based on an ID.
+Return an object representing a `User`. (Inherits from `Vertex`)
+
+| Parameter | Type     | Description                        |
+| --------- | -------- | ---------------------------------- |
+| `id`      | `String` | Mailbox ID (most likely a user ID) |
+
+
+### Mailbox(client, id) *constructor*
+
+Represents a mailbox within the Alerts API.
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | Mailbox ID (most likely a user ID)         |
+
+
+### Mailbox#get(query, callback)
+
+Returns the mailbox contents.
 
 | Parameter  | Type       | Description                       |
 | ---------- | ---------- | --------------------------------- |
-| `id`       | `String`   | Mailbox ID                        |
 | `query`    | `Object`   | Additional query-string arguments |
 | `callback` | `Function` | *See above*                       |
 
 
-### Client#mailboxCreate(id, attr, pref, callback)
+### Mailbox#create(attr, pref, callback)
 
 Creates a new mailbox with the given configuration.
 
@@ -153,42 +171,44 @@ Creates a new mailbox with the given configuration.
 
 | Parameter  | Type       | Description |
 | ---------- | ---------- | ----------- |
-| `id`       | `String`   | Mailbox ID  |
 | `attr`     | `Object`   | Attributes  |
 | `pref`     | `Object`   | Preferences |
 | `callback` | `Function` | *See above* |
 
 
-### Client#mailboxPreferences(id, callback)
+### Mailbox#stats(callback)
 
-Retrieve the preferences configuration for a given mailbox. (by it's ID)
+Returns the statistics for this mailbox:
 
-| Parameter  | Type       | Description |
-| ---------- | ---------- | ----------- |
-| `id`       | `String`   | Mailbox ID  |
-| `callback` | `Function` | *See above* |
+ * **new**: Number of Unread Alerts
+ * **deleted**: Number of Deleted Alerts
+ * **read**: Number of Read Alerts
+ * **total**: Total Number of Alerts
+
+| Parameter  | Type       | Description                       |
+| ---------- | ---------- | --------------------------------- |
+| `callback` | `Function` | *See above*                       |
 
 
-### Client#mailboxUnread(mailbox, alerts, callback)
+### Mailbox#markUnread(alerts, callback)
 
 Mark the specified alerts as unread.
 
 | Parameter  | Type       | Description        |
 | ---------- | ---------- | ------------------ |
-| `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
 
 
-### Client#mailboxRead(mailbox, alerts, callback)
+### Mailbox#markRead(alerts, callback)
 
 Mark the specified alerts as read.
 
 | Parameter  | Type       | Description        |
 | ---------- | ---------- | ------------------ |
-| `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
+
 
 ### Client#user(id)
 
