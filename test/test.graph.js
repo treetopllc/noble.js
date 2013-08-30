@@ -1,25 +1,23 @@
 describe("Graph", function () {
-    var user, userId;
+    describe("User", function () {
+        var user, userId;
 
-    this.timeout("5s");
-
-    before(function (done) {
-        if (config.user_id) {
-            userId = config.user_id;
-            user = client.user(userId);
-            done();
-        } else {
-            client.index(function (err, data) {
-                if (err) return done(err);
-
-                userId = data.user;
+        before(function (done) {
+            if (config.graph.users.user_id) {
+                userId = config.graph.users.user_id;
                 user = client.user(userId);
                 done();
-            });
-        }
-    });
+            } else {
+                client.index(function (err, data) {
+                    if (err) return done(err);
 
-    describe("User", function () {
+                    userId = data.user;
+                    user = client.user(userId);
+                    done();
+                });
+            }
+        });
+
         describe("#get()", function () {
             it("should pass a smoke test", function (done) {
                 user.get(done);
@@ -80,26 +78,112 @@ describe("Graph", function () {
         });
     });
 
-    describe.skip("Submission", function () {
-        var submission, submissionId;
+    describe("Submission", function () {
+        var conf, user, userId, submission, submissionId;
+
+        function setUser(id) {
+            userId = id;
+            user = client.user(id);
+        }
+
+        function setSubmission(id) {
+            submissionId = id;
+            submission = client.submission(id);
+        }
+
+        before(function () {
+            conf = config.graph.submissions;
+        });
 
         before(function (done) {
-            user.submissions(function (err, data) {
-                if (err) {
-                    done(err);
-                } else if (!data.submissions.length) {
-                    done(new Error("No submissions found to test with"));
-                } else {
-                    submissionId = data.submissions[0].submission_id;
-                    submission = client.submission(submissionId);
+            if (conf.user_id) {
+                setUser(conf.user_id);
+                done();
+            } else {
+                client.index(function (err, data) {
+                    if (err) return done(err);
+
+                    setUser(data.user);
                     done();
-                }
-            });
+                });
+            }
+        });
+
+        before(function () {
+            if (conf.submission_id) {
+                setSubmission(conf.submission_id);
+            } else {
+                user.submissions(function (err, data) {
+                    if (err) {
+                        done(err);
+                    } else if (!data.submissions.length) {
+                        done(new Error("No submissions found to test with"));
+                    } else {
+                        setSubmission(data.submissions[0].id);
+                        done();
+                    }
+                });
+            }
         });
 
         describe("#get()", function () {
             it("should pass a smoke test", function (done) {
                 submission.get(done);
+            });
+        });
+
+        describe("#attributes()", function () {
+            it("should pass a smoke test", function (done) {
+                submission.attributes({ status: 0 }, done);
+            });
+
+            it("should send the input object directly", function () {
+                var input = { status: 0 },
+                    req = submission.attributes(input, noop);
+
+                expect(req._data).to.eql(input);
+                req.abort();
+            });
+        });
+
+        describe("#status()", function () {
+            it("should be a shortcut for setting the status attribute", function () {
+                var req = submission.status(0, noop);
+
+                expect(req._data).to.eql({ status: 0 });
+                req.abort();
+            });
+
+            it("should not include a description when set to a falsy value", function () {
+                var req = submission.status(0, false, noop);
+
+                expect(req._data).to.eql({ status: 0 });
+                req.abort();
+            });
+
+            it("should include a description when set to a truthy value", function () {
+                var req = submission.status(0, "foo", noop);
+
+                expect(req._data).to.eql({ status: 0, description: "foo" });
+                req.abort();
+            });
+        });
+
+        describe("#accept()", function () {
+            it("should be a shortcut for setting the status attribute to 1", function () {
+                var req = submission.accept(noop);
+
+                expect(req._data).to.eql({ status: 1 });
+                req.abort();
+            });
+        });
+
+        describe("#deny()", function () {
+            it("should be a shortcut for setting the status attribute to 2", function () {
+                var req = submission.deny(noop);
+
+                expect(req._data).to.eql({ status: 2 });
+                req.abort();
             });
         });
     });

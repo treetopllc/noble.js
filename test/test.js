@@ -12,7 +12,7 @@ before(function (done) {
 
         var data = res.body;
         config = typeof data === "string" ? JSON.parse(data) : data;
-        client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
+        client = createClient();
 
         client.login(data.username, data.password, done);
     });
@@ -27,12 +27,16 @@ function ignore(callback) {
 
 function noop() {}
 
+function createClient() {
+    return api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
+}
+
 describe("Client", function () {
     describe("#request()", function () {
         var client; // meant to override the one from the upper scope
 
         before(function () {
-            client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
+            client = createClient();
 
             client.auth = {
                 access_token: "foo",
@@ -69,7 +73,7 @@ describe("Client", function () {
         var client; // meant to override the one from the upper scope
 
         before(function () {
-            client = api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
+            client = createClient();
         });
 
         it("should return a Request object", function (done) {
@@ -146,7 +150,7 @@ describe("Client", function () {
         });
 
         it("should parse date fields as Date objects", function (done) {
-            client.search(config.search, function (err, data) {
+            client.search(config.graph.search, function (err, data) {
                 if (err) return done(err);
 
                 each(data.results, function (row) {

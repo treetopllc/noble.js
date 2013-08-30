@@ -3,12 +3,25 @@
     "client_secret": null,
     "api_url": "http://kingscross.local:7000",
     "proxy_url": "/api",
+
     "username": null,
     "password": null,
-    "search": {
-        "terms": "school",
-        "limit": 50
+
+    "alerts": {
+        "mailbox_id": null
     },
-    "mailbox_id": null,
-    "user_id": null
+
+    "graph": {
+        "search": {
+            "terms": "school",
+            "limit": 50
+        },
+        "users": {
+            "user_id": null
+        },
+        "submissions": {
+            "user_id": null,
+            "submission_id": null
+        }
+    }
 }
