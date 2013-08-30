@@ -11,7 +11,7 @@ describe("Alerts", function () {
             if (err) return done(err);
 
             async.detectSeries(list, function (item, done) {
-                client.mailbox(item, function (err, alerts) {
+                client.mailbox(item).get(function (err, alerts) {
                     if (err || !alerts.length) {
                         done(false);
                     } else {
@@ -27,8 +27,7 @@ describe("Alerts", function () {
 
     describe("#mailboxes()", function () {
         it("should return a Request object", function (done) {
-            var req = client.mailboxes(ignore(done));
-            expect(req).to.be.a(Request);
+            expect(client.mailboxes(ignore(done))).to.be.a(Request);
         });
 
         it("should return an array of results", function (done) {
@@ -41,257 +40,193 @@ describe("Alerts", function () {
         });
     });
 
-    describe("#mailbox()", function (done) {
-        it("should return a Request object", function () {
-            var req = client.mailbox(mailboxId, noop);
-            expect(req).to.be.a(Request);
-            req.abort();
+    describe("#mailbox()", function () {
+        it("should return a Mailbox object", function () {
+            expect(client.mailbox(mailboxId)).to.be.a(require("noble.js/lib/Mailbox"));
         });
 
-        it("should sucessfully run (smoke test)", function (done) {
-            client.mailbox(mailboxId, done);
+        it("should set the client and id properly", function () {
+            expect(client.mailbox(mailboxId)).to.eql({
+                client: client,
+                id: mailboxId
+            });
+        });
+    });
+
+    describe("Mailbox", function (done) {
+        var mailbox;
+
+        before(function () {
+            mailbox = client.mailbox(mailboxId);
         });
 
-        it("should return an array as the resultset", function (done) {
-            client.mailbox(mailboxId, function (err, data) {
-                if (err) return done(err);
+        describe("#get()", function () {
+            it("should return a Request object", function () {
+                var req = mailbox.get(noop);
+                expect(req).to.be.a(Request);
+                req.abort();
+            });
 
-                expect(data).to.be.an(Array);
-                done();
+            it("should sucessfully run (smoke test)", function (done) {
+                mailbox.get(done);
+            });
+
+            it("should return an array as the resultset", function (done) {
+                mailbox.get(function (err, data) {
+                    if (err) return done(err);
+
+                    expect(data).to.be.an(Array);
+                    done();
+                });
+            });
+
+            it("should parse date fields as Date objects", function (done) {
+                mailbox.get(function (err, data) {
+                    if (err) return done(err);
+
+                    each(data, function (alert) {
+                        each([ "created", "modified" ], function (prop) {
+                            if (alert[prop]) {
+                                expect(alert[prop]).to.be.a(Date);
+                                expect(isNaN(alert[prop].valueOf())).to.be(false);
+                            }
+                        });
+                    });
+
+                    done();
+                });
             });
         });
 
-        it("should parse date fields as Date objects", function (done) {
-            client.mailbox(mailboxId, function (err, data) {
-                if (err) return done(err);
+        describe.skip("#create()", function () {
+            it("should return a Request object", function (done) {
+                var req = client.mailbox("test-invalid").create({}, {}, ignore(done));
+                expect(req).to.be.a(Request);
+                req.abort();
+            });
 
-                each(data, function (alert) {
-                    each([ "created", "modified" ], function (prop) {
-                        if (alert[prop]) {
-                            expect(alert[prop]).to.be.a(Date);
-                            expect(isNaN(alert[prop].valueOf())).to.be(false);
-                        }
+            it.skip("should not allow us to create an invalid mailbox", function (done) {
+                client.mailbox("test-invalid").create({}, {}, function (err, data) {
+                    expect(err).to.be.ok();
+                    done();
+                });
+            });
+
+            it("should allow the creation of a valid mailbox", function (done) {
+                var attr = {
+                        firstname: "Test",
+                        lastname: "User",
+                        email: "test.user@example.com"
+                    },
+                    pref = {};
+
+                client.mailbox("test-id-1").create(attr, pref, done);
+            });
+        });
+
+        describe("#stats()", function () {
+            it("should return a Request object", function (done) {
+                var req = mailbox.stats(ignore(done));
+                expect(req).to.be.a(Request);
+                req.abort();
+            });
+
+            it("should successfully run (smoke test)", function (done) {
+                mailbox.stats(done);
+            });
+
+            it("should return an object of stats", function (done) {
+                mailbox.stats(function (err, stats) {
+                    if (err) return done(err);
+
+                    expect(stats).to.have.keys("deleted", "new", "read", "total");
+                    done();
+                });
+            });
+        });
+
+        describe("#markUnread()", function () {
+            var alertId;
+
+            before(function (done) {
+                mailbox.get(function (err, alerts) {
+                    if (err) {
+                        done(err);
+                    } else if (!alerts || alerts.length < 1) {
+                        done(new Error("no alerts found in test mailbox"));
+                    } else {
+                        alertId = [ alerts[0].id ];
+                        done();
+                    }
+                });
+            });
+
+            beforeEach(function (done) {
+                mailbox.markRead(alertId, done);
+            });
+
+            it("should return a Request object", function (done) {
+                var req = mailbox.markUnread(alertId, ignore(done));
+                expect(req).to.be.a(Request);
+                req.abort();
+            });
+
+            it("should successfully run (smoke test)", function (done) {
+                mailbox.markUnread(alertId, done);
+            });
+
+            it("should change the read property of the alert", function (done) {
+                mailbox.markUnread(alertId, function (err) {
+                    if (err) return done(err);
+
+                    mailbox.get(function (err, alerts) {
+                        if (err) return done(err);
+
+                        expect(alerts[0]).to.have.property("read", false);
+                        done();
                     });
                 });
-
-                done();
             });
         });
-    });
 
-    describe("#mailboxUnread()", function () {
-        var alertId;
+        describe("#markRead()", function () {
+            var alertId;
 
-        before(function (done) {
-            client.mailbox(mailboxId, function (err, alerts) {
-                if (err) {
-                    done(err);
-                } else if (!alerts || alerts.length < 1) {
-                    done(new Error("no alerts found in test mailbox"));
-                } else {
+            before(function (done) {
+                mailbox.get(function (err, alerts) {
+                    if (err) return done(err);
+
                     alertId = [ alerts[0].id ];
                     done();
-                }
-            });
-        });
-
-        beforeEach(function (done) {
-            client.mailboxRead(mailboxId, alertId, done);
-        });
-
-        it("should return a Request object", function (done) {
-            var req = client.mailboxUnread(mailboxId, alertId, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
-
-        it("should successfully run (smoke test)", function (done) {
-            client.mailboxUnread(mailboxId, alertId, done);
-        });
-
-        it("should change the read property of the alert", function (done) {
-            client.mailboxUnread(mailboxId, alertId, function (err) {
-                if (err) return done(err);
-
-                client.mailbox(mailboxId, function (err, alerts) {
-                    if (err) return done(err);
-
-                    expect(alerts[0]).to.have.property("read", false);
-                    done();
                 });
             });
-        });
-    });
 
-    describe("#mailboxRead()", function () {
-        var alertId;
-
-        before(function (done) {
-            client.mailbox(mailboxId, function (err, alerts) {
-                if (err) return done(err);
-
-                alertId = [ alerts[0].id ];
-                done();
+            beforeEach(function (done) {
+                mailbox.markUnread(alertId, done);
             });
-        });
 
-        beforeEach(function (done) {
-            client.mailboxUnread(mailboxId, alertId, done);
-        });
+            it("should return a Request object", function (done) {
+                var req = mailbox.markRead(alertId, ignore(done));
+                expect(req).to.be.a(Request);
+                req.abort();
+            });
 
-        it("should return a Request object", function (done) {
-            var req = client.mailboxRead(mailboxId, alertId, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
+            it("should successfully run (smoke test)", function (done) {
+                mailbox.markRead(alertId, done);
+            });
 
-        it("should successfully run (smoke test)", function (done) {
-            client.mailboxRead(mailboxId, alertId, done);
-        });
-
-        it("should change the read property of the alert", function (done) {
-            client.mailboxRead(mailboxId, alertId, function (err) {
-                if (err) return done(err);
-
-                client.mailbox(mailboxId, function (err, alerts) {
+            it("should change the read property of the alert", function (done) {
+                mailbox.markRead(alertId, function (err) {
                     if (err) return done(err);
 
-                    expect(alerts[0]).to.have.property("read", true);
-                    done();
+                    mailbox.get(function (err, alerts) {
+                        if (err) return done(err);
+
+                        expect(alerts[0]).to.have.property("read", true);
+                        done();
+                    });
                 });
             });
-        });
-    });
-
-    describe.skip("#mailboxCreate()", function () {
-        var id = "test-id-1",
-            attr = {
-                firstname: "Test",
-                lastname: "User",
-                email: "test.user@example.com"
-            },
-            pref = {};
-
-        it("should return a Request object", function (done) {
-            var req = client.mailboxCreate(id, attr, pref, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
-
-        it.skip("should not allow us to create an invalid mailbox", function (done) {
-            client.mailboxCreate("test-invalid", {}, {}, function (err, data) {
-                expect(err).to.be.ok();
-                done();
-            });
-        });
-
-        it("should allow the creation of a valid mailbox", function (done) {
-            client.mailboxCreate(id, attr, pref, done);
-        });
-    });
-
-    describe.skip("#mailboxAttributes()", function () {
-        var id = "test-id-3",
-            attr = {
-                firstname: "Test",
-                lastname: "User",
-                email: "test.user@example.com"
-            },
-            pref = {};
-
-        before(function (done) {
-            client.mailboxCreate(id, attr, pref, done);
-        });
-
-        it("should return a Request object", function (done) {
-            var req = client.mailboxAttributes(id, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
-
-        it("should sucessfully run (smoke test)", function (done) {
-            client.mailboxAttributes(id, done);
-        });
-
-        it("should return an object as the resultset", function (done) {
-            client.mailboxAttributes(id, function (err, data) {
-                if (err) return done(err);
-
-                expect(data).to.be.an("object");
-                done();
-            });
-        });
-    });
-
-    describe.skip("#mailboxPreferences()", function () {
-        var id = "test-id-4",
-            attr = {
-                firstname: "Test",
-                lastname: "User",
-                email: "test.user@example.com"
-            },
-            pref = {
-                email: true,
-                mobile: false,
-                sms: false
-            };
-
-        before(function (done) {
-            client.mailboxCreate(id, attr, pref, done);
-        });
-
-        it("should return a Request object", function (done) {
-            var req = client.mailboxPreferences(id, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
-
-        it("should sucessfully run (smoke test)", function (done) {
-            client.mailboxPreferences(id, done);
-        });
-
-        it("should return an object as the resultset", function (done) {
-            client.mailboxPreferences(id, function (err, data) {
-                if (err) return done(err);
-
-                expect(data).to.be.an("object");
-                done();
-            });
-        });
-    });
-
-    describe.skip("#dispatch()", function () {
-        var mailboxId = "test-id-5",
-            alertMeta = {
-                type: "10",
-                template_attrs: {
-                    subject: "Test Subject",
-                    prefix: "test-prefix-",
-                    suffix: "-test-suffix"
-                },
-                action_attrs: {
-                    group_id: "some-uuid",
-                    entity_id: "some-other-uuid"
-                }
-            },
-            alertOptions = {};
-
-        before(function (done) {
-            client.mailboxCreate(mailboxId, {
-                firstname: "Test",
-                lastname: "User",
-                email: "test.user@example.com"
-            }, {}, done);
-        });
-
-        it("should return a Request object", function (done) {
-            var req = client.dispatch([ mailboxId ], alertMeta, alertOptions, ignore(done));
-            expect(req).to.be.a(Request);
-            req.abort();
-        });
-
-        it("should sucessfully run (smoke test)", function (done) {
-            client.dispatch([ mailboxId ], alertMeta, alertOptions, done);
         });
     });
 });
