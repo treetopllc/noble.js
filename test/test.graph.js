@@ -109,17 +109,19 @@ describe("Graph", function () {
             }
         });
 
-        before(function () {
+        before(function (done) {
             if (conf.submission_id) {
                 setSubmission(conf.submission_id);
             } else {
+                this.timeout("5s");
+
                 user.submissions(function (err, data) {
                     if (err) {
                         done(err);
                     } else if (!data.submissions.length) {
                         done(new Error("No submissions found to test with"));
                     } else {
-                        setSubmission(data.submissions[0].id);
+                        setSubmission(data.submissions[0].submission_id);
                         done();
                     }
                 });
