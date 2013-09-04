@@ -35,7 +35,7 @@ describe("Graph", function () {
                     if (err) return done(err);
 
                     each([ "created", "modified" ], function (prop) {
-                        if (data[prop]) {
+                        if (typeof data[prop] !== "undefined") {
                             expect(data[prop]).to.be.a(Date);
                             expect(isNaN(data[prop].valueOf())).to.be(false);
                         }
@@ -48,10 +48,12 @@ describe("Graph", function () {
 
         describe("#submissions()", function () {
             it("should pass a smoke test", function (done) {
+                this.timeout("5s");
                 user.submissions(done);
             });
 
             it("should retrieve an array of submissions", function (done) {
+                this.timeout("5s");
                 user.submissions(function (err, list) {
                     if (err) return done(err);
 
@@ -75,20 +77,36 @@ describe("Graph", function () {
                 expect(req._query).to.contain("edge_types=" + encodeURIComponent("2,3"));
                 req.abort();
             });
+
+            it("should parse date fields as Date objects", function (done) {
+                user.get(function (err, data) {
+                    if (err) return done(err);
+
+                    each([ "content_modified", "submission_date" ], function (prop) {
+                        if (typeof data[prop] !== "undefined") {
+                            expect(data[prop]).to.be.a(Date);
+                            expect(isNaN(data[prop].valueOf())).to.be(false);
+                        }
+                    });
+
+                    done();
+                });
+            });
         });
     });
 
     describe("Submission", function () {
-        var conf, user, userId, submission, submissionId;
+        var conf, user, userId, submission, submissionId, submissionTypeId, req;
 
         function setUser(id) {
             userId = id;
             user = client.user(id);
         }
 
-        function setSubmission(id) {
-            submissionId = id;
-            submission = client.submission(id);
+        function setSubmission(data) {
+            submissionId = data.submission_id;
+            submissionTypeId = data.submission_type_id;
+            submission = client.submission(submissionId, submissionTypeId);
         }
 
         before(function () {
@@ -110,8 +128,8 @@ describe("Graph", function () {
         });
 
         before(function (done) {
-            if (conf.submission_id) {
-                setSubmission(conf.submission_id);
+            if (conf.submission_id && conf.submission_type_id) {
+                setSubmission(conf);
             } else {
                 this.timeout("5s");
 
@@ -121,10 +139,17 @@ describe("Graph", function () {
                     } else if (!data.submissions.length) {
                         done(new Error("No submissions found to test with"));
                     } else {
-                        setSubmission(data.submissions[0].submission_id);
+                        setSubmission(data.submissions[0]);
                         done();
                     }
                 });
+            }
+        });
+
+        afterEach(function () {
+            if (req) {
+                req.abort();
+                req = null;
             }
         });
 
@@ -139,53 +164,54 @@ describe("Graph", function () {
                 submission.attributes({ status: 0 }, done);
             });
 
-            it("should send the input object directly", function () {
-                var input = { status: 0 },
-                    req = submission.attributes(input, noop);
+            it("should prepopulate content_id and submission_type fields", function () {
+                req = submission.attributes({}, noop);
 
-                expect(req._data).to.eql(input);
-                req.abort();
+                expect(req._data).to.have.property("content_id", submissionId)
+                    .and.have.property("submission_type", submissionTypeId);
+            });
+
+            it("should send the input object directly", function () {
+                req = submission.attributes({ status: 0 }, noop);
+
+                expect(req._data).to.have.property("status", 0);
             });
         });
 
         describe("#status()", function () {
             it("should be a shortcut for setting the status attribute", function () {
-                var req = submission.status(0, noop);
+                req = submission.status(0, noop);
 
-                expect(req._data).to.eql({ status: 0 });
-                req.abort();
+                expect(req._data).to.have.property("status", 0);
             });
 
             it("should not include a description when set to a falsy value", function () {
-                var req = submission.status(0, false, noop);
+                req = submission.status(0, false, noop);
 
-                expect(req._data).to.eql({ status: 0 });
-                req.abort();
+                expect(req._data).to.not.have.property("description");
             });
 
             it("should include a description when set to a truthy value", function () {
-                var req = submission.status(0, "foo", noop);
+                req = submission.status(0, "foo", noop);
 
-                expect(req._data).to.eql({ status: 0, description: "foo" });
-                req.abort();
+                expect(req._data).to.have.property("status", 0)
+                    .and.have.property("description", "foo");
             });
         });
 
         describe("#accept()", function () {
             it("should be a shortcut for setting the status attribute to 1", function () {
-                var req = submission.accept(noop);
+                req = submission.accept(noop);
 
-                expect(req._data).to.eql({ status: 1 });
-                req.abort();
+                expect(req._data).to.have.property("status", 1);
             });
         });
 
         describe("#deny()", function () {
             it("should be a shortcut for setting the status attribute to 2", function () {
-                var req = submission.deny(noop);
+                req = submission.deny(noop);
 
-                expect(req._data).to.eql({ status: 2 });
-                req.abort();
+                expect(req._data).to.have.property("status", 2);
             });
         });
     });
