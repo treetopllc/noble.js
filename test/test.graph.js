@@ -96,7 +96,10 @@ describe("Graph", function () {
     });
 
     describe("Submission", function () {
-        var conf, user, userId, submission, submissionId, submissionTypeId, req;
+        var conf,
+            user, userId,
+            submission, submissionId, submissionTypeId, contentId,
+            req;
 
         function setUser(id) {
             userId = id;
@@ -105,8 +108,9 @@ describe("Graph", function () {
 
         function setSubmission(data) {
             submissionId = data.submission_id;
+            contentId = data.content_id;
             submissionTypeId = data.submission_type_id;
-            submission = client.submission(submissionId, submissionTypeId);
+            submission = client.submission(submissionId);
         }
 
         before(function () {
@@ -159,49 +163,41 @@ describe("Graph", function () {
             });
         });
 
-        describe("#attributes()", function () {
-            it("should pass a smoke test", function (done) {
-                submission.attributes({ status: 0 }, done);
-            });
-
-            it("should prepopulate content_id and submission_type fields", function () {
-                req = submission.attributes({}, noop);
-
-                expect(req._data).to.have.property("content_id", submissionId)
-                    .and.have.property("submission_type", submissionTypeId);
-            });
-
-            it("should send the input object directly", function () {
-                req = submission.attributes({ status: 0 }, noop);
-
-                expect(req._data).to.have.property("status", 0);
-            });
-        });
-
         describe("#status()", function () {
+            it("should pass a smoke test", function (done) {
+                submission.status(contentId, submissionTypeId, 0, done);
+            });
+
             it("should be a shortcut for setting the status attribute", function () {
-                req = submission.status(0, noop);
+                req = submission.status(contentId, submissionTypeId, 0, noop);
 
                 expect(req._data).to.have.property("status", 0);
             });
 
             it("should not include a description when set to a falsy value", function () {
-                req = submission.status(0, false, noop);
+                req = submission.status(contentId, submissionTypeId, 0, false, noop);
 
                 expect(req._data).to.not.have.property("description");
             });
 
             it("should include a description when set to a truthy value", function () {
-                req = submission.status(0, "foo", noop);
+                req = submission.status(contentId, submissionTypeId, 0, "foo", noop);
 
                 expect(req._data).to.have.property("status", 0)
                     .and.have.property("description", "foo");
+            });
+
+            it("should prepopulate content_id and submission_type fields", function () {
+                req = submission.status(contentId, submissionTypeId, 0, noop);
+
+                expect(req._data).to.have.property("content_id", contentId)
+                    .and.have.property("submission_type", submissionTypeId);
             });
         });
 
         describe("#accept()", function () {
             it("should be a shortcut for setting the status attribute to 1", function () {
-                req = submission.accept(noop);
+                req = submission.accept(contentId, submissionTypeId, noop);
 
                 expect(req._data).to.have.property("status", 1);
             });
@@ -209,7 +205,7 @@ describe("Graph", function () {
 
         describe("#deny()", function () {
             it("should be a shortcut for setting the status attribute to 2", function () {
-                req = submission.deny(noop);
+                req = submission.deny(contentId, submissionTypeId, noop);
 
                 expect(req._data).to.have.property("status", 2);
             });

@@ -22,7 +22,8 @@
         "submissions": {
             "user_id": null,
             "submission_id": null,
-            "submission_type_id": null
+            "submission_type_id": null,
+            "content_id": null
         }
     }
 }
