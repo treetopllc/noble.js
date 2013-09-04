@@ -1,7 +1,9 @@
 Version History
 ===============
 
-## ???
+## 0.3.0
+ * Adding Support for Modifying Submission Status
+ * SuperAgent parser now allows plaintext (if JSON.parse fails) (ec860a866db2f14e62b816a8b7b8606b39183e14)
  * Adding Alerts Statistics (4a7862b6335e0be8cd3195e441d846dcef154e99)
  * Made Alerts API fluent (like the newer Graph API) (4a7862b6335e0be8cd3195e441d846dcef154e99)
  * Added custom ISO-8601 date parser for oldIE (d7cecaecaf919fb8e2b761f5b7f5358f143d6834)
