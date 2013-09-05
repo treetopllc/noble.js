@@ -134,18 +134,36 @@ Retrieves a list of available mailboxes from the API.
 | `callback` | `Function` | *See above* |
 
 
-### Client#mailbox(id, [query], callback)
+### Client#mailbox(id)
 
-Retrieves information about a specific mailbox based on an ID.
+Return an object representing a `User`. (Inherits from `Vertex`)
+
+| Parameter | Type     | Description                        |
+| --------- | -------- | ---------------------------------- |
+| `id`      | `String` | Mailbox ID (most likely a user ID) |
+
+
+### Mailbox(client, id) *constructor*
+
+Represents a mailbox within the Alerts API.
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | Mailbox ID (most likely a user ID)         |
+
+
+### Mailbox#get(query, callback)
+
+Returns the mailbox contents.
 
 | Parameter  | Type       | Description                       |
 | ---------- | ---------- | --------------------------------- |
-| `id`       | `String`   | Mailbox ID                        |
 | `query`    | `Object`   | Additional query-string arguments |
 | `callback` | `Function` | *See above*                       |
 
 
-### Client#mailboxCreate(id, attr, pref, callback)
+### Mailbox#create(attr, pref, callback)
 
 Creates a new mailbox with the given configuration.
 
@@ -153,50 +171,43 @@ Creates a new mailbox with the given configuration.
 
 | Parameter  | Type       | Description |
 | ---------- | ---------- | ----------- |
-| `id`       | `String`   | Mailbox ID  |
 | `attr`     | `Object`   | Attributes  |
 | `pref`     | `Object`   | Preferences |
 | `callback` | `Function` | *See above* |
 
 
-### Client#mailboxPreferences(id, callback)
+### Mailbox#stats(callback)
 
-Retrieve the preferences configuration for a given mailbox. (by it's ID)
+Returns the statistics for this mailbox:
 
-| Parameter  | Type       | Description |
-| ---------- | ---------- | ----------- |
-| `id`       | `String`   | Mailbox ID  |
-| `callback` | `Function` | *See above* |
+ * **new**: Number of Unread Alerts
+ * **deleted**: Number of Deleted Alerts
+ * **read**: Number of Read Alerts
+ * **total**: Total Number of Alerts
+
+| Parameter  | Type       | Description                       |
+| ---------- | ---------- | --------------------------------- |
+| `callback` | `Function` | *See above*                       |
 
 
-### Client#mailboxUnread(mailbox, alerts, callback)
+### Mailbox#markUnread(alerts, callback)
 
 Mark the specified alerts as unread.
 
 | Parameter  | Type       | Description        |
 | ---------- | ---------- | ------------------ |
-| `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
 
 
-### Client#mailboxRead(mailbox, alerts, callback)
+### Mailbox#markRead(alerts, callback)
 
 Mark the specified alerts as read.
 
 | Parameter  | Type       | Description        |
 | ---------- | ---------- | ------------------ |
-| `mailbox`  | `String`   | Mailbox ID         |
 | `alerts`   | `String`   | Array of Alert IDs |
 | `callback` | `Function` | *See above*        |
-
-### Client#user(id)
-
-Return an object representing a `User`. (Inherits from `Vertex`)
-
-| Parameter | Type     | Description |
-| --------- | -------- | ----------- |
-| `id`      | `String` | User UUID   |
 
 
 ### Vertex(client, id) *constructor*
@@ -229,6 +240,25 @@ Returns a list of vertices that are related via the `type` parameter.
 | `callback` | `Function` | *See above*             |
 
 
+### Client#user(id)
+
+Returns a `User` object.
+
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `id`      | `String` | User UUID   |
+
+
+### User(client, id) *constructor*
+
+Represents a User within the Graph API. (inherits from `Vertex`)
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | User / Vertex ID                           |
+
+
 ### User#submissions(query, callback)
 
 Retrieves a list of submissions for this user.
@@ -237,3 +267,66 @@ Retrieves a list of submissions for this user.
 | ---------- | ---------- | ----------------------- |
 | `query`    | `Object`   | Query-string parameters |
 | `callback` | `Function` | *See above*             |
+
+
+### Client#submission(id)
+
+Returns a `Submission` object.
+
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `id`      | `String` | User UUID   |
+
+
+### Submission(client, id) *constructor*
+
+Represents a Submission within the Graph API. (inherits from `Vertex`)
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | Submission / Vertex ID                     |
+
+
+### Submission#status(contentId, typeId, status, description, callback)
+
+Updates the status of a submission. Available status codes:
+
+|  ID  | Description |
+| :--: | ----------- |
+|  0   | Unsubmitted |
+|  1   | Accepted    |
+|  2   | Denied      |
+|  3   | Pending     |
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `status`      | `Number`   | *See above for available status codes*                            |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |
+
+
+### Submission#accept(contentId, typeId, description, callback)
+
+Short-hand for setting the status to `1`.
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |
+
+
+### Submission#deny(contentId, typeId, description, callback)
+
+Short-hand for setting the status to `2`.
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |

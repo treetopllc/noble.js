@@ -2,8 +2,8 @@ describe("Alerts", function () {
     var mailboxId;
 
     before(function (done) {
-        if (config.mailbox_id) {
-            mailboxId = config.mailbox_id;
+        if (config.alerts.mailbox_id) {
+            mailboxId = config.alerts.mailbox_id;
             return done();
         }
 
@@ -12,11 +12,7 @@ describe("Alerts", function () {
 
             async.detectSeries(list, function (item, done) {
                 client.mailbox(item).get(function (err, alerts) {
-                    if (err || !alerts.length) {
-                        done(false);
-                    } else {
-                        done(!!alerts.length);
-                    }
+                    done(err ? false : !!alerts.length);
                 });
             }, function (result) {
                 mailboxId = result;
