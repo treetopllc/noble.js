@@ -292,12 +292,12 @@ Represents a Submission within the Graph API. (inherits from `Vertex`)
 
 Updates the status of a submission. Available status codes:
 
-| ID | Description |
-| -- | ----------- |
-| 0  | Unsubmitted |
-| 1  | Accepted    |
-| 2  | Denied      |
-| 3  | Pending     |
+|  ID  | Description |
+| :--: | ----------- |
+|  0   | Unsubmitted |
+|  1   | Accepted    |
+|  2   | Denied      |
+|  3   | Pending     |
 
 | Parameter     | Type       | Description                                                       |
 | ------------- | ---------- | ----------------------------------------------------------------- |
