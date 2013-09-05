@@ -210,15 +210,6 @@ Mark the specified alerts as read.
 | `callback` | `Function` | *See above*        |
 
 
-### Client#user(id)
-
-Return an object representing a `User`. (Inherits from `Vertex`)
-
-| Parameter | Type     | Description |
-| --------- | -------- | ----------- |
-| `id`      | `String` | User UUID   |
-
-
 ### Vertex(client, id) *constructor*
 
 Represents a generic vertex within the graph.
@@ -249,6 +240,25 @@ Returns a list of vertices that are related via the `type` parameter.
 | `callback` | `Function` | *See above*             |
 
 
+### Client#user(id)
+
+Returns a `User` object.
+
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `id`      | `String` | User UUID   |
+
+
+### User(client, id) *constructor*
+
+Represents a User within the Graph API. (inherits from `Vertex`)
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | User / Vertex ID                           |
+
+
 ### User#submissions(query, callback)
 
 Retrieves a list of submissions for this user.
@@ -257,3 +267,66 @@ Retrieves a list of submissions for this user.
 | ---------- | ---------- | ----------------------- |
 | `query`    | `Object`   | Query-string parameters |
 | `callback` | `Function` | *See above*             |
+
+
+### Client#submission(id)
+
+Returns a `Submission` object.
+
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `id`      | `String` | User UUID   |
+
+
+### Submission(client, id) *constructor*
+
+Represents a Submission within the Graph API. (inherits from `Vertex`)
+
+| Parameter | Type     | Description                                |
+| --------- | -------- | ------------------------------------------ |
+| `client`  | `Client` | The base client object (passed internally) |
+| `id`      | `String` | Submission / Vertex ID                     |
+
+
+### Submission#status(contentId, typeId, status, description, callback)
+
+Updates the status of a submission. Available status codes:
+
+| ID | Description |
+| -- | ----------- |
+| 0  | Unsubmitted |
+| 1  | Accepted    |
+| 2  | Denied      |
+| 3  | Pending     |
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `status`      | `Number`   | *See above for available status codes*                            |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |
+
+
+### Submission#accept(contentId, typeId, description, callback)
+
+Short-hand for setting the status to `1`.
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |
+
+
+### Submission#deny(contentId, typeId, description, callback)
+
+Short-hand for setting the status to `2`.
+
+| Parameter     | Type       | Description                                                       |
+| ------------- | ---------- | ----------------------------------------------------------------- |
+| `contentId`   | `String`   | Required to identify the submission (`vertex.content_id`)         |
+| `typeId`      | `Number`   | Required to identify the submission (`vertex.submission_type_id`) |
+| `description` | `String`   | **Optional** description (saved for historical purposes)          |
+| `callback`    | `Function` | *See above*                                                       |
