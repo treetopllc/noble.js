@@ -1,4 +1,6 @@
 describe("Graph", function () {
+    this.timeout("10s");
+
     describe("User", function () {
         var user, userId;
 
@@ -47,8 +49,6 @@ describe("Graph", function () {
         });
 
         describe("#submissions()", function () {
-            this.timeout("5s");
-
             it("should pass a smoke test", function (done) {
                 user.submissions(done);
             });
@@ -133,8 +133,6 @@ describe("Graph", function () {
             if (conf.submission_id && conf.submission_type_id) {
                 setSubmission(conf);
             } else {
-                this.timeout("5s");
-
                 user.submissions(function (err, data) {
                     if (err) {
                         done(err);

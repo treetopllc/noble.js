@@ -167,13 +167,13 @@ describe("Client", function () {
 
     describe("#user()", function () {
         it("should return a User object", function () {
-            expect(client.user("test")).to.be.a(require("noble.js/lib/User"));
+            expect(client.user("test")).to.be.a(api.User);
         });
     });
 
     describe.skip("#submission()", function () {
         it("should return a Submission object", function () {
-            expect(client.submission("test")).to.be.a(require("noble.js/lib/Submission"));
+            expect(client.submission("test")).to.be.a(api.Submission);
         });
     });
 });

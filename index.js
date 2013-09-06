@@ -1,1 +1,5 @@
-module.exports = require("./lib/Client");
+try {
+    module.exports = require("./lib");
+} catch (e) {
+    module.exports = require("./lib-cov");
+}

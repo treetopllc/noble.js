@@ -1,6 +1,6 @@
-var parse = require("noble.js/lib/date-parse-iso.js");
-
 describe("Date Parsing", function () {
+    var parse = api.isoDateParse;
+
     it("should not get a NaN", function () {
         expect(isNaN(parse("2013-04-11T20:41:00.000000Z"))).to.be(false);
     });
