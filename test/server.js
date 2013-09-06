@@ -3,11 +3,13 @@ var path = require("path"),
     proxy = require("simple-http-proxy"),
     app = module.exports = express(),
     root = path.resolve(__dirname, ".."),
-    port = process.env.PORT,
+    port = process.env.PORT || 3000,
     config = require("./api.json");
 
-app.use(express.directory(root, { icons: true }));
+app.use("/build", require("component-serve")({ root: root }));
+
 app.use(express.static(root));
+app.use(express.directory(root));
 
 if (config.proxy_url) {
     app.use(config.proxy_url, proxy(config.api_url + "/"));
