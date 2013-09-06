@@ -1,5 +1,7 @@
 BIN = ./node_modules/.bin
 COMPONENT = $(BIN)/component
+ASSETS = $(BIN)/component-assets
+COVERJS = $(BIN)/coverjs
 
 PORT ?= 3000
 PID := server.pid
@@ -14,18 +16,20 @@ node_modules: package.json
 components: node_modules component.json
 	$(COMPONENT) install --dev
 
-build: components $(SRC)
+build: components lib $(SRC)
 	$(COMPONENT) build --dev
 
-test: test/api.json
+lib: $(wildcard lib/*.js)
+	$(ASSETS) scripts:index.js,lib/*.js
 
-test/api.json: test/api-dist.json
-	cp $< $@
+lib-cov: $(wildcard lib/*.js)
+	$(COVERJS) -o $@ $^
+	$(ASSETS) scripts:index.js,lib-cov/*.js
 
-server: node_modules
+server: node_modules lib-cov
 	PORT=$(PORT) node test/server.js
 
 clean:
-	rm -rf build/ components/ node_modules/
+	rm -rf build/ components/ node_modules/ lib-cov/
 
-.PHONY: all clean server
+.PHONY: all clean server lib
