@@ -3,11 +3,20 @@
 <head>
   <meta charset="utf-8">
   <title>Mocha Tests</title>
-  <link rel="stylesheet" href="../build/build.css" />
+  <link rel="stylesheet" href="../build/build.css">
+  <link rel="stylesheet" href="JSCovReporter/reporter.css">
 </head>
 <body>
   <div id="mocha"></div>
+  <div id="coverage"></div>
+  <div id="menu"></div>
+
   <script src="../build/build.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+  <script src="JSCovReporter/reporter.js"></script>
+  <script src="JSCovReporter/JSCovReporter.js"></script>
   <script>
     require("mocha");
 
@@ -19,7 +28,11 @@
   <script src="test.graph.js"></script>
   <script src="test.date-parse-iso.js"></script>
   <script>
-    (window.mochaPhantomJS || mocha).run();
+    (window.mochaPhantomJS || mocha).run(function () {
+      if (typeof window.__$coverObject !== 'undefined') {
+        var reporter = new JSCovReporter({ coverObject: window.__$coverObject });
+      }
+    });
   </script>
 </body>
 </html>
