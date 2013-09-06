@@ -47,13 +47,13 @@ describe("Graph", function () {
         });
 
         describe("#submissions()", function () {
+            this.timeout("5s");
+
             it("should pass a smoke test", function (done) {
-                this.timeout("5s");
                 user.submissions(done);
             });
 
             it("should retrieve an array of submissions", function (done) {
-                this.timeout("5s");
                 user.submissions(function (err, list) {
                     if (err) return done(err);
 
@@ -67,7 +67,6 @@ describe("Graph", function () {
                     req = user.submissions(query, ignore(done));
 
                 expect(req._query).to.contain("statuses=3");
-                req.abort();
             });
 
             it("should append arrays as lists separated by commas", function (done) {
@@ -75,7 +74,6 @@ describe("Graph", function () {
                     req = user.submissions(query, ignore(done));
 
                 expect(req._query).to.contain("edge_types=" + encodeURIComponent("2,3"));
-                req.abort();
             });
 
             it("should parse date fields as Date objects", function (done) {
@@ -150,13 +148,6 @@ describe("Graph", function () {
             }
         });
 
-        afterEach(function () {
-            if (req) {
-                req.abort();
-                req = null;
-            }
-        });
-
         describe("#get()", function () {
             it("should pass a smoke test", function (done) {
                 submission.get(done);
@@ -169,26 +160,24 @@ describe("Graph", function () {
             });
 
             it("should be a shortcut for setting the status attribute", function () {
-                req = submission.status(contentId, submissionTypeId, 0, noop);
-
+                var req = submission.status(contentId, submissionTypeId, 0, noop);
                 expect(req._data).to.have.property("status", 0);
             });
 
             it("should not include a description when set to a falsy value", function () {
-                req = submission.status(contentId, submissionTypeId, 0, false, noop);
-
+                var req = submission.status(contentId, submissionTypeId, 0, false, noop);
                 expect(req._data).to.not.have.property("description");
             });
 
             it("should include a description when set to a truthy value", function () {
-                req = submission.status(contentId, submissionTypeId, 0, "foo", noop);
+                var req = submission.status(contentId, submissionTypeId, 0, "foo", noop);
 
                 expect(req._data).to.have.property("status", 0)
                     .and.have.property("description", "foo");
             });
 
             it("should prepopulate content_id and submission_type fields", function () {
-                req = submission.status(contentId, submissionTypeId, 0, noop);
+                var req = submission.status(contentId, submissionTypeId, 0, noop);
 
                 expect(req._data).to.have.property("content_id", contentId)
                     .and.have.property("submission_type", submissionTypeId);
@@ -197,16 +186,14 @@ describe("Graph", function () {
 
         describe("#accept()", function () {
             it("should be a shortcut for setting the status attribute to 1", function () {
-                req = submission.accept(contentId, submissionTypeId, noop);
-
+                var req = submission.accept(contentId, submissionTypeId, noop);
                 expect(req._data).to.have.property("status", 1);
             });
         });
 
         describe("#deny()", function () {
             it("should be a shortcut for setting the status attribute to 2", function () {
-                req = submission.deny(contentId, submissionTypeId, noop);
-
+                var req = submission.deny(contentId, submissionTypeId, noop);
                 expect(req._data).to.have.property("status", 2);
             });
         });

@@ -55,7 +55,7 @@ describe("Client", function () {
 
     describe("#index()", function () {
         it("should return a Request object", function (done) {
-            var req = client.index(ignore(done)).abort();
+            var req = client.index(ignore(done));
             expect(req).to.be.a(Request);
         });
 
@@ -77,7 +77,7 @@ describe("Client", function () {
         });
 
         it("should return a Request object", function (done) {
-            var req = client.login(null, null, ignore(done)).abort();
+            var req = client.login(null, null, ignore(done));
             expect(req).to.be.a(Request);
         });
 
@@ -106,11 +106,8 @@ describe("Client", function () {
         });
 
         it("should not automatically add return=geoJSON to the querystring", function (done) {
-            var req = client.search({}, function () {});
-
+            var req = client.search({}, ignore(done));
             expect(req._query).to.not.contain("return=geoJSON");
-            req.abort();
-            done();
         });
 
         it("should add return=geoJSON when the geojson: true", function (done) {
@@ -129,7 +126,6 @@ describe("Client", function () {
                 req = client.search(params, ignore(done));
 
             expect(req._query).to.contain("terms=test&lat=100&lon=100");
-            req.abort();
         });
 
         it("should convert an array of types to numbers", function (done) {
@@ -137,7 +133,6 @@ describe("Client", function () {
                 req = client.search(params, ignore(done));
 
             expect(req._query).to.contain("types=" + encodeURIComponent("3,5,2"));
-            req.abort();
         });
 
         it("should return an array of results", function (done) {

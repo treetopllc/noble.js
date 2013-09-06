@@ -7,6 +7,8 @@ describe("Alerts", function () {
             return done();
         }
 
+        this.timeout("10s");
+
         client.mailboxes(function (err, list) {
             if (err) return done(err);
 
@@ -57,10 +59,9 @@ describe("Alerts", function () {
         });
 
         describe("#get()", function () {
-            it("should return a Request object", function () {
-                var req = mailbox.get(noop);
+            it("should return a Request object", function (done) {
+                var req = mailbox.get(ignore(done));
                 expect(req).to.be.a(Request);
-                req.abort();
             });
 
             it("should sucessfully run (smoke test)", function (done) {
@@ -98,7 +99,6 @@ describe("Alerts", function () {
             it("should return a Request object", function (done) {
                 var req = client.mailbox("test-invalid").create({}, {}, ignore(done));
                 expect(req).to.be.a(Request);
-                req.abort();
             });
 
             it.skip("should not allow us to create an invalid mailbox", function (done) {
@@ -124,7 +124,6 @@ describe("Alerts", function () {
             it("should return a Request object", function (done) {
                 var req = mailbox.stats(ignore(done));
                 expect(req).to.be.a(Request);
-                req.abort();
             });
 
             it("should successfully run (smoke test)", function (done) {
@@ -164,7 +163,6 @@ describe("Alerts", function () {
             it("should return a Request object", function (done) {
                 var req = mailbox.markUnread(alertId, ignore(done));
                 expect(req).to.be.a(Request);
-                req.abort();
             });
 
             it("should successfully run (smoke test)", function (done) {
@@ -172,15 +170,11 @@ describe("Alerts", function () {
             });
 
             it("should change the read property of the alert", function (done) {
-                mailbox.markUnread(alertId, function (err) {
+                mailbox.markUnread(alertId, function (err, data) {
                     if (err) return done(err);
 
-                    mailbox.get(function (err, alerts) {
-                        if (err) return done(err);
-
-                        expect(alerts[0]).to.have.property("read", false);
-                        done();
-                    });
+                    expect(data[0]).to.have.property("read", false);
+                    done();
                 });
             });
         });
@@ -204,7 +198,6 @@ describe("Alerts", function () {
             it("should return a Request object", function (done) {
                 var req = mailbox.markRead(alertId, ignore(done));
                 expect(req).to.be.a(Request);
-                req.abort();
             });
 
             it("should successfully run (smoke test)", function (done) {
@@ -212,15 +205,11 @@ describe("Alerts", function () {
             });
 
             it("should change the read property of the alert", function (done) {
-                mailbox.markRead(alertId, function (err) {
+                mailbox.markRead(alertId, function (err, data) {
                     if (err) return done(err);
 
-                    mailbox.get(function (err, alerts) {
-                        if (err) return done(err);
-
-                        expect(alerts[0]).to.have.property("read", true);
-                        done();
-                    });
+                    expect(data[0]).to.have.property("read", true);
+                    done();
                 });
             });
         });
