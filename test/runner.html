@@ -27,9 +27,10 @@
   <script src="test.alerts.js"></script>
   <script src="test.graph.js"></script>
   <script src="test.date-parse-iso.js"></script>
+  <script src="test.utils.js"></script>
   <script>
     (window.mochaPhantomJS || mocha).run(function () {
-      if (typeof window.__$coverObject !== 'undefined') {
+      if (typeof window.__$coverObject !== "undefined" && typeof JSCovReporter !== "undefined") {
         var reporter = new JSCovReporter({ coverObject: window.__$coverObject });
       }
     });

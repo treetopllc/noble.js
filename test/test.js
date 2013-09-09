@@ -176,4 +176,14 @@ describe("Client", function () {
             expect(client.submission("test")).to.be.a(api.Submission);
         });
     });
+
+    describe("response parsing", function () {
+        it("should treat text/plain as JSON", function () {
+            expect(request.parse["text/plain"]("{}")).to.eql({});
+        });
+
+        it("should return the plain string if JSON.parse fails", function () {
+            expect(request.parse["text/plain"]("foo")).to.equal("foo");
+        });
+    });
 });

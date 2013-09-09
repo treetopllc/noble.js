@@ -16,4 +16,10 @@ describe("Date Parsing", function () {
         expect(d.getUTCSeconds()).to.equal(0);
         expect(d.getUTCMilliseconds()).to.equal(0);
     });
+
+    it("should throw an exception when an unparsable date is used", function () {
+        expect(function () {
+            parse("abc");
+        }).to.throwException(/Could not parse abc as a date/);
+    });
 });
