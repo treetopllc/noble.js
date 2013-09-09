@@ -328,3 +328,7 @@ code .number { color: #2F6FAD }
 .pass .count { background: #BFFFBF;}
 .error .count { background: #F8D5D8; color: red}
 #coverage { font-size: 12px; }
+
+
+/* added by Dominic Barnes */
+#mocha-stats { right: 300px; }

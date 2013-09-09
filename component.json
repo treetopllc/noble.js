@@ -12,7 +12,10 @@
   "development": {
     "visionmedia/mocha": "*",
     "dominicbarnes/expect.js": "*",
-    "caolan/async": "*"
+    "caolan/async": "*",
+    "component/jquery": "*",
+    "components/backbone": "*",
+    "component/underscore": "*"
   },
   "scripts": [
     "index.js",

@@ -12,9 +12,11 @@
   <div id="menu"></div>
 
   <script src="../build/build.js"></script>
-  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+  <script>
+    var jQuery = $ = require("jquery"),
+      Backbone = require("backbone"),
+      _ = require("underscore");
+  </script>
   <script src="JSCovReporter/reporter.js"></script>
   <script src="JSCovReporter/JSCovReporter.js"></script>
   <script>
