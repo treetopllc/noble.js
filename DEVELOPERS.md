@@ -12,7 +12,7 @@
     $ make
 
 This will build the component itself, including downloading and installing all
-component dependencies. This is a prerequisite for opening the test runner.
+component dependencies.
 
     $ make clean
 
@@ -70,23 +70,18 @@ code elsewhere likely will not need to change. (Unless you're locked into a
 specific version tag or branch)
 
 
+## Coverage Testing
+
+To run code coverage tests, (run in parallel with the mocha unit tests) you
+need to build an "instrumented" version of `lib/`. (called `lib-cov/`)
+
+    $ make lib-cov
+
+After this, you can run the server (see "Running Tests") and run the unit tests,
+the coverage results will be displayed to the right after the tests are done.
+
+
 ## Running Tests
-
-    $ make test
-
-This will generate a `test/api.json` file (based on the largely empty `test/api-dist.json`).
-
-| Property      | Description                                                                    |
-| ------------- | ------------------------------------------------------------------------------ |
-| client_id     | API Client ID (see treetopllc/kingscross) **REQUIRED**                         |
-| client_secret | API Client Secret (see treetopllc/kingscross) **REQUIRED**                     |
-| api_url       | The Base URL for the API (required for tests) **REQUIRED**                     |
-| proxy_url     | If `null`, will be tested via CORS, otherwise a proxy is set at this path      |
-| username      | NobleHour account username **REQUIRED**                                        |
-| password      | NobleHour account password **REQUIRED**                                        |
-| search        | Hash to be used for testing `Client#search()` **REQUIRED**                     |
-| mailbox_id    | If `null`, a mailbox will be chosen automatically (for testing alerts)         |
-| user_id       | If `null`, the logged in user will be used (starting vertex for graph testing) |
 
 Tests _cannot_ be run via the CLI at this time, (some weirdness with PhantomJS
 and Cross-Domain Requests) but they can be run in a browser. Start up the test
@@ -96,3 +91,7 @@ server:
 
 Then, via [http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
 you will get the browser test runner.
+
+This server is using a module called [`component-assets`](https://github.com/anthonyshort/component-assets)
+for compiling the component automatically in the background during each refresh
+of the test runner. (you don't need to run `make` for each change anymore)
