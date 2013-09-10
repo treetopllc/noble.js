@@ -88,6 +88,52 @@ the API url and authentication parameters, among other things.
 
     $ make test/api.json
 
+### Available Config Properties (test/api.json)
+
+````javascript
+{
+    // required for the api itself
+    "client_id": null,
+    "client_secret": null,
+    "api_url": "http://kingscross.local:7000",
+    // if falsy, it will use the URL above (and test CORS by extension)
+    "proxy_url": "/api",
+    // noblehour account login details
+    "username": null,
+    "password": null,
+
+    // configuration for testing the alerts API (treetopllc/ponyexpress)
+    "alerts": {
+        "mailbox_id": null
+    },
+
+    // configuration for testing the graph API (treetopllc/drake)
+    "graph": {
+        // search parameters (see `Client#search(params)`)
+        "search": {
+            "terms": "school",
+            "limit": 50
+        },
+        // testing user graph
+        "users": {
+            // specify root user vertex (if not, the logged in user will be used)
+            "user_id": null
+        },
+        // testing user submissions graph
+        "submissions": {
+            // specify root user vertex (if not, the logged in user will be used)
+            "user_id": null,
+            // specify a submission_id (if not, the first submission from the above user_id will be used)
+            "submission_id": null,
+            // additional meta required by api119
+            "submission_type_id": null,
+            "content_id": null
+        }
+    }
+}
+
+````
+
 Tests _cannot_ be run via the CLI at this time, (some weirdness with PhantomJS
 and Cross-Domain Requests) but they can be run in a browser. Start up the test
 server:
