@@ -26,14 +26,16 @@ lib-cov: $(wildcard lib/*.js) | node_modules
 	$(COVERJS) -o $@ $^
 	$(ASSETS) scripts:index.js,lib-cov/*.js
 
-server: node_modules components
+server: test/api.json node_modules components
 	rm -rf build/
 	PORT=$(PORT) node test/server.js
 
 clean:
 	rm -rf build/ components/ node_modules/ lib-cov/
 
+test: server
+
 test/api.json: test/api-dist.json
 	cp $^ $@
 
-.PHONY: all clean server lib lib-cov
+.PHONY: all clean server lib lib-cov test
