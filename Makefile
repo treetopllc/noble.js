@@ -19,7 +19,7 @@ components: component.json | node_modules
 build: lib $(SRC) | node_modules components
 	$(COMPONENT) build --dev
 
-lib: $(wildcard lib/*.js)
+lib: $(wildcard lib/*.js) | node_modules
 	$(ASSETS) scripts:index.js,lib/*.js
 
 lib-cov: $(wildcard lib/*.js) | node_modules
