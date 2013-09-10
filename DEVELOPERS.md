@@ -83,6 +83,11 @@ the coverage results will be displayed to the right after the tests are done.
 
 ## Running Tests
 
+First, you need to create a test configuration file, which has places to set
+the API url and authentication parameters, among other things.
+
+    $ make test/api.json
+
 Tests _cannot_ be run via the CLI at this time, (some weirdness with PhantomJS
 and Cross-Domain Requests) but they can be run in a browser. Start up the test
 server:

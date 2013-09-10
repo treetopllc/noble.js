@@ -33,4 +33,7 @@ server: node_modules components
 clean:
 	rm -rf build/ components/ node_modules/ lib-cov/
 
+test/api.json: test/api-dist.json
+	cp $^ $@
+
 .PHONY: all clean server lib lib-cov
