@@ -104,6 +104,8 @@ the API url and authentication parameters, among other things.
 
     // configuration for testing the alerts API (treetopllc/ponyexpress)
     "alerts": {
+        // specify a mailbox to test with (if not, one will be chosen automatically
+        // by iterating through the list of all mailboxes until 1 is found that contains alerts)
         "mailbox_id": null
     },
 
