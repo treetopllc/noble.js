@@ -77,14 +77,16 @@ describe("Graph", function () {
             });
 
             it("should parse date fields as Date objects", function (done) {
-                user.get(function (err, data) {
+                user.submissions(function (err, data) {
                     if (err) return done(err);
 
-                    each([ "content_modified", "submission_date" ], function (prop) {
-                        if (typeof data[prop] !== "undefined") {
-                            expect(data[prop]).to.be.a(Date);
-                            expect(isNaN(data[prop].valueOf())).to.be(false);
-                        }
+                    each(data.submissions, function (submission) {
+                        each([ "content_modified", "submission_date" ], function (prop) {
+                            if (typeof submission[prop] !== "undefined") {
+                                expect(submission[prop]).to.be.a(Date);
+                                expect(isNaN(submission[prop].valueOf())).to.be(false);
+                            }
+                        });
                     });
 
                     done();

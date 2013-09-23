@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Mocha Tests</title>
-  <link rel="stylesheet" href="../build/build.css">
-  <link rel="stylesheet" href="JSCovReporter/reporter.css">
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="../build/build.css">
+    <link rel="stylesheet" href="JSCovReporter/reporter.css">
 </head>
 <body>
-  <div id="mocha"></div>
-  <div id="coverage"></div>
-  <div id="menu"></div>
+    <div id="mocha"></div>
+    <div id="coverage"></div>
+    <div id="menu"></div>
 
-  <script src="../build/build.js"></script>
-  <script>
-    var jQuery = $ = require("jquery"),
-      Backbone = require("backbone"),
-      _ = require("underscore");
-  </script>
-  <script src="JSCovReporter/reporter.js"></script>
-  <script src="JSCovReporter/JSCovReporter.js"></script>
-  <script>
-    require("mocha");
+    <script src="../build/build.js"></script>
+    <script>
+        var jQuery = $ = require("jquery"),
+        Backbone = require("backbone"),
+        _ = require("underscore");
+    </script>
+    <script src="JSCovReporter/reporter.js"></script>
+    <script src="JSCovReporter/JSCovReporter.js"></script>
+    <script>
+        require("mocha");
 
-    mocha.setup("bdd");
-    mocha.slow("1s");
-  </script>
-  <script src="test.js"></script>
-  <script src="test.alerts.js"></script>
-  <script src="test.graph.js"></script>
-  <script src="test.date-parse-iso.js"></script>
-  <script src="test.utils.js"></script>
-  <script>
-    (window.mochaPhantomJS || mocha).run(function () {
-      if (typeof window.__$coverObject !== "undefined" && typeof JSCovReporter !== "undefined") {
-        var reporter = new JSCovReporter({ coverObject: window.__$coverObject });
-      }
-    });
-  </script>
+        mocha.setup("bdd");
+        mocha.slow("1s");
+    </script>
+    <script src="test.js"></script>
+    <script src="test.alerts.js"></script>
+    <script src="test.graph.js"></script>
+    <script>
+        (window.mochaPhantomJS || mocha).run(function () {
+            if (typeof window.__$coverObject !== "undefined") {
+                $(document.body).addClass("coverage-testing");
+                $("#coverage, #menu").show();
+
+                var reporter = new JSCovReporter({ coverObject: window.__$coverObject });
+            }
+        });
+    </script>
 </body>
 </html>
