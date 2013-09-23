@@ -16,7 +16,7 @@ node_modules: package.json
 components: component.json | node_modules
 	$(COMPONENT) install --dev
 
-build: lib $(SRC) | node_modules components
+build: $(SRC) | node_modules components
 	$(COMPONENT) build --dev
 
 lib: $(wildcard lib/*.js) | node_modules
