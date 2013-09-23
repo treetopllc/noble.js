@@ -7,7 +7,8 @@
     "component/each": "*",
     "component/map": "*",
     "segmentio/extend": "*",
-    "component/inherit": "*"
+    "component/inherit": "*",
+    "segmentio/isodate": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
@@ -25,7 +26,6 @@
     "lib/User.js",
     "lib/Vertex.js",
     "lib/alerts.js",
-    "lib/date-parse-iso.js",
     "lib/graph.js",
     "lib/index.js",
     "lib/search.js",
