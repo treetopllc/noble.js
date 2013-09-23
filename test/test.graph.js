@@ -1,4 +1,6 @@
 describe("Graph", function () {
+    this.timeout("10s");
+
     describe("User", function () {
         var user, userId;
 
@@ -47,8 +49,6 @@ describe("Graph", function () {
         });
 
         describe("#submissions()", function () {
-            this.timeout("5s");
-
             it("should pass a smoke test", function (done) {
                 user.submissions(done);
             });
@@ -133,8 +133,6 @@ describe("Graph", function () {
             if (conf.submission_id && conf.submission_type_id) {
                 setSubmission(conf);
             } else {
-                this.timeout("5s");
-
                 user.submissions(function (err, data) {
                     if (err) {
                         done(err);
@@ -159,25 +157,25 @@ describe("Graph", function () {
                 submission.status(contentId, submissionTypeId, 0, done);
             });
 
-            it("should be a shortcut for setting the status attribute", function () {
-                var req = submission.status(contentId, submissionTypeId, 0, noop);
+            it("should be a shortcut for setting the status attribute", function (done) {
+                var req = submission.status(contentId, submissionTypeId, 0, done);
                 expect(req._data).to.have.property("status", 0);
             });
 
-            it("should not include a description when set to a falsy value", function () {
-                var req = submission.status(contentId, submissionTypeId, 0, false, noop);
+            it("should not include a description when set to a falsy value", function (done) {
+                var req = submission.status(contentId, submissionTypeId, 0, false, done);
                 expect(req._data).to.not.have.property("description");
             });
 
-            it("should include a description when set to a truthy value", function () {
-                var req = submission.status(contentId, submissionTypeId, 0, "foo", noop);
+            it("should include a description when set to a truthy value", function (done) {
+                var req = submission.status(contentId, submissionTypeId, 0, "foo", done);
 
                 expect(req._data).to.have.property("status", 0)
                     .and.have.property("description", "foo");
             });
 
-            it("should prepopulate content_id and submission_type fields", function () {
-                var req = submission.status(contentId, submissionTypeId, 0, noop);
+            it("should prepopulate content_id and submission_type fields", function (done) {
+                var req = submission.status(contentId, submissionTypeId, 0, done);
 
                 expect(req._data).to.have.property("content_id", contentId)
                     .and.have.property("submission_type", submissionTypeId);
@@ -185,15 +183,15 @@ describe("Graph", function () {
         });
 
         describe("#accept()", function () {
-            it("should be a shortcut for setting the status attribute to 1", function () {
-                var req = submission.accept(contentId, submissionTypeId, noop);
+            it("should be a shortcut for setting the status attribute to 1", function (done) {
+                var req = submission.accept(contentId, submissionTypeId, done);
                 expect(req._data).to.have.property("status", 1);
             });
         });
 
         describe("#deny()", function () {
-            it("should be a shortcut for setting the status attribute to 2", function () {
-                var req = submission.deny(contentId, submissionTypeId, noop);
+            it("should be a shortcut for setting the status attribute to 2", function (done) {
+                var req = submission.deny(contentId, submissionTypeId, done);
                 expect(req._data).to.have.property("status", 2);
             });
         });

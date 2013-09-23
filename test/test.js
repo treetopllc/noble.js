@@ -167,13 +167,23 @@ describe("Client", function () {
 
     describe("#user()", function () {
         it("should return a User object", function () {
-            expect(client.user("test")).to.be.a(require("noble.js/lib/User"));
+            expect(client.user("test")).to.be.a(api.User);
         });
     });
 
     describe.skip("#submission()", function () {
         it("should return a Submission object", function () {
-            expect(client.submission("test")).to.be.a(require("noble.js/lib/Submission"));
+            expect(client.submission("test")).to.be.a(api.Submission);
+        });
+    });
+
+    describe("response parsing", function () {
+        it("should treat text/plain as JSON", function () {
+            expect(request.parse["text/plain"]("{}")).to.eql({});
+        });
+
+        it("should return the plain string if JSON.parse fails", function () {
+            expect(request.parse["text/plain"]("foo")).to.equal("foo");
         });
     });
 });

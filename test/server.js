@@ -6,8 +6,9 @@ var path = require("path"),
     port = process.env.PORT || 3000,
     config = require("./api.json");
 
-app.use("/build", require("component-serve")({ root: root }));
 
+app.use(express.logger("dev"));
+app.use("/build", require("component-serve")({ root: root }));
 app.use(express.static(root));
 app.use(express.directory(root));
 
