@@ -7,7 +7,7 @@
     "express": "~3.3.5",
     "simple-http-proxy": "~0.5.5",
     "component-serve": "~0.4.0",
-    "component-assets": "git://github.com/anthonyshort/component-assets",
+    "component-assets": "0.0.2",
     "coverjs": "0.0.14"
   }
 }
