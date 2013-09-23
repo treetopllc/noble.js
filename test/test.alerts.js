@@ -40,7 +40,7 @@ describe("Alerts", function () {
 
     describe("#mailbox()", function () {
         it("should return a Mailbox object", function () {
-            expect(client.mailbox(mailboxId)).to.be.a(require("noble.js/lib/Mailbox"));
+            expect(client.mailbox(mailboxId)).to.be.a(api.Mailbox);
         });
 
         it("should set the client and id properly", function () {
