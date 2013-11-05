@@ -331,4 +331,9 @@ code .number { color: #2F6FAD }
 
 
 /* added by Dominic Barnes */
-#mocha-stats { right: 300px; }
+#coverage, #menu { display: none; }
+.coverage-testing #coverage,
+.coverage-testing #menu { display: block; }
+
+.coverage-testing #mocha-report { margin-right: 260px; }
+.coverage-testing #mocha-stats { right: 300px; }
