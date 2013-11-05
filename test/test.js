@@ -93,7 +93,7 @@ describe("Client", function () {
 
         it("should fail for bad username / password combo", function (done) {
             client.login("not", "real", function (err) {
-                expect(err.message).to.be.equal("Bad username or password");
+                expect(err.message).to.be.equal("invalid user name or password");
                 done();
             });
         });
@@ -108,17 +108,6 @@ describe("Client", function () {
         it("should not automatically add return=geoJSON to the querystring", function (done) {
             var req = client.search({}, ignore(done));
             expect(req._query).to.not.contain("return=geoJSON");
-        });
-
-        it("should add return=geoJSON when the geojson: true", function (done) {
-            var req = client.search({ geojson: true }, function (err, data) {
-                if (err) return done(err);
-
-                expect(data.results.features).to.be.ok();
-                done();
-            });
-
-            expect(req._query).to.contain("return=geoJSON");
         });
 
         it("should append all params to the querystring", function (done) {

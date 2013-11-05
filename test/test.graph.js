@@ -57,7 +57,7 @@ describe("Graph", function () {
                 user.submissions(function (err, list) {
                     if (err) return done(err);
 
-                    expect(list.submissions).to.be.an(Array);
+                    expect(list).to.be.an(Array);
                     done();
                 });
             });
@@ -91,6 +91,22 @@ describe("Graph", function () {
 
                     done();
                 });
+            });
+        });
+
+        describe.skip("#content(query, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                user.content({}, done);
+            });
+        });
+
+        describe.skip("#contribute(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                user.contribute({
+                    content_id: "some-content",
+                    to: [ "some-community" ],
+                    name: "Test Contribution"
+                }, done);
             });
         });
     });
@@ -135,13 +151,13 @@ describe("Graph", function () {
             if (conf.submission_id && conf.submission_type_id) {
                 setSubmission(conf);
             } else {
-                user.submissions(function (err, data) {
+                user.submissions(function (err, list) {
                     if (err) {
                         done(err);
-                    } else if (!data.submissions.length) {
+                    } else if (!list.length) {
                         done(new Error("No submissions found to test with"));
                     } else {
-                        setSubmission(data.submissions[0]);
+                        setSubmission(list[0]);
                         done();
                     }
                 });
