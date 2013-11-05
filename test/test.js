@@ -31,23 +31,6 @@ function createClient() {
     return api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
 }
 
-describe("noble.js export", function () {
-    describe(".parseDate(input)", function () {
-        it("should be a function", function () {
-            expect(api.parseDate).to.be.a(Function);
-        });
-
-        it("should parse iso strings into Date objects", function () {
-            expect(api.parseDate("2013-09-23T12:41:29.021115Z")).to.be.a(Date);
-        });
-
-        it("should not have an invalid date", function () {
-            var d = api.parseDate("2013-09-23T12:41:29.021115Z");
-            expect(isNaN(d.valueOf())).to.be(false);
-        });
-    });
-});
-
 describe("Client", function () {
     describe("#request()", function () {
         var client; // meant to override the one from the upper scope
