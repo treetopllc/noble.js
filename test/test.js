@@ -160,7 +160,7 @@ describe("Client", function () {
         });
     });
 
-    describe.skip("#submission()", function () {
+    describe("#submission()", function () {
         it("should return a Submission object", function () {
             expect(client.submission("test")).to.be.a(api.Submission);
         });

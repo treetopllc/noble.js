@@ -94,9 +94,15 @@ describe("Graph", function () {
             });
         });
 
-        describe.skip("#content(query, callback)", function () {
+        describe("#content([query], callback)", function () {
             it("should pass a smoke test", function (done) {
-                user.content({}, done);
+                user.content(done);
+            });
+        });
+
+        describe("#network([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                user.network(done);
             });
         });
 
