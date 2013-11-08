@@ -28,6 +28,7 @@
     "lib/alerts.js",
     "lib/graph.js",
     "lib/index.js",
+    "lib/reference.js",
     "lib/search.js",
     "lib/utils.js"
   ]

@@ -1,4 +1,4 @@
-describe("Alerts", function () {
+describe.skip("Alerts", function () {
     var mailboxId;
 
     before(function (done) {
