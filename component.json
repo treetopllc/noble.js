@@ -13,16 +13,13 @@
   "development": {
     "visionmedia/mocha": "*",
     "dominicbarnes/expect.js": "*",
-    "caolan/async": "*",
     "component/jquery": "*",
     "components/backbone": "*",
-    "component/underscore": "*"
+    "component/underscore": "*",
+    "victorquinn/chancejs": "develop"
   },
   "scripts": [
     "index.js",
-    "lib/Client.js",
-    "lib/Mailbox.js",
-    "lib/alerts.js",
     "lib/graph/Community.js",
     "lib/graph/Event.js",
     "lib/graph/News.js",
@@ -32,10 +29,6 @@
     "lib/graph/Submission.js",
     "lib/graph/User.js",
     "lib/graph/Vertex.js",
-    "lib/graph/mixin.js",
-    "lib/index.js",
-    "lib/reference.js",
-    "lib/search.js",
-    "lib/utils.js"
+    "lib/graph/mixin.js"
   ]
 }
