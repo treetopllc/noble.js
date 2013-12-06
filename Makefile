@@ -3,12 +3,17 @@ COMPONENT = $(BIN)/component
 ASSETS = $(BIN)/component-assets
 COVERJS = $(BIN)/coverjs
 
+LIB = lib/*/**.js
+LIBCOV = $(subst lib, lib-cov, $(LIB))
+
 PORT ?= 3000
 PID := server.pid
 
 SRC = index.js $(wildcard lib/*.js)
 
 all: build
+
+deps: | node_modules components
 
 node_modules: package.json
 	npm install
@@ -19,23 +24,26 @@ components: component.json | node_modules
 build: $(SRC) | node_modules components
 	$(COMPONENT) build --dev
 
-lib: $(wildcard lib/**/*.js) | node_modules
-	$(ASSETS) scripts:index.js,lib/**/*.js
+lib: $(wildcard $(LIB)) | node_modules
+	$(ASSETS) scripts:index.js,$(strip $(LIB))
 
-lib-cov: $(wildcard lib/*.js) | node_modules
+lib-cov: $(wildcard $(LIB)) | node_modules
 	$(COVERJS) -o $@ $^
-	$(ASSETS) scripts:index.js,lib-cov/*.js
+	$(ASSETS) scripts:index.js,$(strip $(LIBCOV))
 
-server: test/api.json node_modules components
+server: node_modules components
 	rm -rf build/
 	PORT=$(PORT) node test/server.js
 
 clean:
-	rm -rf build/ components/ node_modules/ lib-cov/
+	rm -rf build/ lib-cov/
+
+clean-deps:
+	rm -rf components/ node_modules/
+
+clean-cov: | lib
+	rm -rf lib-cov/
 
 test: server
-
-test/api.json: test/api-dist.json
-	cp $^ $@
 
 .PHONY: all clean server lib lib-cov test
