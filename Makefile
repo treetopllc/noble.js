@@ -3,7 +3,7 @@ COMPONENT = $(BIN)/component
 ASSETS = $(BIN)/component-assets
 COVERJS = $(BIN)/coverjs
 
-LIB = lib/*/**.js
+LIB = lib/**/*.js
 LIBCOV = $(subst lib, lib-cov, $(LIB))
 
 PORT ?= 3000
@@ -31,12 +31,14 @@ lib-cov: $(wildcard $(LIB)) | node_modules
 	$(COVERJS) -o $@ $^
 	$(ASSETS) scripts:index.js,$(strip $(LIBCOV))
 
-server: node_modules components
+server: | node_modules components
 	rm -rf build/
 	PORT=$(PORT) node test/server.js
 
 clean:
 	rm -rf build/ lib-cov/
+
+clean-all: clean clean-deps clean-cov
 
 clean-deps:
 	rm -rf components/ node_modules/
