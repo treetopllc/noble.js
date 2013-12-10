@@ -34,13 +34,13 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#content([query], callback)", function () {
+        describe("#authored([query], callback)", function () {
             before(function () {
                 server.respondWith("/users/abc/authored", [ 200, null, "OK" ]);
             });
 
             it("should pass a smoke test", function (done) {
-                user.content(done);
+                user.authored(done);
                 server.respond();
             });
         });

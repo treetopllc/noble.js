@@ -1,13 +1,17 @@
 describe("lib/graph/mixin.js", function () {
     describe("Client", function () {
         each({
+            "asset":        "Asset",
             "community":    "Community",
+            "customer":     "Customer",
             "event":        "Event",
+            "group":        "Group",
             "news":         "News",
             "opportunity":  "Opportunity",
             "organization": "Organization",
             "resource":     "Resource",
             "submission":   "Submission",
+            "url":          "Url",
             "user":         "User",
             "vertex":       "Vertex"
         }, function (method, name) {

@@ -12,13 +12,13 @@ describe("lib/graph/Vertex.js", function () {
             });
         });
 
-        describe("#url([path])", function () {
+        describe("#uri([path])", function () {
             it("should return a formatted url", function () {
-                expect(vertex.url()).to.equal("vertices/" + vertex.id);
+                expect(vertex.uri()).to.equal("vertices/" + vertex.id);
             });
 
             it("should append the optional path param", function () {
-                expect(vertex.url("foo")).to.equal("vertices/" + vertex.id + "/foo");
+                expect(vertex.uri("foo")).to.equal("vertices/" + vertex.id + "/foo");
             });
         });
 
