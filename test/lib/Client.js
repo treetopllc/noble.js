@@ -1,6 +1,24 @@
 describe("lib/Client.js", function () {
     describe("Client", function () {
-        describe.skip("#url([path])", function () {});
+        describe("#uri([path])", function () {
+            var oldRoot = client.root;
+
+            before(function () {
+                client.root = "http://example.com";
+            });
+
+            after(function () {
+                client.root = oldRoot;
+            });
+
+            it("should return a formatted url", function () {
+                expect(client.uri()).to.equal("http://example.com/");
+            });
+
+            it("should append the optional path param", function () {
+                expect(client.uri("foo")).to.equal("http://example.com/foo");
+            });
+        });
 
         describe("#request()", function () {
             var client;
