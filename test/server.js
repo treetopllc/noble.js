@@ -7,7 +7,6 @@ app.use(express.logger("dev"));
 app.use("/build", require("component-serve")({
     root: path.resolve(__dirname, "..")
 }));
-app.use("/api", require("./mock/server"));
 app.use("/test", express.static(__dirname));
 app.use("/test", express.directory(__dirname));
 

@@ -1,11 +1,9 @@
 describe("lib/graph/User.js", function () {
-    this.timeout("10s");
-
     describe("User", function () {
         var user;
 
         before(function () {
-            user = client.me;
+            user = client.user("abc");
         });
 
         describe("#base", function () {
@@ -15,79 +13,89 @@ describe("lib/graph/User.js", function () {
         });
 
         describe("#get([query], callback)", function () {
+            before(function () {
+                server.respondWith("/users/abc", [ 200, null, "OK" ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 user.get(done);
+                server.respond();
             });
         });
 
         describe("#submissions([query], callback)", function () {
+            before(function () {
+                server.respondWith("/users/abc/submissions", [ 200, null, "OK" ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 user.submissions(done);
+                server.respond();
             });
         });
 
         describe("#content([query], callback)", function () {
+            before(function () {
+                server.respondWith("/users/abc/authored", [ 200, null, "OK" ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 user.content(done);
+                server.respond();
             });
         });
 
         describe("#feed([query], callback)", function () {
+            before(function () {
+                server.respondWith("/users/abc/feed", [ 200, null, "OK" ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 user.feed(done);
+                server.respond();
             });
         });
 
         describe("#network([query], callback)", function () {
+            before(function () {
+                server.respondWith("/users/abc/network", [ 200, null, "OK" ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 user.network(done);
+                server.respond();
             });
         });
 
         describe("#role([entity], callback)", function () {
-            var entity;
-
-            before(function (done) {
-                user.network(function (err, network) {
-                    if (err) return done(err);
-                    entity = network[0].id;
-                    done();
-                });
+            before(function () {
+                server.respondWith("/users/abc/role", [ 200, null, "OK" ]);
+                server.respondWith("/users/abc/role?for=def", [ 200, null, "OK" ]);
             });
 
             it("should pass a smoke test (no entity)", function (done) {
                 user.role(done);
+                server.respond();
             });
 
             it("should pass a smoke test (with entity)", function (done) {
-                user.role(entity, done);
+                user.role("def", done);
+                server.respond();
             });
         });
 
-        describe.skip("#contribute(params, callback)", function () {
-            var content_id, destination;
-
-            before(function (done) {
-                user.content(function (err, list) {
-                    if (err) return done(err);
-                    content_id = list[0].id;
-                    done();
-                });
-            });
-
-            before(function (done) {
-                user.network(function (err, list) {
-                    if (err) return done(err);
-                    destination = list[0].id;
-                    done();
-                });
+        describe("#contribute(params, callback)", function () {
+            before(function () {
+                server.respondWith("POST", "/submissions", [ 200, null, "OK" ]);
             });
 
             it("should pass a smoke test", function (done) {
                 user.contribute({
-                    content_id: content_id,
-                    to: destination
+                    content_id: chance.guid(),
+                    to: [ chance.guid() ]
                 }, done);
+
+                server.respond();
             });
         });
     });

@@ -7,8 +7,6 @@ describe.skip("Alerts", function () {
             return done();
         }
 
-        this.timeout("10s");
-
         client.mailboxes(function (err, list) {
             if (err) return done(err);
 

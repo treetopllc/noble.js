@@ -1,42 +1,50 @@
 describe("lib/Client.js", function () {
     describe("Client", function () {
-        describe("#url([path])", function () {
-        });
+        describe.skip("#url([path])", function () {});
 
         describe("#request()", function () {
-            var client; // meant to override the one from the upper scope
+            var client;
 
             before(function () {
                 client = createClient();
-
-                client.auth = {
-                    access_token: "foo",
-                    username: "bar"
-                };
             });
 
             it("should add access_token to query string", function () {
+                client.auth = { access_token: "foo" };
                 expect(client.request()._query[0]).to.equal("access_token=foo");
+                server.respond();
             });
 
             it("should return a Request object", function () {
                 expect(client.request()).to.be.a(Request);
+                server.respond();
             });
         });
 
         describe("#index()", function () {
-            it("should return a Request object", function (done) {
-                var req = client.index(ignore(done));
-                expect(req).to.be.a(Request);
+            before(function () {
+                server.respondWith("GET", "/", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        description: "Noblehour API",
+                        version: "mock"
+                    })
+                ]);
             });
 
-            it("should be the NH API root", function (done) {
-                client.index(function (err, data) {
-                    if (err) return done(err);
+            it("should return a Request object", function () {
+                var callback = sinon.spy();
+                expect(client.index(callback)).to.be.a(Request);
+                server.respond();
+                sinon.assert.calledOnce(callback);
+            });
 
-                    expect(data).to.have.property("description", "Noblehour API");
-                    done();
-                });
+            it("should be the NH API root", function () {
+                var callback = sinon.spy();
+                client.index(callback);
+                server.respond();
+                sinon.assert.calledWith(callback, null, sinon.match.truthy);
             });
         });
 
@@ -47,26 +55,27 @@ describe("lib/Client.js", function () {
                 client = createClient();
             });
 
-            it("should return a Request object", function (done) {
-                var req = client.login(null, null, ignore(done));
-                expect(req).to.be.a(Request);
+            it("should return a Request object", function () {
+                var callback = sinon.spy();
+                expect(client.login(null, null, callback)).to.be.a(Request);
+                server.respond();
+                sinon.assert.calledOnce(callback);
             });
 
-            it("should attach the returned auth data to the client object", function (done) {
-                client.login("testuser", "123456", function (err, auth) {
-                    if (err) return done(err);
-
-                    expect(auth).to.be.ok();
-                    expect(auth).to.equal(client.auth);
-                    done();
-                });
+            it("should attach the returned auth data to the client object", function () {
+                var callback = sinon.spy();
+                client.login("testuser", "123456", callback);
+                server.respond();
+                sinon.assert.calledWith(callback, null, client.auth);
             });
 
-            it("should fail for bad username / password combo", function (done) {
-                client.login("not", "real", function (err) {
-                    expect(err.message).to.be.equal("invalid user name or password");
-                    done();
-                });
+            it("should fail for bad username / password combo", function () {
+                var callback = sinon.spy();
+                client.login("not", "real", callback);
+                server.respond();
+                sinon.assert.calledWith(callback, sinon.match({
+                    message: "invalid user name or password"
+                }));
             });
         });
     });

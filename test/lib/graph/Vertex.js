@@ -3,7 +3,7 @@ describe("lib/graph/Vertex.js", function () {
         var vertex;
 
         before(function () {
-            vertex = client.me.toVertex();
+            vertex = client.vertex("abc");
         });
 
         describe("#base", function () {
@@ -23,8 +23,21 @@ describe("lib/graph/Vertex.js", function () {
         });
 
         describe("#get()", function () {
+            before(function () {
+                server.respondWith("/vertices/abc", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        id: "abc",
+                        created: chance.isodate(),
+                        modified: chance.isodate()
+                    })
+                ]);
+            });
+
             it("should pass a smoke test", function (done) {
                 vertex.get(done);
+                server.respond();
             });
 
             it("should parse date fields as Date objects", function (done) {
@@ -40,18 +53,19 @@ describe("lib/graph/Vertex.js", function () {
 
                     done();
                 });
+
+                server.respond();
             });
         });
 
         describe("#related(type, query, callback)", function () {
-            var user;
-
             before(function () {
-                user = client.user(vertex.id);
+                server.respondWith("/vertices/abc/test", [ 200, null, "OK" ]);
             });
 
             it("should pass a smoke test", function (done) {
-                user.related("network", done);
+                vertex.related("test", done);
+                server.respond();
             });
         });
     });
