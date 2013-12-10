@@ -8,7 +8,7 @@
     "component/map": "*",
     "segmentio/extend": "*",
     "component/inherit": "*",
-    "segmentio/isodate": "*"
+    "segmentio/isodate-traverse": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
@@ -20,6 +20,9 @@
   },
   "scripts": [
     "index.js",
+    "lib/Client.js",
+    "lib/Mailbox.js",
+    "lib/alerts.js",
     "lib/graph/Community.js",
     "lib/graph/Event.js",
     "lib/graph/News.js",
@@ -29,6 +32,10 @@
     "lib/graph/Submission.js",
     "lib/graph/User.js",
     "lib/graph/Vertex.js",
-    "lib/graph/mixin.js"
+    "lib/graph/mixin.js",
+    "lib/index.js",
+    "lib/reference.js",
+    "lib/search.js",
+    "lib/utils.js"
   ]
 }
