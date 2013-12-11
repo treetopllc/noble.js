@@ -4,6 +4,7 @@ var each = require("each");
 var Chance = require("chance");
 var expect = require("expect.js");
 var request = require("superagent");
+var sinon = require("sinon");
 
 var chance = new Chance();
 var Request = request.Request;

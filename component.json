@@ -16,7 +16,8 @@
     "component/jquery": "*",
     "components/backbone": "*",
     "component/underscore": "*",
-    "victorquinn/chancejs": "develop"
+    "victorquinn/chancejs": "develop",
+    "ianstormtaylor/sinon": "*"
   },
   "scripts": [
     "index.js",
