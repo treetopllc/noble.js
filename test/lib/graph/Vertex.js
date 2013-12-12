@@ -13,12 +13,19 @@ describe("lib/graph/Vertex.js", function () {
         });
 
         describe("#uri([path])", function () {
-            it("should return a formatted url", function () {
-                expect(vertex.uri()).to.equal("vertices/" + vertex.id);
+            it("should return the correct uri", function () {
+                expect(vertex.uri())
+                    .to.equal("vertices/abc");
             });
 
-            it("should append the optional path param", function () {
-                expect(vertex.uri("foo")).to.equal("vertices/" + vertex.id + "/foo");
+            it("should append additional path information", function () {
+                expect(vertex.uri("foo"))
+                    .to.equal("vertices/abc/foo");
+            });
+
+            it("should handle an array of path information", function () {
+                expect(vertex.uri([ "foo", "bar" ]))
+                    .to.equal("vertices/abc/foo/bar");
             });
         });
 
@@ -60,12 +67,22 @@ describe("lib/graph/Vertex.js", function () {
 
         describe("#related(type, query, callback)", function () {
             before(function () {
-                server.respondWith("/vertices/abc/test", [ 200, null, "OK" ]);
+                server.respondWith("/vertices/abc/test", simpleResponse);
             });
 
             it("should pass a smoke test", function (done) {
                 vertex.related("test", done);
                 server.respond();
+            });
+        });
+
+        describe("#toVertex()", function () {
+            it("should return a fresh Vertex object (not a sub-class)", function () {
+                var user = client.user("abc");
+
+                expect(user.toVertex())
+                    .to.be.a(client.Vertex)
+                    .and.not.be.a(client.User);
             });
         });
     });

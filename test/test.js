@@ -11,6 +11,19 @@ var Request = request.Request;
 var client = createClient();
 var server;
 var defaultHeaders = { "Content-Type": "application/json" };
+var simpleResponse = [ 200, null, "OK" ];
+
+sinon.log = function () {
+    console.log.apply(console, arguments);
+};
+
+sinon.format = function (val) {
+    if (typeof val === "object") {
+        return JSON.stringify(val, null, 2);
+    }
+
+    return "" + val;
+};
 
 // global hooks
 before(function () {

@@ -3,8 +3,8 @@ describe("lib/graph/Submission.js", function () {
         var submission;
 
         before(function () {
-            server.respondWith("/submissions/abc", [ 200, null, "OK" ]);
-            server.respondWith("/submissions/abc/history", [ 200, null, "OK" ]);
+            server.respondWith("/submissions/abc", simpleResponse);
+            server.respondWith("/submissions/abc/history", simpleResponse);
         });
 
         before(function () {

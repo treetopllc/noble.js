@@ -1,10 +1,11 @@
 BIN = ./node_modules/.bin
 COMPONENT = $(BIN)/component
 ASSETS = $(BIN)/component-assets
+SERVE = $(BIN)/component-serve
 COVERJS = $(BIN)/coverjs
 
 LIB = lib/**/*.js
-LIBCOV = $(subst lib, lib-cov, $(LIB))
+LIBCOV = lib-cov/**/*.js
 
 PORT ?= 3000
 PID := server.pid
@@ -24,16 +25,16 @@ components: component.json | node_modules
 build: $(SRC) | node_modules components
 	$(COMPONENT) build --dev
 
-lib: $(wildcard $(LIB)) | node_modules
+lib: | node_modules
 	$(ASSETS) scripts:index.js,$(strip $(LIB))
 
 lib-cov: $(wildcard $(LIB)) | node_modules
-	$(COVERJS) -o $@ $^
+	$(COVERJS) --output $@ --recursive lib/*
 	$(ASSETS) scripts:index.js,$(strip $(LIBCOV))
 
 server: | node_modules components
 	rm -rf build/
-	PORT=$(PORT) node test/server.js
+	$(SERVE) --port $(PORT)
 
 clean:
 	rm -rf build/ lib-cov/
