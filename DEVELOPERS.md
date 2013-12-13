@@ -80,71 +80,24 @@ need to build an "instrumented" version of `lib/`. (called `lib-cov/`)
 After this, you can run the server (see "Running Tests") and run the unit tests,
 the coverage results will be displayed to the right after the tests are done.
 
+To restore the component back to the uninstrumented version: (`lib-cov` files
+must not be committed into the `component.json`)
+
+    $ make lib
+
 
 ## Running Tests
 
-First, you need to create a test configuration file, which has places to set
-the API url and authentication parameters, among other things.
-
-    $ make test/api.json
-
-### Available Config Properties (test/api.json)
-
-````javascript
-{
-    // required for the api itself
-    "client_id": null,
-    "client_secret": null,
-    "api_url": "http://kingscross.local:7000",
-    // if falsy, it will use the URL above (and test CORS by extension)
-    "proxy_url": "/api",
-    // noblehour account login details
-    "username": null,
-    "password": null,
-
-    // configuration for testing the alerts API (treetopllc/ponyexpress)
-    "alerts": {
-        // specify a mailbox to test with (if not, one will be chosen automatically
-        // by iterating through the list of all mailboxes until 1 is found that contains alerts)
-        "mailbox_id": null
-    },
-
-    // configuration for testing the graph API (treetopllc/drake)
-    "graph": {
-        // search parameters (see `Client#search(params)`)
-        "search": {
-            "terms": "school",
-            "limit": 50
-        },
-        // testing user graph
-        "users": {
-            // specify root user vertex (if not, the logged in user will be used)
-            "user_id": null
-        },
-        // testing user submissions graph
-        "submissions": {
-            // specify root user vertex (if not, the logged in user will be used)
-            "user_id": null,
-            // specify a submission_id (if not, the first submission from the above user_id will be used)
-            "submission_id": null,
-            // additional meta required by api119
-            "submission_type_id": null,
-            "content_id": null
-        }
-    }
-}
-
-````
-
-Tests _cannot_ be run via the CLI at this time, (some weirdness with PhantomJS
-and Cross-Domain Requests) but they can be run in a browser. Start up the test
-server:
+Tests _cannot_ be run via the CLI at this time, so they are run in a browser.
+To start up the test server:
 
     $ make server
 
-Then, via [http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
+Then, via
+[http://localhost:3000/test/runner.html](http://localhost:3000/test/runner.html)
 you will get the browser test runner.
 
-This server is using a module called [`component-assets`](https://github.com/anthonyshort/component-assets)
+This server is using a module called
+[`component-serve`](https://github.com/anthonyshort/component-serve)
 for compiling the component automatically in the background during each refresh
-of the test runner. (you don't need to run `make` for each change anymore)
+of the test runner. (you *don't* need to run `make` for each change anymore!)
