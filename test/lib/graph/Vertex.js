@@ -1,10 +1,6 @@
 describe("lib/graph/Vertex.js", function () {
     describe("Vertex", function () {
-        var vertex;
-
-        before(function () {
-            vertex = client.vertex("abc");
-        });
+        var vertex = client.vertex("abc");
 
         describe("#base", function () {
             it("should be vertices", function () {
@@ -30,7 +26,12 @@ describe("lib/graph/Vertex.js", function () {
         });
 
         describe("#get()", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/vertices/abc", simpleResponse);
+                vertex.get(done);
+            });
+
+            it("should /parse date fields as Date objects", function (done) {
                 server.respondWith("/vertices/abc", [
                     200,
                     defaultHeaders,
@@ -40,14 +41,7 @@ describe("lib/graph/Vertex.js", function () {
                         modified: chance.isodate()
                     })
                 ]);
-            });
 
-            it("should pass a smoke test", function (done) {
-                vertex.get(done);
-                server.respond();
-            });
-
-            it("should parse date fields as Date objects", function (done) {
                 vertex.get(function (err, data) {
                     if (err) return done(err);
 
@@ -60,19 +54,20 @@ describe("lib/graph/Vertex.js", function () {
 
                     done();
                 });
-
-                server.respond();
             });
         });
 
         describe("#related(type, query, callback)", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
                 server.respondWith("/vertices/abc/test", simpleResponse);
+
+                vertex.related("test", done);
             });
 
-            it("should pass a smoke test", function (done) {
-                vertex.related("test", done);
-                server.respond();
+            it("should send additional querystring params", function (done) {
+                server.respondWith("/vertices/abc/test?foo=bar", simpleResponse);
+
+                vertex.related("test", { foo: "bar" }, done);
             });
         });
 

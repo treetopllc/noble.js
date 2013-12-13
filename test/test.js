@@ -1,6 +1,7 @@
 // global variables
 var api = require("noble.js");
 var each = require("each");
+var map = require("map");
 var Chance = require("chance");
 var expect = require("expect.js");
 var request = require("superagent");
@@ -26,19 +27,15 @@ sinon.format = function (val) {
 };
 
 // global hooks
-before(function () {
+beforeEach(function () {
     server = sinon.fakeServer.create();
+    server.autoRespond = true;
 
-    server.respondWith("POST", "/oauth/token", function (req) {
+    /*server.respondWith("POST", "/oauth/token", function (req) {
         var body = JSON.parse(req.requestBody);
 
         if (body.username === "testuser" && body.password === "123456") {
-            req.respond(200, defaultHeaders, JSON.stringify({
-                user_id: "testuser-uuid",
-                access_token: "abc123",
-                refresh_token: "def456",
-                expires_in: 1000
-            }));
+            req.respond();
         } else {
             req.respond(400, defaultHeaders, JSON.stringify({
                 error: "invalid_request",
@@ -46,9 +43,10 @@ before(function () {
             }));
         }
     });
+    */
 });
 
-after(function () {
+afterEach(function () {
     server.restore();
 });
 
@@ -85,4 +83,8 @@ chance.mixin({
 // global helpers
 function createClient() {
     return api("/", "test", "secret");
+}
+
+function createArray(size, generator) {
+    return map(Array(size), generator);
 }

@@ -1,10 +1,6 @@
 describe("lib/graph/User.js", function () {
     describe("User", function () {
-        var user;
-
-        before(function () {
-            user = client.user("abc");
-        });
+        var user = client.user("abc")
 
         describe("#base", function () {
             it("should be specific to the users entity type", function () {
@@ -12,112 +8,148 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#get([query], callback)", function () {
-            before(function () {
-                server.respondWith("/users/abc", simpleResponse);
-            });
-
+        describe("#get(callback)", function () {
             it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc", simpleResponse);
+
                 user.get(done);
-                server.respond();
             });
         });
 
         describe("#submissions([query], callback)", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/submissions", simpleResponse);
+
+                user.submissions(done);
             });
 
-            it("should pass a smoke test", function (done) {
-                user.submissions(done);
-                server.respond();
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/submissions?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { submission_id: chance.guid() };
+                    }))
+                ]);
+
+                user.submissions({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
             });
         });
 
         describe("#authored([query], callback)", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/authored", simpleResponse);
+
+                user.authored(done);
             });
 
-            it("should pass a smoke test", function (done) {
-                user.authored(done);
-                server.respond();
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/authored?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                user.authored({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
             });
         });
 
         describe("#feed([query], callback)", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/feed", simpleResponse);
+
+                user.feed(done);
             });
 
-            it("should pass a smoke test", function (done) {
-                user.feed(done);
-                server.respond();
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/feed?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                user.feed({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
             });
         });
 
         describe("#network([query], callback)", function () {
-            before(function () {
+            it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/network", simpleResponse);
+
+                user.network(done);
             });
 
-            it("should pass a smoke test", function (done) {
-                user.network(done);
-                server.respond();
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/network?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                user.network({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
             });
         });
 
         describe("#role([entity], callback)", function () {
-            before(function () {
-                server.respondWith("/users/abc/role", simpleResponse);
-                server.respondWith("/users/abc/role?for=def", simpleResponse);
-            });
-
             it("should pass a smoke test (no entity)", function (done) {
+                server.respondWith("/users/abc/role", simpleResponse);
+
                 user.role(done);
-                server.respond();
             });
 
             it("should pass a smoke test (with entity)", function (done) {
+                server.respondWith("/users/abc/role?for=def", simpleResponse);
+
                 user.role("def", done);
-                server.respond();
             });
         });
 
         describe("#contribute(params, callback)", function () {
-            before(function () {
-                server.respondWith("POST", "/submissions", simpleResponse);
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("POST", "/submissions", simpleResponse);
+
                 user.contribute({
                     content_id: chance.guid(),
                     to: [ chance.guid() ]
                 }, done);
-
-                server.respond();
             });
         });
 
         describe("#alerts([query], callback)", function () {
-            before(function () {
-                server.respondWith("/users/abc/alerts", simpleResponse);
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/alerts", simpleResponse);
+
                 user.alerts(done);
-                server.respond();
             });
         });
 
         describe("#alertsStats(callback)", function () {
-            before(function () {
-                server.respondWith("/users/abc/alerts/stats", simpleResponse);
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/alerts/stats", simpleResponse);
+
                 user.alertsStats(done);
-                server.respond();
             });
         });
     });

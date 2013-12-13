@@ -1,11 +1,7 @@
 describe("lib/graph/UserAlert.js", function () {
     describe("UserAlert", function () {
-        var user, alert;
-
-        before(function () {
-            user = client.user("abc");
-            alert = user.alert("123");
-        });
+        var user = client.user("abc");
+        var alert = user.alert("123");
 
         describe("#uri([path])", function () {
             it("should return the correct uri", function () {
@@ -25,45 +21,26 @@ describe("lib/graph/UserAlert.js", function () {
         });
 
         describe("#get([query], callback)", function () {
-            before(function () {
-                server.respondWith("/users/abc/alerts/123", simpleResponse);
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/alerts/123", simpleResponse);
+
                 alert.get(done);
-                server.respond();
             });
         });
 
         describe("#markRead(callback)", function () {
-            before(function () {
-                server.respondWith("POST", "/users/abc/alerts/123/status", function (req) {
-                    var body = JSON.parse(req.requestBody);
-                    if (body.read === true) {
-                        req.respond();
-                    }
-                });
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("POST", "/users/abc/alerts/123/status", simpleResponse);
+
                 alert.markRead(done);
-                server.respond();
             });
         });
 
         describe("#markUnread(callback)", function () {
-            before(function () {
-                server.respondWith("POST", "/users/abc/alerts/123/status", function (req) {
-                    var body = JSON.parse(req.requestBody);
-                    if (body.read === false) {
-                        req.respond();
-                    }
-                });
-            });
-
             it("should pass a smoke test", function (done) {
+                server.respondWith("POST", "/users/abc/alerts/123/status", simpleResponse);
+
                 alert.markUnread(done);
-                server.respond();
             });
         });
     });

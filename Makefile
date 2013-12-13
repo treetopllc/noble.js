@@ -4,6 +4,8 @@ ASSETS = $(BIN)/component-assets
 SERVE = $(BIN)/component-serve
 COVERJS = $(BIN)/coverjs
 
+COMPONENT_DEV ?= --dev
+
 LIB = lib/**/*.js
 LIBCOV = lib-cov/**/*.js
 
@@ -20,10 +22,10 @@ node_modules: package.json
 	npm install
 
 components: component.json | node_modules
-	$(COMPONENT) install --dev
+	$(COMPONENT) install $(COMPONENT_DEV)
 
 build: $(SRC) | node_modules components
-	$(COMPONENT) build --dev
+	$(COMPONENT) build $(COMPONENT_DEV)
 
 lib: | node_modules
 	$(ASSETS) scripts:index.js,$(strip $(LIB))
@@ -33,18 +35,19 @@ lib-cov: $(wildcard $(LIB)) | node_modules
 	$(ASSETS) scripts:index.js,$(strip $(LIBCOV))
 
 server: | node_modules components
-	rm -rf build/
 	$(SERVE) --port $(PORT)
 
-clean:
-	rm -rf build/ lib-cov/
+clean: clean-build clean-cov
 
 clean-all: clean clean-deps clean-cov
 
 clean-deps:
 	rm -rf components/ node_modules/
 
-clean-cov: | lib
+clean-build:
+	rm -rf build/
+
+clean-cov:
 	rm -rf lib-cov/
 
 test: server
