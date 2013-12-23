@@ -23,11 +23,24 @@
         require("mocha");
 
         mocha.setup("bdd");
-        mocha.slow("1s");
+        mocha.slow(150);
     </script>
     <script src="test.js"></script>
-    <script src="test.alerts.js"></script>
-    <script src="test.graph.js"></script>
+    <script src="lib/Client.js"></script>
+    <script src="lib/search.js"></script>
+    <script src="lib/graph/mixin.js"></script>
+    <script src="lib/graph/Vertex.js"></script>
+    <script src="lib/graph/Community.js"></script>
+    <script src="lib/graph/Customer.js"></script>
+    <script src="lib/graph/Event.js"></script>
+    <script src="lib/graph/Group.js"></script>
+    <script src="lib/graph/News.js"></script>
+    <script src="lib/graph/Opportunity.js"></script>
+    <script src="lib/graph/Organization.js"></script>
+    <script src="lib/graph/Submission.js"></script>
+    <script src="lib/graph/Url.js"></script>
+    <script src="lib/graph/User.js"></script>
+    <script src="lib/graph/UserAlert.js"></script>
     <script>
         (window.mochaPhantomJS || mocha).run(function () {
             if (typeof window.__$coverObject !== "undefined") {

@@ -1,178 +1,90 @@
-var api = require("noble.js"),
-    request = require("superagent"),
-    each = require("each"),
-    async = require("async"),
-    expect = require("expect.js"),
-    Request = request.Request,
-    client, config;
+// global variables
+var api = require("noble.js");
+var each = require("each");
+var map = require("map");
+var Chance = require("chance");
+var expect = require("expect.js");
+var request = require("superagent");
+var sinon = require("sinon");
 
-before(function (done) {
-    request("api.json", function (err, res) {
-        if (err) return done(err);
+var chance = new Chance();
+var Request = request.Request;
+var client = createClient();
+var server;
+var defaultHeaders = { "Content-Type": "application/json" };
+var simpleResponse = [ 200, null, "OK" ];
 
-        var data = res.body;
-        config = typeof data === "string" ? JSON.parse(data) : data;
-        client = createClient();
+sinon.log = function () {
+    console.log.apply(console, arguments);
+};
 
-        client.login(data.username, data.password, done);
+sinon.format = function (val) {
+    if (typeof val === "object") {
+        return JSON.stringify(val, null, 2);
+    }
+
+    return "" + val;
+};
+
+// global hooks
+beforeEach(function () {
+    server = sinon.fakeServer.create();
+    server.autoRespond = true;
+
+    /*server.respondWith("POST", "/oauth/token", function (req) {
+        var body = JSON.parse(req.requestBody);
+
+        if (body.username === "testuser" && body.password === "123456") {
+            req.respond();
+        } else {
+            req.respond(400, defaultHeaders, JSON.stringify({
+                error: "invalid_request",
+                error_description: "invalid user name or password"
+            }));
+        }
     });
+    */
 });
 
-// used to ignore errors that we trigger intentionally (like aborting a request)
-function ignore(callback) {
-    return function () {
-        callback();
-    };
-}
+afterEach(function () {
+    server.restore();
+});
 
-function noop() {}
+// chance mixins
+chance.mixin({
+    token: function () {
+        return chance.hash({ length: 12 });
+    },
+    isodate: function () {
+        return chance.date().toISOString();
+    },
+    type_id: function () {
+        return chance.integer({ min: 0, max: 13 });
+    },
+    subtype_id: function () {
+        return chance.integer({ min: 0, max: 13 });
+    },
+    slug: function () {
+        return chance.string({ pool: "1234567890", length: 7 });
+    },
+    deleted: function () {
+        return chance.bool({ likelihood: 1 });
+    },
+    timezone: function () {
+        return chance.pick([
+            "US/Pacific", "US/Mountain", "US/Central", "US/Eastern"
+        ]);
+    },
+    submissionStatus: function () {
+        return chance.integer({ min: 0, max: 3 });
+    }
+});
 
+// global helpers
 function createClient() {
-    return api(config.proxy_url || config.api_url, config.client_id, config.client_secret);
+    return api("/", "test", "secret");
 }
 
-describe("Client", function () {
-    describe("#request()", function () {
-        var client; // meant to override the one from the upper scope
-
-        before(function () {
-            client = createClient();
-
-            client.auth = {
-                access_token: "foo",
-                username: "bar"
-            };
-        });
-
-        it("should add access_token to query string", function () {
-            expect(client.request()._query[0]).to.equal("access_token=foo");
-        });
-
-        it("should return a Request object", function () {
-            expect(client.request()).to.be.a(Request);
-        });
-    });
-
-    describe("#index()", function () {
-        it("should return a Request object", function (done) {
-            var req = client.index(ignore(done));
-            expect(req).to.be.a(Request);
-        });
-
-        it("should be the NH API root", function (done) {
-            client.index(function (err, data) {
-                if (err) return done(err);
-
-                expect(data).to.have.property("description", "Noblehour API");
-                done();
-            });
-        });
-    });
-
-    describe("#login()", function () {
-        var client; // meant to override the one from the upper scope
-
-        before(function () {
-            client = createClient();
-        });
-
-        it("should return a Request object", function (done) {
-            var req = client.login(null, null, ignore(done));
-            expect(req).to.be.a(Request);
-        });
-
-        it("should attach the returned auth data to the client object", function (done) {
-            client.login(config.username, config.password, function (err, auth) {
-                if (err) return done(err);
-
-                expect(auth).to.be.ok();
-                expect(auth).to.equal(client.auth);
-                done();
-            });
-        });
-
-        it("should fail for bad username / password combo", function (done) {
-            client.login("not", "real", function (err) {
-                expect(err.message).to.be.equal("invalid user name or password");
-                done();
-            });
-        });
-    });
-
-    describe("#search()", function () {
-        it("should return a Request object", function (done) {
-            var req = client.search({}, ignore(done));
-            expect(req).to.be.a(Request);
-        });
-
-        it("should not automatically add return=geoJSON to the querystring", function (done) {
-            var req = client.search({}, ignore(done));
-            expect(req._query).to.not.contain("return=geoJSON");
-        });
-
-        it("should append all params to the querystring", function (done) {
-            var params = { terms: "test", lat: 100, lon: 100 },
-                req = client.search(params, ignore(done));
-
-            expect(req._query).to.contain("terms=test&lat=100&lon=100");
-        });
-
-        it("should convert an array of types to numbers", function (done) {
-            var params = { types: [ "opportunities", "events", "organizations" ] },
-                req = client.search(params, ignore(done));
-
-            expect(req._query).to.contain("types=" + encodeURIComponent("3,5,2"));
-        });
-
-        it("should return an array of results", function (done) {
-            client.search({}, function (err, data) {
-                if (err) return done(err);
-
-                expect(data.results).to.be.ok();
-                done();
-            });
-        });
-
-        it("should parse date fields as Date objects", function (done) {
-            client.search(config.graph.search, function (err, data) {
-                if (err) return done(err);
-
-                each(data.results, function (row) {
-                    each([
-                        "created", "modified",
-                        "start_ts", "end_ts"
-                    ], function (prop) {
-                        if (row[prop]) {
-                            expect(row[prop]).to.be.a(Date);
-                            expect(isNaN(row[prop].valueOf())).to.be(false);
-                        }
-                    });
-                });
-
-                done();
-            });
-        });
-    });
-
-    describe("#user()", function () {
-        it("should return a User object", function () {
-            expect(client.user("test")).to.be.a(api.User);
-        });
-    });
-
-    describe("#submission()", function () {
-        it("should return a Submission object", function () {
-            expect(client.submission("test")).to.be.a(api.Submission);
-        });
-    });
-
-    describe("response parsing", function () {
-        it("should treat text/plain as JSON", function () {
-            expect(request.parse["text/plain"]("{}")).to.eql({});
-        });
-
-        it("should return the plain string if JSON.parse fails", function () {
-            expect(request.parse["text/plain"]("foo")).to.equal("foo");
-        });
-    });
-});
+function createArray(size, generator) {
+    return map(Array(size), generator);
+}
