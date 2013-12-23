@@ -9,7 +9,6 @@ describe("lib/graph/mixin.js", function () {
             "news":         "News",
             "opportunity":  "Opportunity",
             "organization": "Organization",
-            "resource":     "Resource",
             "submission":   "Submission",
             "url":          "Url",
             "user":         "User",
