@@ -3,6 +3,7 @@ COMPONENT = $(BIN)/component
 ASSETS = $(BIN)/component-assets
 SERVE = $(BIN)/component-serve
 COVERJS = $(BIN)/coverjs
+JSHINT = $(BIN)/jshint
 
 COMPONENT_DEV ?= --dev
 
@@ -37,6 +38,9 @@ lib-cov: $(wildcard $(LIB)) | node_modules
 server: | node_modules components
 	$(SERVE) --port $(PORT)
 
+lint:
+	$(JSHINT)
+
 clean: clean-build clean-cov
 
 clean-all: clean clean-deps clean-cov
@@ -52,4 +56,5 @@ clean-cov:
 
 test: server
 
-.PHONY: all clean server lib lib-cov test
+.PHONY: all deps lib lib-cov server lint
+.PHONY: clean clean-all clean-deps clean-build test
