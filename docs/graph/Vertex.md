@@ -17,18 +17,34 @@ other types will inherit from)
 | `id`      | `String` | Vertex UUID                                |
 
 
+## Vertex#base `String`
+
+The base URI for generating URI for various endpoints.
+
+
 ## Vertex#get(callback)
 
-Returns the vertex information.
+Returns the vertex information. (via `GET /:base/:id`)
 
 | Parameter  | Type       |
 | ---------- | ---------- |
 | `callback` | `Function` |
 
 
+## Vertex#create(data, callback)
+
+Creates a new Vertex (via `POST /:base`)
+
+| Parameter  | Type       |
+| ---------- | ---------- |
+| `data`     | `Object`   |
+| `callback` | `Function` |
+
+
 ## Vertex#related(type, query, callback)
 
-Returns a list of vertices that are related via the `type` parameter.
+Returns a list of vertices that are related to the current vertex.
+(via `GET /:base/:id/:type`)
 
 | Parameter  | Type       | Description             |
 | ---------- | ---------- | ----------------------- |
