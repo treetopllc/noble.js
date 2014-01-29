@@ -261,5 +261,19 @@ describe("lib/graph/User.js", function () {
                 user.alertsStats(done);
             });
         });
+
+        describe("#participation([entity], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/participation", simpleResponse);
+
+                user.participation(done);
+            });
+
+            it("should pass a smoke test (with entity)", function (done) {
+                server.respondWith("/users/abc/participation?for=def", simpleResponse);
+
+                user.participation("def", done);
+            });
+        });
     });
 });
