@@ -25,7 +25,7 @@ describe("lib/graph/Vertex.js", function () {
             });
         });
 
-        describe("#get()", function () {
+        describe("#get(callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/vertices/abc", simpleResponse);
                 vertex.get(done);
@@ -51,6 +51,52 @@ describe("lib/graph/Vertex.js", function () {
                             expect(isNaN(data[prop].valueOf())).to.be(false);
                         }
                     });
+
+                    done();
+                });
+            });
+        });
+
+        describe("#create(data, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/vertices", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({ id: "abc" })
+                ]);
+
+                client.vertex().create({ hello: "world" }, done);
+            });
+
+            it("should send the passed data in the request", function (done) {
+                server.respondWith("/vertices", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({ id: "abc" })
+                ]);
+
+                var vertex = client.vertex();
+                var data = { hello: "world" };
+                var req = vertex.create(data, done);
+
+                expect(req._data).to.eql(data);
+            });
+
+            it("should set the id of the vertex after success", function (done) {
+                server.respondWith("/vertices", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({ id: "abc" })
+                ]);
+
+                var vertex = client.vertex();
+
+                expect(vertex.id).to.not.be.ok();
+                vertex.create({ hello: "world" }, function (err, data) {
+                    if (err) return done(err);
+
+                    expect(vertex.id).to.be.ok();
+                    expect(data.id).to.equal(vertex.id);
 
                     done();
                 });
