@@ -9,7 +9,8 @@
     "segmentio/extend": "*",
     "component/inherit": "*",
     "ianstormtaylor/to-constant-case": "*",
-    "segmentio/isodate-traverse": "*"
+    "segmentio/isodate-traverse": "*",
+    "segmentio/to-iso-string": "*"
   },
   "development": {
     "visionmedia/mocha": "*",

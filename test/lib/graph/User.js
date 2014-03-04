@@ -235,17 +235,6 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#contribute(params, callback)", function () {
-            it("should pass a smoke test", function (done) {
-                server.respondWith("POST", "/submissions", simpleResponse);
-
-                user.contribute({
-                    content_id: chance.guid(),
-                    to: [ chance.guid() ]
-                }, done);
-            });
-        });
-
         describe("#alerts([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/alerts", simpleResponse);
@@ -273,6 +262,17 @@ describe("lib/graph/User.js", function () {
                 server.respondWith("/users/abc/participation?for=def", simpleResponse);
 
                 user.participation("def", done);
+            });
+        });
+
+        describe("#addHours(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/hours", simpleResponse);
+
+                user.addHours({
+                    start_ts: new Date(),
+                    end_ts: new Date()
+                }, done);
             });
         });
     });
