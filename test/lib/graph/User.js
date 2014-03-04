@@ -265,6 +265,14 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#contribute(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/submissions", simpleResponse);
+
+                user.contribute({}, done);
+            });
+        });
+
         describe("#addHours(params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/hours", simpleResponse);
