@@ -235,6 +235,16 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#alert(id)", function () {
+            it("should return an Alert object", function () {
+                expect(user.alert("abc")).to.be.a(client.Alert);
+            });
+
+            it("should set the owner as the user", function () {
+                expect(user.alert("abc").owner).to.equal(user);
+            });
+        });
+
         describe("#alerts([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/alerts", simpleResponse);
