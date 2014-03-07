@@ -29,6 +29,7 @@
     "lib/graph/Customer.js",
     "lib/graph/Event.js",
     "lib/graph/Group.js",
+    "lib/graph/Hours.js",
     "lib/graph/News.js",
     "lib/graph/Opportunity.js",
     "lib/graph/Organization.js",
