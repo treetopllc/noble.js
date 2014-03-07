@@ -235,6 +235,16 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#alert(id)", function () {
+            it("should return an Alert object", function () {
+                expect(user.alert("abc")).to.be.a(client.Alert);
+            });
+
+            it("should set the owner as the user", function () {
+                expect(user.alert("abc").owner).to.equal(user);
+            });
+        });
+
         describe("#alerts([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/alerts", simpleResponse);
@@ -265,22 +275,49 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#author(type, params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/hours", simpleResponse);
+
+                user.author("hours", {}, done);
+            });
+
+            it("should inject author_id into the params", function (done) {
+                server.respondWith("/hours", simpleResponse);
+
+                var params = {};
+
+                user.author("hours", params, done);
+
+                expect(params).to.have.property("author_id", user.id);
+            });
+
+            it("should automatically turn Date objects into ISO strings", function (done) {
+                server.respondWith("/hours", simpleResponse);
+
+                var params = {
+                    start_ts: new Date()
+                };
+
+                user.author("hours", params, done);
+
+                expect(params.start_ts).to.be.a("string");
+            });
+        });
+
+        describe("#add(type, params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/hours", simpleResponse);
+
+                user.add("hours", {}, done);
+            });
+        });
+
         describe("#contribute(params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/submissions", simpleResponse);
 
                 user.contribute({}, done);
-            });
-        });
-
-        describe("#addHours(params, callback)", function () {
-            it("should pass a smoke test", function (done) {
-                server.respondWith("/hours", simpleResponse);
-
-                user.addHours({
-                    start_ts: new Date(),
-                    end_ts: new Date()
-                }, done);
             });
         });
     });
