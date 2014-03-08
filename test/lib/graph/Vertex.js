@@ -126,5 +126,18 @@ describe("lib/graph/Vertex.js", function () {
                     .and.not.be.a(client.User);
             });
         });
+
+        describe("#belongsTo(owner)", function () {
+            var owner = client.vertex("def");
+            var vertex = client.vertex("abc").belongsTo(owner);
+
+            it("should set the owner property of the vertex", function () {
+                expect(vertex.owner).to.equal(owner);
+            });
+
+            it("should change the generated URL", function () {
+                expect(vertex.uri()).to.equal("vertices/def/vertices/abc");
+            });
+        });
     });
 });
