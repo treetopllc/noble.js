@@ -65,6 +65,55 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#moderations([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/moderations", simpleResponse);
+
+                user.moderations(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/moderations?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { submission_id: chance.guid() };
+                    }))
+                ]);
+
+                user.moderations({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+
+            it("should translate id fields into name fields", function (done) {
+                server.respondWith("/users/abc/moderations", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify([
+                        {
+                            submission_edge_type_id: 8, // Author
+                            submission_status_id: 0,    // Unsubmitted
+                            content_type_id: 5,         // Event
+                            destination_type_id: 2      // Organization
+                        }
+                    ])
+                ]);
+
+                user.moderations(function (err, results) {
+                    if (err) return done(err);
+                    var row = results[0];
+                    expect(row.submission_edge_type).to.equal("Author");
+                    expect(row.submission_status).to.equal("Unsubmitted");
+                    expect(row.content_type).to.equal("Event");
+                    expect(row.destination_type).to.equal("Organization");
+                    done();
+                });
+            });
+        });
+
         describe("#authored([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/authored", simpleResponse);
