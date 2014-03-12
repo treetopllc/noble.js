@@ -5,12 +5,13 @@
   "dependencies": {
     "visionmedia/superagent": "*",
     "component/each": "*",
-    "component/map": "*",
-    "segmentio/extend": "*",
     "component/inherit": "*",
+    "component/map": "*",
     "ianstormtaylor/to-constant-case": "*",
+    "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
-    "segmentio/to-iso-string": "*"
+    "segmentio/to-iso-string": "*",
+    "yields/isArray": "*"
   },
   "development": {
     "visionmedia/mocha": "*",

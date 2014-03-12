@@ -8,6 +8,13 @@ describe("lib/graph/Vertex.js", function () {
             });
         });
 
+        describe("#baseUri()", function () {
+            it("should return only the base uri", function () {
+                expect(vertex.baseUri())
+                    .to.equal("vertices");
+            });
+        });
+
         describe("#uri([path])", function () {
             it("should return the correct uri", function () {
                 expect(vertex.uri())
@@ -59,7 +66,7 @@ describe("lib/graph/Vertex.js", function () {
 
         describe("#create(data, callback)", function () {
             it("should pass a smoke test", function (done) {
-                server.respondWith("/vertices", [
+                server.respondWith("POST", "/vertices", [
                     200,
                     defaultHeaders,
                     JSON.stringify({ id: "abc" })
@@ -69,7 +76,7 @@ describe("lib/graph/Vertex.js", function () {
             });
 
             it("should send the passed data in the request", function (done) {
-                server.respondWith("/vertices", [
+                server.respondWith("POST", "/vertices", [
                     200,
                     defaultHeaders,
                     JSON.stringify({ id: "abc" })
@@ -83,7 +90,7 @@ describe("lib/graph/Vertex.js", function () {
             });
 
             it("should set the id of the vertex after success", function (done) {
-                server.respondWith("/vertices", [
+                server.respondWith("POST", "/vertices", [
                     200,
                     defaultHeaders,
                     JSON.stringify({ id: "abc" })
@@ -100,6 +107,22 @@ describe("lib/graph/Vertex.js", function () {
 
                     done();
                 });
+            });
+        });
+
+        describe("#modify(data, callback)", function () {
+            var vertex = client.vertex("abc");
+
+            it("should pass a smoke test (single)", function (done) {
+                server.respondWith("PATCH", "/vertices/abc", simpleResponse);
+
+                vertex.modify({}, done);
+            });
+
+            it("should pass a smoke test (bulk)", function (done) {
+                server.respondWith("PATCH", "/vertices", simpleResponse);
+
+                vertex.modify([], done);
             });
         });
 
