@@ -105,12 +105,12 @@ describe("lib/Client.js", function () {
                     defaultHeaders,
                     JSON.stringify({
                         error: "invalid_request",
-                        error_description: "invalid user name or password"
+                        details: "invalid user name or password"
                     })
                 ]);
 
-                client.login("not", "real", function (err, auth) {
-                    expect(err).to.have.property("message", "invalid user name or password");
+                client.login("not", "real", function (err, body, res) {
+                    expect(body.details).to.equal("invalid user name or password");
                     done();
                 });
             });
