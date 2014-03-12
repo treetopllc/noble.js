@@ -65,6 +65,14 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#submission([id])", function () {
+            it("should create a Submission with User as it's owner", function () {
+                var sub = user.submission();
+                expect(sub).to.be.a(client.Submission);
+                expect(sub.owner).to.equal(user);
+            });
+        });
+
         describe("#moderations([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/moderations", simpleResponse);
@@ -111,6 +119,14 @@ describe("lib/graph/User.js", function () {
                     expect(row.destination_type).to.equal("Organization");
                     done();
                 });
+            });
+        });
+
+        describe("#moderation([id])", function () {
+            it("should create a Moderation with User as it's owner", function () {
+                var sub = user.moderation();
+                expect(sub).to.be.a(client.Moderation);
+                expect(sub.owner).to.equal(user);
             });
         });
 
