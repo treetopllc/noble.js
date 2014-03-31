@@ -1,18 +1,9 @@
 Version History
 ===============
 
-## 0.3.0
- * Adding Support for Modifying Submission Status (c65adef1358ff54ba433dc7d68c49c326e63a5aa)
- * SuperAgent parser now allows plaintext (if JSON.parse fails) (ec860a866db2f14e62b816a8b7b8606b39183e14)
- * Adding Alerts Statistics (4a7862b6335e0be8cd3195e441d846dcef154e99)
- * Made Alerts API fluent (like the newer Graph API) (4a7862b6335e0be8cd3195e441d846dcef154e99)
- * Added custom ISO-8601 date parser for oldIE (d7cecaecaf919fb8e2b761f5b7f5358f143d6834)
- * Switched to expect.js (so oldIE can be tested) (8c75e04a73679962c9e519a830109df8c03fdeaa)
- * Added test server (to add a proxy so oldIE can be tested) (471061ee6b2e55643a4bb6ccfafcdae929dc6c95)
- * Parsing dates as `Date` objects (256b6b21dd069c01a17ee353ea3adbd295e63c0e)
- * Adding graph API (base object Vertex) (f5c5a0dd2608f3dfb131013140b369ac79b8a4cc)
- * Default `api_url` in test config is `http://kingscross.local:8000` (fe8b8b233ebb69fbf53ee95b8f3132d3abf4f835)
- * Adding `DEVELOPERS.md` w/ developer information (698b96b8e50631af0ca49cfbac20bc6549c8470a)
+## 0.3.0 (3/31/2014)
+ * Massive rewrite, huge list of changes (just refer to the docs instead)
+
 
 ## 0.2.0
  * Adding API docs to the README  (fa89b5775dfe53efb2a24921537d0d22fa5aa87f)
