@@ -157,6 +157,104 @@ describe("lib/Client.js", function () {
                     done();
                 });
             });
+
+            it("should create a me property reflecting the user_id", function (done) {
+                server.respondWith("POST", "/oauth/token", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "abc123",
+                        refresh_token: "def456",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.login(null, null, function (err, body, res) {
+                    if (err) return done(err);
+                    expect(client.me).to.be.a(client.User);
+                    expect(client.me.id).to.equal("testuser-uuid");
+                    done();
+                });
+            });
+        });
+
+        describe("#refresh()", function () {
+            it("should return a Request object", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "c",
+                        refresh_token: "d",
+                        expires_in: 1000
+                    })
+                ]);
+
+                var req = client.refresh(done);
+                expect(req).to.be.a(Request);
+            });
+
+            it("should attach the returned auth data to the client object", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "c",
+                        refresh_token: "d",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.refresh(function (err, auth) {
+                    if (err) return done(err);
+                    expect(auth).to.equal(client.auth);
+                    done();
+                });
+            });
+
+            it("should create a me property reflecting the user_id", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "abc123",
+                        refresh_token: "def456",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.refresh(function (err, body, res) {
+                    if (err) return done(err);
+                    expect(client.me).to.be.a(client.User);
+                    expect(client.me.id).to.equal("testuser-uuid");
+                    done();
+                });
+            });
         });
     });
 
