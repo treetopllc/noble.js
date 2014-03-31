@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.3.1 (3/31/2014)
+ * Added Hours Sets to API (missing commits from master during earlier release)
+
 ## 0.3.0 (3/31/2014)
  * Massive rewrite, huge list of changes (just refer to the docs instead)
 

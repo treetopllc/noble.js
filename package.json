@@ -1,6 +1,6 @@
 {
   "name": "noblehour-api",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "devDependencies": {
     "component": "~0.17.0",

@@ -1,6 +1,6 @@
 {
   "name": "noble.js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "visionmedia/superagent": "*",
@@ -32,6 +32,7 @@
     "lib/graph/Event.js",
     "lib/graph/Group.js",
     "lib/graph/Hours.js",
+    "lib/graph/HoursSet.js",
     "lib/graph/Moderation.js",
     "lib/graph/News.js",
     "lib/graph/Opportunity.js",
