@@ -82,7 +82,10 @@ chance.mixin({
 
 // global helpers
 function createClient() {
-    return api("/", "test", "secret");
+    return api("/", {
+        client_id: "test",
+        client_secret: "secret"
+    });
 }
 
 function createArray(size, generator) {

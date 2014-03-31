@@ -1,5 +1,48 @@
 describe("lib/Client.js", function () {
-    describe("Client", function () {
+    describe("Client(url, [params])", function () {
+        it("should set the root property", function () {
+            var client = api("http://example.com");
+            expect(client.root).to.equal("http://example.com");
+        });
+
+        it("should set optional client id/secret params", function () {
+            var client = api("http://example.com", {
+                client_id: "foo",
+                client_secret: "bar"
+            });
+
+            expect(client.client_id).to.equal("foo");
+            expect(client.client_secret).to.equal("bar");
+        });
+
+        it("should set optional auth param", function () {
+            var client = api("http://example.com", {
+                auth: { foo: "bar" }
+            });
+
+            expect(client.auth.foo).to.equal("bar");
+        });
+
+        it("should set optional access_token param", function () {
+            var client = api("http://example.com", {
+                access_token: "blah"
+            });
+
+            expect(client.auth.access_token).to.equal("blah");
+        });
+
+        it("should create a me property reflecting the user_id", function () {
+            var client = api("http://example.com", {
+                auth: {
+                    user_id: "foo",
+                    access_token: "bar"
+                }
+            });
+
+            expect(client.me).to.be.a(client.User);
+            expect(client.me.id).to.equal("foo");
+        });
+
         describe("#uri([path])", function () {
             var client = createClient();
             client.root = "http://example.com";
