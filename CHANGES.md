@@ -1,4 +1,9 @@
-# Version History
+Version History
+===============
+
+## 0.3.0 (3/31/2014)
+ * Massive rewrite, huge list of changes (just refer to the docs instead)
+
 
 ## 0.2.0
  * Adding API docs to the README  (fa89b5775dfe53efb2a24921537d0d22fa5aa87f)
@@ -17,7 +22,8 @@
  * Initial Release
 
 
-# Road Map (Upcoming)
+Road Map (Upcoming)
+===================
 
  * [Standalone](https://github.com/component/component/wiki/F.A.Q#can-i-use-components-without-component1) Version
  * Node version (for server-side applications)

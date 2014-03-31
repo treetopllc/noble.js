@@ -1,8 +1,0 @@
-{
-    "client_id": "<< id >>",
-    "client_secret": "<< secret >>",
-    "api_url": "http://localhost:7000",
-    "username": "",
-    "password": "",
-    "mailbox_id": ""
-}

@@ -1,21 +1,49 @@
 {
   "name": "noble.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "visionmedia/superagent": "*",
+    "component/each": "*",
+    "component/inherit": "*",
     "component/map": "*",
-    "segmentio/extend": "*"
+    "ianstormtaylor/to-constant-case": "*",
+    "segmentio/extend": "*",
+    "segmentio/isodate-traverse": "*",
+    "segmentio/to-iso-string": "*",
+    "yields/isArray": "*"
   },
   "development": {
     "visionmedia/mocha": "*",
-    "chaijs/chai": "*"
+    "dominicbarnes/expect.js": "*",
+    "component/jquery": "*",
+    "components/backbone": "*",
+    "component/underscore": "*",
+    "victorquinn/chancejs": "*",
+    "ianstormtaylor/sinon": "*"
   },
   "scripts": [
     "index.js",
     "lib/Client.js",
+    "lib/graph/Alert.js",
+    "lib/graph/Asset.js",
+    "lib/graph/Community.js",
+    "lib/graph/Customer.js",
+    "lib/graph/Event.js",
+    "lib/graph/Group.js",
+    "lib/graph/Hours.js",
+    "lib/graph/Moderation.js",
+    "lib/graph/News.js",
+    "lib/graph/Opportunity.js",
+    "lib/graph/Organization.js",
+    "lib/graph/Submission.js",
+    "lib/graph/Url.js",
+    "lib/graph/User.js",
+    "lib/graph/Vertex.js",
+    "lib/graph/mixin.js",
+    "lib/index.js",
+    "lib/reference.js",
     "lib/search.js",
-    "lib/alerts.js",
     "lib/utils.js"
   ]
 }

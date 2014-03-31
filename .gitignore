@@ -1,7 +1,9 @@
-node_modules
+node_modules/
 npm-debug.log
 
-components
-build
+components/
+build/
+
+lib-cov/
 
 test/api.json
