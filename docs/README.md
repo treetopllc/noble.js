@@ -26,7 +26,7 @@ the specified action is complete:
  * [Submission](graph/Submission.md) - Contribution of content (by user, for community)
  * [Url](graph/Url.md) - Bookmarked link that is shared with a community
  * [User](graph/User.md) - NobleHour user
- * [UserAlert](graph/UserAlert.md) - A user's alert
+ * [Alert](graph/Alert.md) - A user's alert
 
 
 
@@ -100,6 +100,16 @@ reflect a NobleHour account only.
 | `callback` | `Function` | *See above*                |
 
 
+### Client#refresh(callback)
+
+Refreshes the current `auth` object for the user. It assumes you have
+either previously logged in or set the `auth` object manually.
+
+| Parameter  | Type       | Description |
+| ---------- | ---------- | ----------- |
+| `callback` | `Function` | *See above* |
+
+
 ### Client#search(params, callback)
 
 Performs a search via treetopllc/drake, which uses many possible criteria,
@@ -152,6 +162,11 @@ client.search({
 ### Client#vertex(id)
 
 Returns a generic [`Vertex`](Vertex.md) object.
+
+
+### Client#alert(id)
+
+Returns an [`Alert`](Alert.md) object.
 
 
 ### Client#asset(id)
