@@ -1,5 +1,48 @@
 describe("lib/Client.js", function () {
-    describe("Client", function () {
+    describe("Client(url, [params])", function () {
+        it("should set the root property", function () {
+            var client = api("http://example.com");
+            expect(client.root).to.equal("http://example.com");
+        });
+
+        it("should set optional client id/secret params", function () {
+            var client = api("http://example.com", {
+                client_id: "foo",
+                client_secret: "bar"
+            });
+
+            expect(client.client_id).to.equal("foo");
+            expect(client.client_secret).to.equal("bar");
+        });
+
+        it("should set optional auth param", function () {
+            var client = api("http://example.com", {
+                auth: { foo: "bar" }
+            });
+
+            expect(client.auth.foo).to.equal("bar");
+        });
+
+        it("should set optional access_token param", function () {
+            var client = api("http://example.com", {
+                access_token: "blah"
+            });
+
+            expect(client.auth.access_token).to.equal("blah");
+        });
+
+        it("should create a me property reflecting the user_id", function () {
+            var client = api("http://example.com", {
+                auth: {
+                    user_id: "foo",
+                    access_token: "bar"
+                }
+            });
+
+            expect(client.me).to.be.a(client.User);
+            expect(client.me.id).to.equal("foo");
+        });
+
         describe("#uri([path])", function () {
             var client = createClient();
             client.root = "http://example.com";
@@ -111,6 +154,104 @@ describe("lib/Client.js", function () {
 
                 client.login("not", "real", function (err, body, res) {
                     expect(body.details).to.equal("invalid user name or password");
+                    done();
+                });
+            });
+
+            it("should create a me property reflecting the user_id", function (done) {
+                server.respondWith("POST", "/oauth/token", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "abc123",
+                        refresh_token: "def456",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.login(null, null, function (err, body, res) {
+                    if (err) return done(err);
+                    expect(client.me).to.be.a(client.User);
+                    expect(client.me.id).to.equal("testuser-uuid");
+                    done();
+                });
+            });
+        });
+
+        describe("#refresh()", function () {
+            it("should return a Request object", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "c",
+                        refresh_token: "d",
+                        expires_in: 1000
+                    })
+                ]);
+
+                var req = client.refresh(done);
+                expect(req).to.be.a(Request);
+            });
+
+            it("should attach the returned auth data to the client object", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "c",
+                        refresh_token: "d",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.refresh(function (err, auth) {
+                    if (err) return done(err);
+                    expect(auth).to.equal(client.auth);
+                    done();
+                });
+            });
+
+            it("should create a me property reflecting the user_id", function (done) {
+                var client = api("/", {
+                    auth: {
+                        access_token: "a",
+                        refresh_token: "b"
+                    }
+                });
+
+                server.respondWith("POST", "/oauth/token?access_token=a", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        user_id: "testuser-uuid",
+                        access_token: "abc123",
+                        refresh_token: "def456",
+                        expires_in: 1000
+                    })
+                ]);
+
+                client.refresh(function (err, body, res) {
+                    if (err) return done(err);
+                    expect(client.me).to.be.a(client.User);
+                    expect(client.me.id).to.equal("testuser-uuid");
                     done();
                 });
             });

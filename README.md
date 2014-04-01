@@ -15,7 +15,10 @@ as well.
 ```javascript
 var Client = require("noble.js");
 
-var client = new Client("<<URL>>", "<<Client ID>>", "<<Client Secret>>");
+var client = new Client("<<URL>>", {
+    client_id: "<<Client ID>>",
+    client_secret: "<<Client Secret>>"
+});
 ```
 
 [API Documentation](docs/)

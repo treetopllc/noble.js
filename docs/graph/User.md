@@ -24,6 +24,37 @@ Retrieves a list of submissions for this user.
 | `callback` | `Function` |
 
 
+## User#submission(id)
+
+Returns a `Submission` object that represents a submission that is
+"owned" by this user.
+
+| Parameter | Type     |
+| --------- | -------- |
+| `id`      | `String` |
+
+
+## User#moderations([query], callback)
+
+Retrieves a list of moderations for this user. (moderations are
+submissions that this user has admin ability over)
+
+| Parameter  | Type       |
+| ---------- | ---------- |
+| `query`    | `Object`   |
+| `callback` | `Function` |
+
+
+## User#moderation(id)
+
+Returns a `Moderation` object that represents a moderation that is
+"owned" by this user.
+
+| Parameter | Type     |
+| --------- | -------- |
+| `id`      | `String` |
+
+
 ## User#authored([query], callback)
 
 Retrieves a list of content this user has created.
@@ -47,16 +78,6 @@ Retrieves a list of content in this user's feed.
 ## User#network([query], callback)
 
 Retrieves this user's network. ("connected" entities)
-
-| Parameter  | Type       |
-| ---------- | ---------- |
-| `query`    | `Object`   |
-| `callback` | `Function` |
-
-
-## User#submissions([query], callback)
-
-Retrieves a list of submissions for this user.
 
 | Parameter  | Type       |
 | ---------- | ---------- |
@@ -99,17 +120,37 @@ Retrieves this statistics (e.g. unread count) for this user's alerts.
 | `callback` | `Function` |
 
 
+## User#participation([entity], callback)
+
+Retrieves participation metrics for this user in relation to a
+specific `entity`. (or in general if no `entity` is provided)
+
+| Parameter  | Type       |
+| ---------- | ---------- |
+| `entity`   | `String`   |
+| `callback` | `Function` |
+
+
+## User#author(type, params, callback)
+
+Creates a new vertex that is owned by the current user. (eg: they
+"authored" it)
+
+Alias: `add`
+
+| Parameter  | Type       | Notes                                             |
+| ---------- | ---------- | ------------------------------------------------- |
+| `type`     | `String`   | Must match one of the types in `mixin.js`         |
+| `params`   | `Object`   | Changes per-type (see the respective constructor) |
+| `callback` | `Function` |                                                   |
+
+
 ## User#contribute(params, callback)
 
-Share existing content with another community.
+Creates a new submission vertex that is owned by the current user. (this
+is a thin wrapper around `User#author`)
 
-Available `params`:
-
-| Parameter         | Type           | Notes                                  |
-| ----------------- | -------------- | -------------------------------------- |
-| `content_id`      | `String`       | Vertex UUID of content                 |
-| `to`              | `Array:String` | Community UUIDs                        |
-| `name`            | `String`       | For the new `Submission` vertex        |
-| `description`     | `String`       | For the new `Submission` vertex        |
-| `submission_type` | `Number`       | See [reference](../reference.md) notes |
-| `status`          | `Number`       | See [reference](../reference.md) notes |
+| Parameter  | Type       | Notes                 |
+| ---------- | ---------- | --------------------- |
+| `params`   | `Object`   | See `Submission` docs |
+| `callback` | `Function` |                       |

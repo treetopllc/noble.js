@@ -22,6 +22,22 @@ other types will inherit from)
 The base URI for generating URI for various endpoints.
 
 
+## Vertex#baseUri()
+
+Returns a `String`, which is the base URL for this entity (which
+includes `Vertex#base` and any owner entities)
+
+
+## Vertex#uri([path])
+
+Returns a `String`, which is the URL for this entity (including any
+appended `path` information, plus `Vertex#id` if available)
+
+| Parameter  | Type     |
+| ---------- | -------- |
+| `path`     | `String` |
+
+
 ## Vertex#get(callback)
 
 Returns the vertex information. (via `GET /:base/:id`)
@@ -41,6 +57,18 @@ Creates a new Vertex (via `POST /:base`)
 | `callback` | `Function` |
 
 
+## Vertex#modify(data, callback)
+
+Modifies the vertex. (via `PATCH /:base/:id`) This can also modify
+a batch of vertices if no `id` is set and an `Array` of objects is
+passed as `data`.
+
+| Parameter  | Type                  |
+| ---------- | --------------------- |
+| `data`     | `Object|Array:Object` |
+| `callback` | `Function`            |
+
+
 ## Vertex#related(type, query, callback)
 
 Returns a list of vertices that are related to the current vertex.
@@ -57,3 +85,18 @@ Returns a list of vertices that are related to the current vertex.
 
 Convert this object (particularly a subclass, like `Submission`) into a
 plain `Vertex` object.
+
+
+## Vertex#belongsTo(owner)
+
+Establishes a "resource" hierarchy for this vertex. For example, a
+user's submission can only be accessed within the `/users/:id` namespace.
+Thus, creating a `Submission` object that has a `User` object as it's
+owner will generate the correct URL.
+
+
+## Vertex.extend(Constructor)
+
+This convenience method allows the `Constructor` to inherit
+from `Vertex` (without needing to establish that inheritance chain
+itself)
