@@ -1,6 +1,11 @@
 Version History
 ===============
 
+## 0.3.2 (4/1/2014)
+ * Changed init signature to use object for params
+ * Added `Client#refresh(callback)` for refreshing user token
+ * Updated documentation
+
 ## 0.3.1 (3/31/2014)
  * Added Hours Sets to API (missing commits from master during earlier release)
 
