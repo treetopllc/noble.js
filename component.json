@@ -16,9 +16,9 @@
   "development": {
     "visionmedia/mocha": "*",
     "dominicbarnes/expect.js": "*",
-    "component/jquery": "*",
-    "components/backbone": "*",
-    "component/underscore": "*",
+    "components/jquery": "*",
+    "jashkenas/backbone": "*",
+    "jashkenas/underscore": "*",
     "victorquinn/chancejs": "*",
     "ianstormtaylor/sinon": "*"
   },

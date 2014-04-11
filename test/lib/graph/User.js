@@ -45,7 +45,7 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            submission_edge_type_id: 8, // Author
+                            submission_edge_type_id: 9, // Verifier
                             submission_status_id: 0,    // Unsubmitted
                             content_type_id: 5,         // Event
                             destination_type_id: 2      // Organization
@@ -56,7 +56,7 @@ describe("lib/graph/User.js", function () {
                 user.submissions(function (err, results) {
                     if (err) return done(err);
                     var row = results[0];
-                    expect(row.submission_edge_type).to.equal("Author");
+                    expect(row.submission_edge_type).to.equal("Verifier");
                     expect(row.submission_status).to.equal("Unsubmitted");
                     expect(row.content_type).to.equal("Event");
                     expect(row.destination_type).to.equal("Organization");
@@ -102,7 +102,7 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            submission_edge_type_id: 8, // Author
+                            submission_edge_type_id: 9, // Verifier
                             submission_status_id: 0,    // Unsubmitted
                             content_type_id: 5,         // Event
                             destination_type_id: 2      // Organization
@@ -113,7 +113,7 @@ describe("lib/graph/User.js", function () {
                 user.moderations(function (err, results) {
                     if (err) return done(err);
                     var row = results[0];
-                    expect(row.submission_edge_type).to.equal("Author");
+                    expect(row.submission_edge_type).to.equal("Verifier");
                     expect(row.submission_status).to.equal("Unsubmitted");
                     expect(row.content_type).to.equal("Event");
                     expect(row.destination_type).to.equal("Organization");
