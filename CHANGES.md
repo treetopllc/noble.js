@@ -1,6 +1,15 @@
 Version History
 ===============
 
+## 0.3.3 (4/11/2014)
+ * Using better repos for component/underscore/jquery deps (preparing for component v1)
+ * Updating reference indexes
+
+## 0.3.2 (4/1/2014)
+ * Changed init signature to use object for params
+ * Added `Client#refresh(callback)` for refreshing user token
+ * Updated documentation
+
 ## 0.3.1 (3/31/2014)
  * Added Hours Sets to API (missing commits from master during earlier release)
 

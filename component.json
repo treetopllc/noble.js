@@ -1,6 +1,6 @@
 {
   "name": "noble.js",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "visionmedia/superagent": "*",
@@ -16,9 +16,9 @@
   "development": {
     "visionmedia/mocha": "*",
     "dominicbarnes/expect.js": "*",
-    "component/jquery": "*",
-    "components/backbone": "*",
-    "component/underscore": "*",
+    "components/jquery": "*",
+    "jashkenas/backbone": "*",
+    "jashkenas/underscore": "*",
     "victorquinn/chancejs": "*",
     "ianstormtaylor/sinon": "*"
   },

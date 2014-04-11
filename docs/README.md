@@ -26,14 +26,23 @@ the specified action is complete:
  * [Submission](graph/Submission.md) - Contribution of content (by user, for community)
  * [Url](graph/Url.md) - Bookmarked link that is shared with a community
  * [User](graph/User.md) - NobleHour user
- * [UserAlert](graph/UserAlert.md) - A user's alert
+ * [Alert](graph/Alert.md) - A user's alert
 
 
 
-### Client(url, id, secret) *constructor*
+### Client(params) *constructor*
 
-Builds a new instance of the API client for a given url/id/secret combination.
-The `new` keyword is **not** required.
+Builds a new instance of the API client. The `new` keyword is **not**
+required for this constructor.
+
+**Available Options (params)**
+
+| Parameter       | Type     | Description                             |
+| --------------- | -------- | --------------------------------------- |
+| `auth`          | `Object` | (same as result of login)               |
+| `access_token`  | `String` | Predefined access_token                 |
+| `client_id`     | `String` | (if not using `access_token` or `auth`) |
+| `client_secret` | `String` | (if not using `access_token` or `auth`) |
 
 **Returns**: `Client` object instance
 
@@ -91,6 +100,16 @@ reflect a NobleHour account only.
 | `callback` | `Function` | *See above*                |
 
 
+### Client#refresh(callback)
+
+Refreshes the current `auth` object for the user. It assumes you have
+either previously logged in or set the `auth` object manually.
+
+| Parameter  | Type       | Description |
+| ---------- | ---------- | ----------- |
+| `callback` | `Function` | *See above* |
+
+
 ### Client#search(params, callback)
 
 Performs a search via treetopllc/drake, which uses many possible criteria,
@@ -143,6 +162,11 @@ client.search({
 ### Client#vertex(id)
 
 Returns a generic [`Vertex`](Vertex.md) object.
+
+
+### Client#alert(id)
+
+Returns an [`Alert`](Alert.md) object.
 
 
 ### Client#asset(id)
