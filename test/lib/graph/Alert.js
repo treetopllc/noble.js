@@ -1,3 +1,6 @@
+var simpleResponse = require("../../mock").simpleResponse;
+var client = require("../../utils").createClient();
+
 describe("lib/graph/Alert.js", function () {
     describe("Alert", function () {
         var alert = client.alert("123");

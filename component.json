@@ -1,9 +1,8 @@
 {
   "name": "noble.js",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
-    "visionmedia/superagent": "*",
     "component/each": "*",
     "component/inherit": "*",
     "component/map": "*",
@@ -11,20 +10,30 @@
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
+    "visionmedia/debug": "*",
+    "visionmedia/superagent": "*",
     "yields/isArray": "*"
   },
   "development": {
-    "visionmedia/mocha": "*",
-    "dominicbarnes/expect.js": "*",
-    "components/jquery": "*",
-    "jashkenas/backbone": "*",
-    "jashkenas/underscore": "*",
-    "victorquinn/chancejs": "*",
-    "ianstormtaylor/sinon": "*"
+    "dependencies": {
+      "dominicbarnes/expect.js": "master",
+      "ianstormtaylor/sinon": "master",
+      "victorquinn/chancejs": "*",
+      "visionmedia/mocha": "*"
+    },
+    "scripts": [
+      "test/**/*.js"
+    ]
   },
   "scripts": [
     "index.js",
+    "lib/index.js",
     "lib/Client.js",
+    "lib/reference.js",
+    "lib/search.js",
+    "lib/utils.js",
+    "lib/graph/mixin.js",
+    "lib/graph/Vertex.js",
     "lib/graph/Alert.js",
     "lib/graph/Asset.js",
     "lib/graph/Community.js",
@@ -39,12 +48,6 @@
     "lib/graph/Organization.js",
     "lib/graph/Submission.js",
     "lib/graph/Url.js",
-    "lib/graph/User.js",
-    "lib/graph/Vertex.js",
-    "lib/graph/mixin.js",
-    "lib/index.js",
-    "lib/reference.js",
-    "lib/search.js",
-    "lib/utils.js"
+    "lib/graph/User.js"
   ]
 }

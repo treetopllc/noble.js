@@ -1,3 +1,9 @@
+var each = require("each");
+var client = require("../../utils").createClient();
+var mock = require("../../mock");
+var simpleResponse = mock.simpleResponse;
+var defaultHeaders = mock.defaultHeaders;
+
 describe("lib/graph/Vertex.js", function () {
     describe("Vertex", function () {
         var vertex = client.vertex("abc");

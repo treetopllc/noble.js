@@ -1,4 +1,14 @@
+var expect = require("expect.js");
+var createClient = require("../utils").createClient;
+var mock = require("../mock");
+var Request = require("superagent").Request;
+var chance = mock.chance;
+var defaultHeaders = mock.defaultHeaders;
+var simpleResponse = mock.simpleResponse;
+
 describe("lib/search.js", function () {
+    var client = createClient();
+
     describe("Client#search()", function () {
         function generate() {
             return {

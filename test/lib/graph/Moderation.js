@@ -1,3 +1,6 @@
+var client = require("../../utils").createClient();
+var simpleResponse = require("../../mock").simpleResponse;
+
 describe("lib/graph/Moderation.js", function () {
     describe("Moderation", function () {
         var moderation = client.moderation("abc")

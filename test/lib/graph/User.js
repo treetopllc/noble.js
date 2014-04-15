@@ -1,3 +1,10 @@
+var mock = require("../../mock");
+var utils = require("../../utils");
+var defaultHeaders = mock.defaultHeaders;
+var simpleResponse = mock.simpleResponse;
+var client = utils.createClient();
+var createArray = utils.createArray;
+
 describe("lib/graph/User.js", function () {
     describe("User", function () {
         var user = client.user("abc");
@@ -28,7 +35,9 @@ describe("lib/graph/User.js", function () {
                     200,
                     defaultHeaders,
                     JSON.stringify(createArray(5, function () {
-                        return { submission_id: chance.guid() };
+                        return {
+                            id: chance.guid()
+                        };
                     }))
                 ]);
 
@@ -45,10 +54,14 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            submission_edge_type_id: 9, // Verifier
-                            submission_status_id: 0,    // Unsubmitted
-                            content_type_id: 5,         // Event
-                            destination_type_id: 2      // Organization
+                            edge_type_id: 9, // Verifier
+                            status_id: 0, // Unsubmitted
+                            content: {
+                                vertex_type_id: 5 // Event
+                            },
+                            destination: {
+                                vertex_type_id: 2 // Organization
+                            }
                         }
                     ])
                 ]);
@@ -56,10 +69,9 @@ describe("lib/graph/User.js", function () {
                 user.submissions(function (err, results) {
                     if (err) return done(err);
                     var row = results[0];
-                    expect(row.submission_edge_type).to.equal("Verifier");
-                    expect(row.submission_status).to.equal("Unsubmitted");
-                    expect(row.content_type).to.equal("Event");
-                    expect(row.destination_type).to.equal("Organization");
+                    expect(row.edge_type).to.equal("Verifier");
+                    expect(row.content.vertex_type).to.equal("Event");
+                    expect(row.destination.vertex_type).to.equal("Organization");
                     done();
                 });
             });
@@ -85,7 +97,7 @@ describe("lib/graph/User.js", function () {
                     200,
                     defaultHeaders,
                     JSON.stringify(createArray(5, function () {
-                        return { submission_id: chance.guid() };
+                        return { id: chance.guid() };
                     }))
                 ]);
 
@@ -102,10 +114,13 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            submission_edge_type_id: 9, // Verifier
-                            submission_status_id: 0,    // Unsubmitted
-                            content_type_id: 5,         // Event
-                            destination_type_id: 2      // Organization
+                            edge_type_id: 9, // Verifier
+                            content: {
+                                vertex_type_id: 5 // Event
+                            },
+                            destination: {
+                                vertex_type_id: 2 // Organization
+                            }
                         }
                     ])
                 ]);
@@ -113,10 +128,9 @@ describe("lib/graph/User.js", function () {
                 user.moderations(function (err, results) {
                     if (err) return done(err);
                     var row = results[0];
-                    expect(row.submission_edge_type).to.equal("Verifier");
-                    expect(row.submission_status).to.equal("Unsubmitted");
-                    expect(row.content_type).to.equal("Event");
-                    expect(row.destination_type).to.equal("Organization");
+                    expect(row.edge_type).to.equal("Verifier");
+                    expect(row.content.vertex_type).to.equal("Event");
+                    expect(row.destination.vertex_type).to.equal("Organization");
                     done();
                 });
             });
@@ -159,10 +173,10 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            type_id: 0    // News
+                            vertex_type_id: 0    // News
                         },
                         {
-                            type_id: 5,   // Event
+                            vertex_type_id: 5,   // Event
                             subtype_id: 4 // Educational
                         }
                     ])
@@ -171,10 +185,10 @@ describe("lib/graph/User.js", function () {
                 user.authored(function (err, results) {
                     if (err) return done(err);
 
-                    expect(results[0].type).to.equal("News");
+                    expect(results[0].vertex_type).to.equal("News");
                     expect(results[0].subtype).to.not.be.ok();
 
-                    expect(results[1].type).to.equal("Event");
+                    expect(results[1].vertex_type).to.equal("Event");
                     expect(results[1].subtype).to.equal("Educational");
 
                     done();
@@ -211,11 +225,11 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            type_id: 10   // Hours
+                            vertex_type_id: 10  // Hours
                         },
                         {
-                            type_id: 2,   // Organization
-                            subtype_id: 3 // For-Profit
+                            vertex_type_id: 2,  // Organization
+                            subtype_id: 3  // For-Profit
                         }
                     ])
                 ]);
@@ -223,10 +237,10 @@ describe("lib/graph/User.js", function () {
                 user.feed(function (err, results) {
                     if (err) return done(err);
 
-                    expect(results[0].type).to.equal("Hours");
+                    expect(results[0].vertex_type).to.equal("Hours");
                     expect(results[0].subtype).to.not.be.ok();
 
-                    expect(results[1].type).to.equal("Organization");
+                    expect(results[1].vertex_type).to.equal("Organization");
                     expect(results[1].subtype).to.equal("For-Profit");
 
                     done();
@@ -263,11 +277,11 @@ describe("lib/graph/User.js", function () {
                     defaultHeaders,
                     JSON.stringify([
                         {
-                            type_id: 7    // User
+                            vertex_type_id: 7  // User
                         },
                         {
-                            type_id: 3,   // Opportunity
-                            subtype_id: 6 // Performance
+                            vertex_type_id: 3,  // Opportunity
+                            subtype_id: 6  // Performance
                         }
                     ])
                 ]);
@@ -275,10 +289,10 @@ describe("lib/graph/User.js", function () {
                 user.feed(function (err, results) {
                     if (err) return done(err);
 
-                    expect(results[0].type).to.equal("User");
+                    expect(results[0].vertex_type).to.equal("User");
                     expect(results[0].subtype).to.not.be.ok();
 
-                    expect(results[1].type).to.equal("Opportunity");
+                    expect(results[1].vertex_type).to.equal("Opportunity");
                     expect(results[1].subtype).to.equal("Performance");
 
                     done();

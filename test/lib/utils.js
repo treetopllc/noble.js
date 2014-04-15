@@ -1,6 +1,6 @@
 describe("lib/utils.js", function () {
     describe("utils", function () {
-        var utils = require("noble.js/lib/utils");
+        var utils = require("noble.js/lib/utils.js");
 
         describe(".translate(input, type, from, to)", function () {
             var translate = utils.translate;

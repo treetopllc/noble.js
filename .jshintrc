@@ -29,7 +29,7 @@
     "trailing"      : true,     // true: Prohibit trailing whitespaces
     "maxparams"     : 4,        // {int} Max number of formal params allowed per function
     "maxdepth"      : 3,        // {int} Max depth of nested blocks (within functions)
-    "maxstatements" : 10,       // {int} Max number statements per function
+    "maxstatements" : 20,       // {int} Max number statements per function
     "maxcomplexity" : 10,       // {int} Max cyclomatic complexity per function
     "maxlen"        : 80,       // {int} Max number of characters per line
 

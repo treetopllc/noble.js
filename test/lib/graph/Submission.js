@@ -1,3 +1,6 @@
+var client = require("../../utils").createClient();
+var simpleResponse = require("../../mock").simpleResponse;
+
 describe("lib/graph/Submission.js", function () {
     describe("Submission", function () {
         var submission = client.submission("abc")
