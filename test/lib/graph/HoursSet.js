@@ -1,3 +1,6 @@
+var client = require("../../utils").createClient();
+var simpleResponse = require("../../mock").simpleResponse;
+
 describe("lib/graph/HoursSet.js", function () {
     describe("HoursSet", function () {
         var hoursSet = client.hoursSet("abc");

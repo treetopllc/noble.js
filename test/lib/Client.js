@@ -1,4 +1,16 @@
+var api = require("noble.js");
+var expect = require("expect.js");
+var request = require("superagent");
+var createClient = require("../utils").createClient;
+var mock = require("../mock");
+var Request = request.Request;
+var defaultHeaders = mock.defaultHeaders;
+var simpleResponse = mock.simpleResponse;
+
+
 describe("lib/Client.js", function () {
+    var client = createClient();
+
     describe("Client(url, [params])", function () {
         it("should set the root property", function () {
             var client = api("http://example.com");

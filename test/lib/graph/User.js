@@ -1,3 +1,10 @@
+var mock = require("../../mock");
+var utils = require("../../utils");
+var defaultHeaders = mock.defaultHeaders;
+var simpleResponse = mock.simpleResponse;
+var client = utils.createClient();
+var createArray = utils.createArray;
+
 describe("lib/graph/User.js", function () {
     describe("User", function () {
         var user = client.user("abc");

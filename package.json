@@ -3,7 +3,7 @@
   "version": "0.3.3",
   "private": true,
   "devDependencies": {
-    "component": "~0.17.0",
+    "component": "^1.0.0-rc5",
     "component-serve": "~0.4.0",
     "component-assets": "0.0.2",
     "coverjs": "0.0.14",

@@ -1,3 +1,6 @@
+var each = require("each");
+var client = require("../../utils").createClient();
+
 describe("lib/graph/mixin.js", function () {
     describe("Client", function () {
         each({
