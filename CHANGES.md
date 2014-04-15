@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.4.0 (?)
+ * Updating to leverage Component v1.0.0+
+ * Adding `visionmedia/debug` for debugging output
+
 ## 0.3.3 (4/11/2014)
  * Using better repos for component/underscore/jquery deps (preparing for component v1)
  * Updating reference indexes
