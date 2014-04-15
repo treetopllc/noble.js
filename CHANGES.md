@@ -1,9 +1,12 @@
 Version History
 ===============
 
-## 0.4.0 (?)
+## 0.4.0 (4/15/2014)
  * Updating to leverage Component v1.0.0+
  * Adding `visionmedia/debug` for debugging output
+ * Updating internals to reflect new structure for moderations/submissions API responses
+ * Dropped `Makefile`, using `npm run` for commands instead
+ * Dropped coverage testing (waiting for deps to transition to component v1.0)
 
 ## 0.3.3 (4/11/2014)
  * Using better repos for component/underscore/jquery deps (preparing for component v1)
