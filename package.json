@@ -4,9 +4,16 @@
   "private": true,
   "devDependencies": {
     "component": "^1.0.0-rc5",
-    "component-serve": "~0.4.0",
-    "component-assets": "0.0.2",
-    "coverjs": "0.0.14",
-    "jshint": "~2.4.1"
+    "jshint": "^2.5.0",
+    "http-server": "^0.6.1",
+    "mocha-phantomjs": "^3.3.2"
+  },
+  "scripts": {
+    "build": "component build --dev",
+    "lint": "jshint lib",
+    "start": "http-server -p 3000",
+    "test": "mocha-phantomjs -R dot test/runner.html",
+    "distclean": "rm -rf node_modules components",
+    "clean": "rm -rf build"
   }
 }

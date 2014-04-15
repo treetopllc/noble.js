@@ -3,7 +3,6 @@
   "version": "0.3.3",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
-    "visionmedia/superagent": "*",
     "component/each": "*",
     "component/inherit": "*",
     "component/map": "*",
@@ -11,8 +10,9 @@
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
-    "yields/isArray": "*",
-    "visionmedia/debug": "*"
+    "visionmedia/debug": "*",
+    "visionmedia/superagent": "*",
+    "yields/isArray": "*"
   },
   "development": {
     "dependencies": {
@@ -37,6 +37,7 @@
     "lib/graph/Alert.js",
     "lib/graph/Asset.js",
     "lib/graph/Community.js",
+    "lib/graph/Customer.js",
     "lib/graph/Event.js",
     "lib/graph/Group.js",
     "lib/graph/Hours.js",
