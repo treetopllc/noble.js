@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.4.1 (4/16/2014)
+ * Fixing bug response handler that threw an exception upon network errors
+
 ## 0.4.0 (4/15/2014)
  * Updating to leverage Component v1.0.0+
  * Adding `visionmedia/debug` for debugging output
