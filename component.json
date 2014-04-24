@@ -1,6 +1,6 @@
 {
   "name": "noble.js",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/each": "*",
