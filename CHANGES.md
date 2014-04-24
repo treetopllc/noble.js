@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.4.2 (4/24/2014)
+ * Adding `Submission#unsubmit(callback)`
+ * Removing some unnecessary debug output
+
 ## 0.4.1 (4/16/2014)
  * Fixing bug response handler that threw an exception upon network errors
 
