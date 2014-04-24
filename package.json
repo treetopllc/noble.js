@@ -12,6 +12,7 @@
     "build": "component build --dev",
     "lint": "jshint lib",
     "start": "http-server -p 3000",
+    "pretest": "npm run build",
     "test": "mocha-phantomjs -R dot test/runner.html",
     "distclean": "rm -rf node_modules components",
     "clean": "rm -rf build"
