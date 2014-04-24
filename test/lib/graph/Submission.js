@@ -13,6 +13,14 @@ describe("lib/graph/Submission.js", function () {
             });
         });
 
+        describe("#unsubmit(callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/submissions/abc", simpleResponse);
+
+                submission.unsubmit(done);
+            });
+        });
+
         describe("#history(callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/submissions/abc/history", simpleResponse);
