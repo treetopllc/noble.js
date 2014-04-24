@@ -14,6 +14,15 @@ Creates a `Submission` object instance.
 | `id`      | `String` | Submission UUID                            |
 
 
+## Submission#unsubmit(callback)
+
+Mark the submission as unsubmitted
+
+| Parameter  | Type       |
+| ---------- | ---------- |
+| `callback` | `Function` |
+
+
 ## Submission#history(callback)
 
 Retrieve the update history for this submission.
