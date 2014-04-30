@@ -1,6 +1,12 @@
 Version History
 ===============
 
+## 0.4.4 (4/30/2014)
+ * Adding `User#favorite(entity, callback)` and `User#unfavorite(entity, callback)`
+
+## 0.4.3 (4/24/2014)
+ * Hotfix for typo in Submission (copy-pasta fail)
+
 ## 0.4.2 (4/24/2014)
  * Adding `Submission#unsubmit(callback)`
  * Removing some unnecessary debug output
