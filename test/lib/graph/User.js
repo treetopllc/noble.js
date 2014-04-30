@@ -391,5 +391,19 @@ describe("lib/graph/User.js", function () {
                 user.contribute({}, done);
             });
         });
+
+        describe("#favorite(entity, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/favorites", simpleResponse);
+                user.favorite("test", done);
+            });
+        });
+
+        describe("#unfavorite(entity, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/favorites/test", simpleResponse);
+                user.unfavorite("test", done);
+            });
+        });
     });
 });
