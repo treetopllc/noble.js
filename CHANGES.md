@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.4.5 (5/5/2014)
+ * Adding `Asset#create(params, callback)` and using HTML5/XHR2 file uploads
+
 ## 0.4.4 (4/30/2014)
  * Adding `User#favorite(entity, callback)` and `User#unfavorite(entity, callback)`
 
