@@ -56,6 +56,11 @@ describe("lib/graph/Organization.js", function () {
                     done();
                 });
             });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/content?limit=5", simpleResponse);
+                organization.content({ limit: 5 }, done);
+            });
         });
     });
 });
