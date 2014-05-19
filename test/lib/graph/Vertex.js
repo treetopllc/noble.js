@@ -68,6 +68,23 @@ describe("lib/graph/Vertex.js", function () {
                     done();
                 });
             });
+
+            it("should translate the vertex_type_id field", function (done) {
+                server.respondWith("/vertices/abc", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        id: "abc",
+                        vertex_type_id: 0 // News
+                    })
+                ]);
+
+                vertex.get(function (err, data) {
+                    if (err) return done(err);
+                    expect(data.vertex_type).to.equal("News");
+                    done();
+                });
+            });
         });
 
         describe("#create(data, callback)", function () {
@@ -111,6 +128,25 @@ describe("lib/graph/Vertex.js", function () {
                     expect(vertex.id).to.be.ok();
                     expect(data.id).to.equal(vertex.id);
 
+                    done();
+                });
+            });
+
+            it("should translate the vertex_type_id after success", function (done) {
+                server.respondWith("POST", "/vertices", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify({
+                        id: "abc",
+                        vertex_type_id: 1 // Group
+                    })
+                ]);
+
+                var vertex = client.vertex();
+
+                vertex.create({ hello: "world" }, function (err, data) {
+                    if (err) return done(err);
+                    expect(data.vertex_type).to.equal("Group");
                     done();
                 });
             });
