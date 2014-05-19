@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.4.6 (5/19/2014)
+ * Adding `Organization#content([query], callback)` for retrieving organization content
+ * Changing `Vertex#get()` and `Vertex#create()` to translate `vertex_type_id` automatically
+
 ## 0.4.5 (5/5/2014)
  * Adding `Asset#create(params, callback)` and using HTML5/XHR2 file uploads
 
