@@ -394,7 +394,7 @@ describe("lib/graph/User.js", function () {
 
         describe("#favorite(entity, callback)", function () {
             it("should pass a smoke test", function (done) {
-                server.respondWith("/users/abc/favorites", simpleResponse);
+                server.respondWith("/users/abc/favorites/test", simpleResponse);
                 user.favorite("test", done);
             });
         });
