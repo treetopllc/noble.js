@@ -1,6 +1,11 @@
 Version History
 ===============
 
+## 0.5.0 (5/23/2014)
+ * Changing `User#favorite()` to use `PUT` instead of `POST`
+ * Adds `Organization#participation()` (taken directly from `User`)
+ * Changing `User#participation()` to have a 3rd param `key` (changes signature, not backwards compatible)
+
 ## 0.4.6 (5/19/2014)
  * Adding `Organization#content([query], callback)` for retrieving organization content
  * Changing `Vertex#get()` and `Vertex#create()` to translate `vertex_type_id` automatically
