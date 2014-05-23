@@ -62,5 +62,31 @@ describe("lib/graph/Organization.js", function () {
                 organization.content({ limit: 5 }, done);
             });
         });
+
+        describe("#participation([key], [entity], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/participation", simpleResponse);
+
+                organization.participation(done);
+            });
+
+            it("should pass a smoke test (with key)", function (done) {
+                server.respondWith("/organizations/abc/participation/impact", simpleResponse);
+
+                organization.participation("impact", done);
+            });
+
+            it("should pass a smoke test (with entity)", function (done) {
+                server.respondWith("/organizations/abc/participation?for=def", simpleResponse);
+
+                organization.participation(null, "def", done);
+            });
+
+            it("should pass a smoke test (with key and entity)", function (done) {
+                server.respondWith("/organizations/abc/participation/impact?for=def", simpleResponse);
+
+                organization.participation("impact", "def", done);
+            });
+        });
     });
 });

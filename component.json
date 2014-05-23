@@ -30,6 +30,7 @@
     "lib/index.js",
     "lib/Client.js",
     "lib/reference.js",
+    "lib/participation.js",
     "lib/search.js",
     "lib/utils.js",
     "lib/graph/mixin.js",

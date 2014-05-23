@@ -340,17 +340,29 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#participation([entity], callback)", function () {
+        describe("#participation([key], [entity], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/participation", simpleResponse);
 
                 user.participation(done);
             });
 
+            it("should pass a smoke test (with key)", function (done) {
+                server.respondWith("/users/abc/participation/impact", simpleResponse);
+
+                user.participation("impact", done);
+            });
+
             it("should pass a smoke test (with entity)", function (done) {
                 server.respondWith("/users/abc/participation?for=def", simpleResponse);
 
-                user.participation("def", done);
+                user.participation(null, "def", done);
+            });
+
+            it("should pass a smoke test (with key and entity)", function (done) {
+                server.respondWith("/users/abc/participation/impact?for=def", simpleResponse);
+
+                user.participation("impact", "def", done);
             });
         });
 
