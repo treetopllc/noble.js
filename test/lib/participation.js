@@ -1,10 +1,5 @@
-var expect = require("expect.js");
 var createClient = require("../utils").createClient;
-var mock = require("../mock");
-var Request = require("superagent").Request;
-var chance = mock.chance;
-var defaultHeaders = mock.defaultHeaders;
-var simpleResponse = mock.simpleResponse;
+var simpleResponse = require("../mock").simpleResponse;
 
 describe("lib/participation.js", function () {
     var client = createClient();
