@@ -77,18 +77,6 @@ describe("lib/graph/Organization.js", function () {
 
                 organization.participation("impact", done);
             });
-
-            it("should pass a smoke test (with entity)", function (done) {
-                server.respondWith("/organizations/abc/participation?for=def", simpleResponse);
-
-                organization.participation(null, "def", done);
-            });
-
-            it("should pass a smoke test (with key and entity)", function (done) {
-                server.respondWith("/organizations/abc/participation/impact?for=def", simpleResponse);
-
-                organization.participation("impact", "def", done);
-            });
         });
 
         describe("#submissions([query], callback)", function () {

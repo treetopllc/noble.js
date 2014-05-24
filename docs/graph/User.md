@@ -120,13 +120,20 @@ Retrieves this statistics (e.g. unread count) for this user's alerts.
 | `callback` | `Function` |
 
 
-## User#participation([entity], callback)
+## User#participation([key], [entity], callback)
 
 Retrieves participation metrics for this user in relation to a
 specific `entity`. (or in general if no `entity` is provided)
 
+The `key` allows specifying a specific subset of participation
+data to retrieve. (eg: "impact")
+
+If there are only 2 arguments, it is assumed that `key` was
+specified.
+
 | Parameter  | Type       |
 | ---------- | ---------- |
+| `key`      | `String`   |
 | `entity`   | `String`   |
 | `callback` | `Function` |
 
@@ -154,3 +161,23 @@ is a thin wrapper around `User#author`)
 | ---------- | ---------- | --------------------- |
 | `params`   | `Object`   | See `Submission` docs |
 | `callback` | `Function` |                       |
+
+
+## User#favorite(entity, callback)
+
+Marks an entity as one of this user's favorites.
+
+| Parameter  | Type       | Notes       |
+| ---------- | ---------- | ----------- |
+| `entity`   | `String`   | Entity UUID |
+| `callback` | `Function` |             |
+
+
+## User#unfavorite(entity, callback)
+
+Marks an entity as not one of this user's favorites.
+
+| Parameter  | Type       | Notes       |
+| ---------- | ---------- | ----------- |
+| `entity`   | `String`   | Entity UUID |
+| `callback` | `Function` |             |
