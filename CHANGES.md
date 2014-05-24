@@ -1,9 +1,13 @@
 Version History
 ===============
 
+## 0.5.1 (5/23/2014)
+ * Updating documentation
+ * Adding `Organization#submissions()`
+
 ## 0.5.0 (5/23/2014)
  * Changing `User#favorite()` to use `PUT` instead of `POST`
- * Adds `Organization#participation()` (taken directly from `User`)
+ * Adding `Organization#participation()` (taken directly from `User`)
  * Changing `User#participation()` to have a 3rd param `key` (changes signature, not backwards compatible)
 
 ## 0.4.6 (5/19/2014)
