@@ -1,6 +1,6 @@
 {
   "name": "noble.js",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/each": "*",
@@ -10,7 +10,6 @@
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
-    "visionmedia/debug": "*",
     "visionmedia/superagent": "*",
     "yields/isArray": "*"
   },
@@ -19,6 +18,7 @@
       "dominicbarnes/expect.js": "master",
       "ianstormtaylor/sinon": "master",
       "victorquinn/chancejs": "*",
+      "visionmedia/debug": "*",
       "visionmedia/mocha": "*"
     },
     "scripts": [
