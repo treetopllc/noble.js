@@ -2,6 +2,7 @@ Version History
 ===============
 
 ## 0.5.1 (5/23/2014)
+ * Removing `debug` usage from lib (never used it)
  * Updating documentation
  * Adding `Organization#submissions()`
 
