@@ -1,5 +1,7 @@
-var client = require("../../utils").createClient();
+var utils = require("../../utils");
 var mock = require("../../mock");
+var client = utils.createClient();
+var createArray = utils.createArray;
 var simpleResponse = mock.simpleResponse;
 var defaultHeaders = mock.defaultHeaders;
 
@@ -86,6 +88,60 @@ describe("lib/graph/Organization.js", function () {
                 server.respondWith("/organizations/abc/participation/impact?for=def", simpleResponse);
 
                 organization.participation("impact", "def", done);
+            });
+        });
+
+        describe("#submissions([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/submissions", simpleResponse);
+
+                organization.submissions(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/submissions?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return {
+                            id: chance.guid()
+                        };
+                    }))
+                ]);
+
+                organization.submissions({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+
+            it("should translate id fields into name fields", function (done) {
+                server.respondWith("/organizations/abc/submissions", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify([
+                        {
+                            edge_type_id: 9, // Verifier
+                            status_id: 0, // Unsubmitted
+                            content: {
+                                vertex_type_id: 5 // Event
+                            },
+                            destination: {
+                                vertex_type_id: 2 // Organization
+                            }
+                        }
+                    ])
+                ]);
+
+                organization.submissions(function (err, results) {
+                    if (err) return done(err);
+                    var row = results[0];
+                    expect(row.edge_type).to.equal("Verifier");
+                    expect(row.content.vertex_type).to.equal("Event");
+                    expect(row.destination.vertex_type).to.equal("Organization");
+                    done();
+                });
             });
         });
     });
