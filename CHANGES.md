@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.5.2 (6/3/2014)
+ * Adding response `err.body` for error callbacks (includes response body)
+
 ## 0.5.1 (5/23/2014)
  * Removing `debug` usage from lib (never used it)
  * Updating documentation

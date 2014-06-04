@@ -165,6 +165,7 @@ describe("lib/Client.js", function () {
                 ]);
 
                 client.login("not", "real", function (err, body, res) {
+                    expect(err.body).to.equal(body);
                     expect(body.details).to.equal("invalid user name or password");
                     done();
                 });
