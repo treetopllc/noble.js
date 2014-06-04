@@ -1,7 +1,10 @@
 Version History
 ===============
 
-## 0.5.2 (6/3/2014)
+## 0.6.0 (6/4/2014)
+ * Adding old browser support for `Asset#create()` (via [iframe-multipart](https://github.com/eivindfjeldstad/iframe-multipart))
+
+## 0.5.2 (6/4/2014)
  * Adding response `err.body` for error callbacks (includes response body)
 
 ## 0.5.1 (5/23/2014)
