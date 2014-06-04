@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.6.1 (6/4/2014)
+ * Adding filename for `Asset#create()` uploads (via XHR2)
+
 ## 0.6.0 (6/4/2014)
  * Adding old browser support for `Asset#create()` (via [iframe-multipart](https://github.com/eivindfjeldstad/iframe-multipart))
 
