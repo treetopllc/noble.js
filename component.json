@@ -1,11 +1,14 @@
 {
   "name": "noble.js",
-  "version": "0.5.2",
+  "repository": "treetopllc/noble.js",
+  "version": "0.6.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
+    "component/domify": "*",
     "component/each": "*",
     "component/inherit": "*",
     "component/map": "*",
+    "eivindfjeldstad/iframe-multipart": "*",
     "ianstormtaylor/to-constant-case": "*",
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
@@ -32,6 +35,7 @@
     "lib/reference.js",
     "lib/participation.js",
     "lib/search.js",
+    "lib/supports.js",
     "lib/utils.js",
     "lib/graph/mixin.js",
     "lib/graph/Vertex.js",
