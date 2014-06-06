@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.6.2 (6/6/2014)
+ * Changing behavior for `Vertex#modify()` (URL now determined via presence/absence of `id`, not the passed `data`)
+
 ## 0.6.1 (6/4/2014)
  * Adding filename for `Asset#create()` uploads (via XHR2)
 
