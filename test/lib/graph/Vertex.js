@@ -153,18 +153,16 @@ describe("lib/graph/Vertex.js", function () {
         });
 
         describe("#modify(data, callback)", function () {
-            var vertex = client.vertex("abc");
-
             it("should pass a smoke test (single)", function (done) {
                 server.respondWith("PATCH", "/vertices/abc", simpleResponse);
 
-                vertex.modify({}, done);
+                client.vertex("abc").modify({}, done);
             });
 
             it("should pass a smoke test (bulk)", function (done) {
                 server.respondWith("PATCH", "/vertices", simpleResponse);
 
-                vertex.modify([], done);
+                client.vertex(null).modify([], done);
             });
         });
 
