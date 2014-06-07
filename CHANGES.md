@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.6.3 (6/7/2014)
+ * Updating `reference.organization_types` list
+
 ## 0.6.2 (6/6/2014)
  * Changing behavior for `Vertex#modify()` (URL now determined via presence/absence of `id`, not the passed `data`)
 
