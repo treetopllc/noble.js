@@ -96,7 +96,7 @@ describe("lib/search.js", function () {
                         },
                         {
                             vertex_type_id: 2, // Organization
-                            subtype_id: 1      // Club
+                            subtype_id: 1      // Education
                         },
                         {
                             vertex_type_id: 3, // Opportunity
@@ -113,7 +113,7 @@ describe("lib/search.js", function () {
                 expect(results[0].subtype).to.equal("Celebration");
 
                 expect(results[1].type).to.equal("Organization");
-                expect(results[1].subtype).to.equal("Club");
+                expect(results[1].subtype).to.equal("Education");
 
                 expect(results[2].type).to.equal("Opportunity");
                 expect(results[2].subtype).to.equal("Volunteer Service");
