@@ -229,7 +229,7 @@ describe("lib/graph/User.js", function () {
                         },
                         {
                             vertex_type_id: 2,  // Organization
-                            subtype_id: 3  // For-Profit
+                            subtype_id: 3       // Non-Profit
                         }
                     ])
                 ]);
@@ -241,7 +241,7 @@ describe("lib/graph/User.js", function () {
                     expect(results[0].subtype).to.not.be.ok();
 
                     expect(results[1].vertex_type).to.equal("Organization");
-                    expect(results[1].subtype).to.equal("For-Profit");
+                    expect(results[1].subtype).to.equal("Non-Profit");
 
                     done();
                 });
