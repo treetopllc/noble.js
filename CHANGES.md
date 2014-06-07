@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.6.4 (6/7/2014)
+ * Updating `reference` lists, removing "find" feature
+
 ## 0.6.3 (6/7/2014)
  * Updating `reference.organization_types` list
 
