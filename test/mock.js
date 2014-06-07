@@ -39,7 +39,9 @@ chance.mixin({
         return chance.date().toISOString();
     },
     type_id: function () {
-        return chance.integer({ min: 0, max: 13 });
+        var ret = chance.integer({ min: 0, max: 13 });
+        if (ret === 4) return this.type_id(); // FIXME
+        return ret;
     },
     subtype_id: function () {
         return chance.integer({ min: 0, max: 13 });
