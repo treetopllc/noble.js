@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.6.5 (6/19/2014)
+ * Adding `reference` lists for project activities and focuses
+ * Adding `User#activity()`
+
 ## 0.6.4 (6/7/2014)
  * Updating `reference` lists, removing "find" feature
 
