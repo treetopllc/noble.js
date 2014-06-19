@@ -391,7 +391,6 @@ describe("lib/graph/User.js", function () {
         describe("#add(type, params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/hours", simpleResponse);
-
                 user.add("hours", {}, done);
             });
         });
@@ -399,7 +398,6 @@ describe("lib/graph/User.js", function () {
         describe("#contribute(params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/submissions", simpleResponse);
-
                 user.contribute({}, done);
             });
         });
@@ -415,6 +413,13 @@ describe("lib/graph/User.js", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/favorites/test", simpleResponse);
                 user.unfavorite("test", done);
+            });
+        });
+
+        describe("#activity([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/activity", simpleResponse);
+                user.activity(done);
             });
         });
     });
