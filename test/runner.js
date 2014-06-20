@@ -22,6 +22,7 @@ require("./lib/graph/Moderation");
 require("./lib/graph/News");
 require("./lib/graph/Opportunity");
 require("./lib/graph/Organization");
+require("./lib/graph/Project");
 require("./lib/graph/Submission");
 require("./lib/graph/Url");
 require("./lib/graph/User");
