@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.7.1 (6/20/2014)
+ * Adding `Project#search()`
+ * Changing `Vertex#create()` to always use `baseUri` (just in case)
+
 ## 0.7.0 (6/20/2014)
  * Adding the `Project` vertex object
 
