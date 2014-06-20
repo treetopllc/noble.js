@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.7.0 (6/20/2014)
+ * Adding the `Project` vertex object
+
 ## 0.6.6 (6/19/2014)
  * Updating `reference.vertex_types` to include "Project"
 
