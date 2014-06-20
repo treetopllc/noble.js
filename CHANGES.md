@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.6.6 (6/19/2014)
+ * Updating `reference.vertex_types` to include "Project"
+
 ## 0.6.5 (6/19/2014)
  * Adding `reference` lists for project activities and focuses
  * Adding `User#activity()`
