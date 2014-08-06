@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.7.3 (8/6/2014)
+ * Adding "Course" to list of group types
+
 ## 0.7.2 (7/11/2014)
  * Adding activity types to reference
 
