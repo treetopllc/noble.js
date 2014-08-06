@@ -19,7 +19,7 @@
   "development": {
     "dependencies": {
       "dominicbarnes/expect.js": "master",
-      "ianstormtaylor/sinon": "master",
+      "ianstormtaylor/sinon": "59a0bdc92e071aeb705d71176734618867440602",
       "victorquinn/chancejs": "*",
       "visionmedia/debug": "*",
       "visionmedia/mocha": "*"
