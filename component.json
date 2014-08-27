@@ -30,6 +30,30 @@
   },
   "scripts": [
     "index.js",
-    "lib/**/*.js"
+    "lib/Client.js",
+    "lib/graph/Alert.js",
+    "lib/graph/Asset.js",
+    "lib/graph/Community.js",
+    "lib/graph/Customer.js",
+    "lib/graph/Event.js",
+    "lib/graph/Group.js",
+    "lib/graph/Hours.js",
+    "lib/graph/HoursSet.js",
+    "lib/graph/Moderation.js",
+    "lib/graph/News.js",
+    "lib/graph/Opportunity.js",
+    "lib/graph/Organization.js",
+    "lib/graph/Project.js",
+    "lib/graph/Submission.js",
+    "lib/graph/Url.js",
+    "lib/graph/User.js",
+    "lib/graph/Vertex.js",
+    "lib/graph/mixin.js",
+    "lib/index.js",
+    "lib/participation.js",
+    "lib/reference.js",
+    "lib/search.js",
+    "lib/supports.js",
+    "lib/utils.js"
   ]
 }
