@@ -132,5 +132,72 @@ describe("lib/graph/Organization.js", function () {
                 });
             });
         });
+
+        describe("#submission([id])", function () {
+            it("should create a Submission with Organization as it's owner", function () {
+                var sub = organization.submission();
+                expect(sub).to.be.a(client.Submission);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
+
+        describe("#moderations([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/moderations", simpleResponse);
+
+                organization.moderations(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/moderations?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.moderations({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+
+            it("should translate id fields into name fields", function (done) {
+                server.respondWith("/organizations/abc/moderations", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify([
+                        {
+                            edge_type_id: 9, // Verifier
+                            content: {
+                                vertex_type_id: 5 // Event
+                            },
+                            destination: {
+                                vertex_type_id: 2 // Organization
+                            }
+                        }
+                    ])
+                ]);
+
+                organization.moderations(function (err, results) {
+                    if (err) return done(err);
+                    var row = results[0];
+                    expect(row.edge_type).to.equal("Verifier");
+                    expect(row.content.vertex_type).to.equal("Event");
+                    expect(row.destination.vertex_type).to.equal("Organization");
+                    done();
+                });
+            });
+        });
+
+        describe("#moderation([id])", function () {
+            it("should create a Moderation with Organization as it's owner", function () {
+                var sub = organization.moderation();
+                expect(sub).to.be.a(client.Moderation);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
     });
 });
