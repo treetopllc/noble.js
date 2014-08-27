@@ -1,6 +1,10 @@
 Version History
 ===============
 
+## 0.7.4 (8/27/2014)
+ * Adding `Organization#submission()`, `Organization#moderations()` and `Organization#moderation()`
+ * Adding collaboratory-related group types
+
 ## 0.7.3 (8/6/2014)
  * Adding "Course" to list of group types
 
