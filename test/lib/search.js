@@ -83,43 +83,5 @@ describe("lib/search.js", function () {
                 done();
             });
         });
-
-        it("should translate id fields into name fields", function (done) {
-            server.respondWith("/search", [
-                200,
-                defaultHeaders,
-                JSON.stringify({
-                    results: [
-                        {
-                            vertex_type_id: 5, // Event
-                            subtype_id: 0      // Celebration
-                        },
-                        {
-                            vertex_type_id: 2, // Organization
-                            subtype_id: 1      // Education
-                        },
-                        {
-                            vertex_type_id: 3, // Opportunity
-                            subtype_id: 2      // Volunteer Service
-                        }
-                    ]
-                })
-            ]);
-
-            client.search(function (err, results) {
-                if (err) return done(err);
-
-                expect(results[0].type).to.equal("Event");
-                expect(results[0].subtype).to.equal("Celebration");
-
-                expect(results[1].type).to.equal("Organization");
-                expect(results[1].subtype).to.equal("Education");
-
-                expect(results[2].type).to.equal("Opportunity");
-                expect(results[2].subtype).to.equal("Volunteer Service");
-
-                done();
-            });
-        });
     });
 });

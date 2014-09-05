@@ -7,7 +7,6 @@ mocha.slow(150);
 require("./lib/Client");
 require("./lib/search");
 require("./lib/participation");
-require("./lib/utils");
 require("./lib/graph/mixin");
 require("./lib/graph/Vertex");
 require("./lib/graph/Alert");

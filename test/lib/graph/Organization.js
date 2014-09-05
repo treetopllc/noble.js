@@ -24,41 +24,6 @@ describe("lib/graph/Organization.js", function () {
                 organization.content(done);
             });
 
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/organizations/abc/content", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            content: {
-                                vertex_type_id: 0 // News
-                            },
-                            author: {
-                                vertex_type_id: 7 // User
-                            },
-                            submitter: {
-                                vertex_type_id: 7 // User
-                            },
-                            submission: {
-                                vertex_type_id: 8, // Submission
-                                status: 1 // Approved
-                            }
-                        }
-                    ])
-                ]);
-
-                organization.content(function (err, results) {
-                    if (err) return done(err);
-                    var row = results[0];
-                    expect(row.content.vertex_type).to.equal("News");
-                    expect(row.author.vertex_type).to.equal("User");
-                    expect(row.submitter.vertex_type).to.equal("User");
-                    expect(row.submission.vertex_type).to.equal("Submission");
-                    expect(row.submission.status_name).to.equal("Approved");
-                    done();
-                });
-            });
-
             it("should pass additional querystring arguments", function (done) {
                 server.respondWith("/organizations/abc/content?limit=5", simpleResponse);
                 organization.content({ limit: 5 }, done);
@@ -103,34 +68,6 @@ describe("lib/graph/Organization.js", function () {
                     done();
                 });
             });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/organizations/abc/submissions", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            edge_type_id: 9, // Verifier
-                            status_id: 0, // Unsubmitted
-                            content: {
-                                vertex_type_id: 5 // Event
-                            },
-                            destination: {
-                                vertex_type_id: 2 // Organization
-                            }
-                        }
-                    ])
-                ]);
-
-                organization.submissions(function (err, results) {
-                    if (err) return done(err);
-                    var row = results[0];
-                    expect(row.edge_type).to.equal("Verifier");
-                    expect(row.content.vertex_type).to.equal("Event");
-                    expect(row.destination.vertex_type).to.equal("Organization");
-                    done();
-                });
-            });
         });
 
         describe("#submission([id])", function () {
@@ -160,33 +97,6 @@ describe("lib/graph/Organization.js", function () {
                 organization.moderations({ limit: 5 }, function (err, results) {
                     if (err) return done(err);
                     expect(results.length).to.equal(5);
-                    done();
-                });
-            });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/organizations/abc/moderations", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            edge_type_id: 9, // Verifier
-                            content: {
-                                vertex_type_id: 5 // Event
-                            },
-                            destination: {
-                                vertex_type_id: 2 // Organization
-                            }
-                        }
-                    ])
-                ]);
-
-                organization.moderations(function (err, results) {
-                    if (err) return done(err);
-                    var row = results[0];
-                    expect(row.edge_type).to.equal("Verifier");
-                    expect(row.content.vertex_type).to.equal("Event");
-                    expect(row.destination.vertex_type).to.equal("Organization");
                     done();
                 });
             });
