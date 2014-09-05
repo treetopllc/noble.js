@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.8.0 (9/5/2014)
+ * Removing all "references", web apps will use treetopllc/mappings-nobleweb and treetopllc/mappings-collaboratory respectively
+
 ## 0.7.4 (8/27/2014)
  * Adding `Organization#submission()`, `Organization#moderations()` and `Organization#moderation()`
  * Adding collaboratory-related group types

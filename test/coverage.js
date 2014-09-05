@@ -17,7 +17,6 @@ mocha.slow(150);
 
 require("./lib/Client");
 require("./lib/search");
-require("./lib/utils");
 require("./lib/graph/mixin");
 require("./lib/graph/Vertex");
 require("./lib/graph/Alert");
@@ -39,4 +38,3 @@ require("./lib/graph/User");
 (window.mochaPhantomJS || mocha).run(function () {
     cov.render();
 });
-
