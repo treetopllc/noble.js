@@ -47,34 +47,6 @@ describe("lib/graph/User.js", function () {
                     done();
                 });
             });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/users/abc/submissions", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            edge_type_id: 9, // Verifier
-                            status_id: 0, // Unsubmitted
-                            content: {
-                                vertex_type_id: 5 // Event
-                            },
-                            destination: {
-                                vertex_type_id: 2 // Organization
-                            }
-                        }
-                    ])
-                ]);
-
-                user.submissions(function (err, results) {
-                    if (err) return done(err);
-                    var row = results[0];
-                    expect(row.edge_type).to.equal("Verifier");
-                    expect(row.content.vertex_type).to.equal("Event");
-                    expect(row.destination.vertex_type).to.equal("Organization");
-                    done();
-                });
-            });
         });
 
         describe("#submission([id])", function () {
@@ -104,33 +76,6 @@ describe("lib/graph/User.js", function () {
                 user.moderations({ limit: 5 }, function (err, results) {
                     if (err) return done(err);
                     expect(results.length).to.equal(5);
-                    done();
-                });
-            });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/users/abc/moderations", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            edge_type_id: 9, // Verifier
-                            content: {
-                                vertex_type_id: 5 // Event
-                            },
-                            destination: {
-                                vertex_type_id: 2 // Organization
-                            }
-                        }
-                    ])
-                ]);
-
-                user.moderations(function (err, results) {
-                    if (err) return done(err);
-                    var row = results[0];
-                    expect(row.edge_type).to.equal("Verifier");
-                    expect(row.content.vertex_type).to.equal("Event");
-                    expect(row.destination.vertex_type).to.equal("Organization");
                     done();
                 });
             });
@@ -166,34 +111,6 @@ describe("lib/graph/User.js", function () {
                     done();
                 });
             });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/users/abc/authored", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            vertex_type_id: 0    // News
-                        },
-                        {
-                            vertex_type_id: 5,   // Event
-                            subtype_id: 4 // Educational
-                        }
-                    ])
-                ]);
-
-                user.authored(function (err, results) {
-                    if (err) return done(err);
-
-                    expect(results[0].vertex_type).to.equal("News");
-                    expect(results[0].subtype).to.not.be.ok();
-
-                    expect(results[1].vertex_type).to.equal("Event");
-                    expect(results[1].subtype).to.equal("Educational");
-
-                    done();
-                });
-            });
         });
 
         describe("#feed([query], callback)", function () {
@@ -218,34 +135,6 @@ describe("lib/graph/User.js", function () {
                     done();
                 });
             });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/users/abc/feed", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            vertex_type_id: 10  // Hours
-                        },
-                        {
-                            vertex_type_id: 2,  // Organization
-                            subtype_id: 3       // Non-Profit
-                        }
-                    ])
-                ]);
-
-                user.feed(function (err, results) {
-                    if (err) return done(err);
-
-                    expect(results[0].vertex_type).to.equal("Hours");
-                    expect(results[0].subtype).to.not.be.ok();
-
-                    expect(results[1].vertex_type).to.equal("Organization");
-                    expect(results[1].subtype).to.equal("Non-Profit");
-
-                    done();
-                });
-            });
         });
 
         describe("#network([query], callback)", function () {
@@ -267,34 +156,6 @@ describe("lib/graph/User.js", function () {
                 user.network({ limit: 5 }, function (err, results) {
                     if (err) return done(err);
                     expect(results.length).to.equal(5);
-                    done();
-                });
-            });
-
-            it("should translate id fields into name fields", function (done) {
-                server.respondWith("/users/abc/feed", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify([
-                        {
-                            vertex_type_id: 7  // User
-                        },
-                        {
-                            vertex_type_id: 3,  // Opportunity
-                            subtype_id: 6  // Performance
-                        }
-                    ])
-                ]);
-
-                user.feed(function (err, results) {
-                    if (err) return done(err);
-
-                    expect(results[0].vertex_type).to.equal("User");
-                    expect(results[0].subtype).to.not.be.ok();
-
-                    expect(results[1].vertex_type).to.equal("Opportunity");
-                    expect(results[1].subtype).to.equal("Performance");
-
                     done();
                 });
             });
