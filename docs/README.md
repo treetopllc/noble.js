@@ -129,33 +129,6 @@ including graph traversal, location and full-text indexing.
 | `lat`     | `Number`  | `null`  | Latitude coordinate                                 |
 | `lon`     | `Number`  | `null`  | Longitude coordinate                                |
 | `limit`   | `Number`  | `null`  | Limit result size (API currently defaults to `200`) |
-
-**Special Instructions for the `types` Parameter**
-
-The `types` parameter is an array of entity types, which must be `Number`s once
-passed into the method. There are helper objects located at `Client.reference`
-that you can use to make things more readable. For example:
-
-```javascript
-client.search({
-    types: [
-        client.reference.vertex_types.by_name.EVENT,
-        client.reference.vertex_types.by_name.OPPORTUNITY,
-        client.reference.vertex_types.by_name.ORGANIZATION
-    ]
-}, callback);
-
-// or...
-
-var types = client.reference.vertex_types.by_name;
-
-client.search({
-    types: [
-        types.EVENT,
-        types.OPPORTUNITY,
-        types.ORGANIZATION
-    ]
-}, callback);
 ```
 
 
