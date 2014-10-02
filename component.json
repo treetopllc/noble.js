@@ -50,6 +50,7 @@
     "lib/graph/mixin.js",
     "lib/index.js",
     "lib/participation.js",
+    "lib/saml.js",
     "lib/search.js",
     "lib/supports.js",
     "lib/utils.js"
