@@ -109,5 +109,37 @@ describe("lib/graph/Organization.js", function () {
                 expect(sub.owner).to.equal(organization);
             });
         });
+
+        describe("#groups([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/groups", simpleResponse);
+
+                organization.groups(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/groups?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.groups({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
+
+        describe("#group([id])", function () {
+            it("should create a Moderation with Organization as it's owner", function () {
+                var sub = organization.group();
+                expect(sub).to.be.a(client.Group);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
     });
 });
