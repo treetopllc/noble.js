@@ -12,7 +12,7 @@ describe("lib/saml.js", function () {
         });
 
          it("should pass a smoke test (with id)", function (done) {
-            server.respondWith("/saml/providers/?portals=123456", simpleResponse);
+            server.respondWith("/saml/providers?portals=123456", simpleResponse);
 
             client.saml("123456", done);
         });
