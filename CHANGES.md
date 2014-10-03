@@ -1,11 +1,14 @@
 Version History
 ===============
 
+## 0.8.3 (10/2/2014)
+ * Adding `saml()` to allow for search of sso providers
+
 ## 0.8.2 (10/1/2014)
  * Adding `Organization#groups()` and `Organization#group()`
 
- ## 0.8.1 (9/19/2014)
-  * Added `Vertex#delete()`
+## 0.8.1 (9/19/2014)
+ * Added `Vertex#delete()`
 
 ## 0.8.0 (9/5/2014)
  * Removing all "references", web apps will use treetopllc/mappings-nobleweb and treetopllc/mappings-collaboratory respectively
