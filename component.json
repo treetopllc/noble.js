@@ -1,7 +1,7 @@
 {
   "name": "noble.js",
   "repository": "treetopllc/noble.js",
-  "version": "0.8.4",
+  "version": "0.8.6",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/domify": "*",
@@ -20,8 +20,8 @@
       "dominicbarnes/expect.js": "master",
       "ianstormtaylor/sinon": "59a0bdc92e071aeb705d71176734618867440602",
       "victorquinn/chancejs": "*",
-      "tj/debug": "*",
-      "tj/mocha": "*"
+      "visionmedia/debug": "*",
+      "mochajs/mocha": "*"
     },
     "scripts": [
       "test/**/*.js"

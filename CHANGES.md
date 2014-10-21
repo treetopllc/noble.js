@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.8.6 (10/21/2014)
+ * Repo name changes
+
 ## 0.8.4 (10/2/2014)
  * Hotfix for typo in saml() vall (copy-pasta fail)
 
