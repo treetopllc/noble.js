@@ -13,15 +13,15 @@
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
-    "visionmedia/superagent": "*"
+    "tj/superagent": "*"
   },
   "development": {
     "dependencies": {
       "dominicbarnes/expect.js": "master",
       "ianstormtaylor/sinon": "59a0bdc92e071aeb705d71176734618867440602",
       "victorquinn/chancejs": "*",
-      "visionmedia/debug": "*",
-      "visionmedia/mocha": "*"
+      "tj/debug": "*",
+      "tj/mocha": "*"
     },
     "scripts": [
       "test/**/*.js"
