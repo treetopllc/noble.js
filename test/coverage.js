@@ -16,7 +16,7 @@ mocha.setup("bdd");
 mocha.slow(150);
 
 require("./lib/Client");
-require("./lib/saml");
+require("./lib/sso");
 require("./lib/search");
 require("./lib/graph/mixin");
 require("./lib/graph/Vertex");
