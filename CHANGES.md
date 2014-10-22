@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.9.0 (10/21/2014)
+ * Changing `saml()` to `sso()`
+
 ## 0.8.6 (10/21/2014)
  * Repo name changes
 
