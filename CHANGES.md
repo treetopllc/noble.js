@@ -1,5 +1,7 @@
 Version History
 ===============
+## 0.9.1 (10/27/2014)
+ * Hotfix for repo name update
 
 ## 0.9.0 (10/21/2014)
  * Changing `saml()` to `sso()`
