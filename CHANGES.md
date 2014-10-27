@@ -1,5 +1,7 @@
 Version History
 ===============
+## 0.9.1 (10/27/2014)
+ * Hotfix for repo name update
 
 ## 0.9.0 (10/21/2014)
  * Changing `saml()` to `sso()`
@@ -96,7 +98,7 @@ Version History
 
 ## 0.4.0 (4/15/2014)
  * Updating to leverage Component v1.0.0+
- * Adding `visionmedia/debug` for debugging output
+ * Adding `tj/debug` for debugging output
  * Updating internals to reflect new structure for moderations/submissions API responses
  * Dropped `Makefile`, using `npm run` for commands instead
  * Dropped coverage testing (waiting for deps to transition to component v1.0)
