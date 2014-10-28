@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.9.2 (10/27/2014)
+ * Add no-cache option to superagent requests
+
 ## 0.9.1 (10/27/2014)
  * Hotfix for repo name update
 
