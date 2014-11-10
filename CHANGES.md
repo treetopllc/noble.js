@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.9.3 (11/10/2014)
+ * Add missing tests
+
 ## 0.9.2 (10/27/2014)
  * Add no-cache option to superagent requests
 
