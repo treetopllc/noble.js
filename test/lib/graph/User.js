@@ -201,6 +201,30 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#preferences([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/preferences", simpleResponse);
+
+                user.preferences(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/users/abc/preferences?weekly_email_digest=true", [
+                200,
+                defaultHeaders,
+                JSON.stringify(createArray(5, function () {
+                    return { id: chance.guid() };
+                }))
+                ]);
+
+                user.preferences({ weekly_email_digest: true }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length);
+                    done();
+                });
+            });
+        });
+
         describe("#participation([key], [entity], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/participation", simpleResponse);

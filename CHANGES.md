@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.9.4 (12/18/2014)
+ * Adding `Opportunity#alert()`
+ * Adding `User#preferences()`
+
 ## 0.9.3 (11/10/2014)
  * Add missing tests
 
