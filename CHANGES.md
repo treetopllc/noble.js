@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.9.5 (12/19/2014)
+ * Adding `Event#alert()`
+ * Adding `User#preference()`
+
 ## 0.9.4 (12/18/2014)
  * Adding `Opportunity#alert()`
  * Adding `User#preferences()`
