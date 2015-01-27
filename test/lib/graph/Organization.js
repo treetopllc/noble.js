@@ -70,6 +70,32 @@ describe("lib/graph/Organization.js", function () {
             });
         });
 
+        describe("#track([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/track", simpleResponse);
+
+                organization.track(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/track?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return {
+                            id: chance.guid()
+                        };
+                    }))
+                ]);
+
+                organization.track({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
+
         describe("#submission([id])", function () {
             it("should create a Submission with Organization as it's owner", function () {
                 var sub = organization.submission();
