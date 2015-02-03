@@ -6,7 +6,7 @@ describe("lib/archive.js", function () {
 
     describe("Client#archive()", function () {
          it("should pass a smoke test (with id)", function (done) {
-            server.respondWith("/vertices/123456?archived=true", simpleResponse);
+            server.respondWith("/vertices/123456", simpleResponse);
 
             client.archive("123456", done);
         });
@@ -19,7 +19,7 @@ describe("lib/archive.js", function () {
 
     describe("Client#unarchive()", function () {
          it("should pass a smoke test (with id)", function (done) {
-            server.respondWith("/vertices/123456?archived=false", simpleResponse);
+            server.respondWith("/vertices/123456", simpleResponse);
 
             client.unarchive("123456", done);
         });
