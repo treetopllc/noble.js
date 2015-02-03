@@ -5,6 +5,7 @@ mocha.setup("bdd");
 mocha.slow(150);
 
 require("./lib/Client");
+require("./lib/archive");
 require("./lib/sso");
 require("./lib/search");
 require("./lib/participation");
