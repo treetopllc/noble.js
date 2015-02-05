@@ -217,6 +217,31 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+
+        describe("#emailList(callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/emails", simpleResponse);
+
+                user.emailList(done);
+            });
+        });
+
+        describe("#emailAdd(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/emails", simpleResponse);
+
+                user.emailAdd({}, done);
+            });
+        });
+
+        describe("#emailDelete(obj, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/emails/obj", simpleResponse);
+
+                user.emailDelete("obj", done);
+            });
+        });
+
         describe("#alertsStats(callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/alerts/stats", simpleResponse);
