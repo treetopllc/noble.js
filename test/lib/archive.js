@@ -25,3 +25,28 @@ describe("lib/archive.js", function () {
         });
     });
 });
+
+
+describe("lib/archive.js", function () {
+    var client = createClient();
+
+    describe("Client#bulkArchive()", function () {
+         it("should pass a smoke test", function (done) {
+            server.respondWith("/vertices/archive/", simpleResponse);
+
+            client.bulkArchive(done);
+        });
+    });
+});
+
+describe("lib/archive.js", function () {
+    var client = createClient();
+
+    describe("Client#bulkUnArchive()", function () {
+         it("should pass a smoke test", function (done) {
+            server.respondWith("/vertices/unarchive/", simpleResponse);
+
+            client.bulkUnArchive(done);
+        });
+    });
+});
