@@ -329,6 +329,28 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#authorModify(type, params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/hours", simpleResponse);
+
+                user.authorModify("hours", {}, done);
+            });
+
+            it("should automatically turn Date objects into ISO strings", function (done) {
+                server.respondWith("/users/abc/hours", simpleResponse);
+
+                var params = {
+                    start_ts: new Date(),
+                    end_ts: new Date()
+                };
+
+                user.authorModify("hours", params, done);
+
+                expect(params.start_ts).to.be.a("string");
+                expect(params.end_ts).to.be.a("string");
+            });
+        });
+
         describe("#contribute(params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/submissions", simpleResponse);
