@@ -8,6 +8,7 @@ var createArray = utils.createArray;
 describe("lib/graph/User.js", function () {
     describe("User", function () {
         var user = client.user("abc");
+        var id = "123";
 
         describe("#base", function () {
             it("should be specific to the users entity type", function () {
@@ -322,10 +323,32 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#add(type, params, callback)", function () {
+        describe("#add(type, id, params, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/hours", simpleResponse);
                 user.add("hours", {}, done);
+            });
+        });
+
+        describe("#authorModify(type, id, params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/hours/123", simpleResponse);
+
+                user.authorModify("hours", id, {}, done);
+            });
+
+            it("should automatically turn Date objects into ISO strings", function (done) {
+                server.respondWith("/users/abc/hours/123", simpleResponse);
+
+                var params = {
+                    start_ts: new Date(),
+                    end_ts: new Date()
+                };
+
+                user.authorModify("hours", id, params, done);
+
+                expect(params.start_ts).to.be.a("string");
+                expect(params.end_ts).to.be.a("string");
             });
         });
 
