@@ -2,14 +2,14 @@ var client = require("../../utils").createClient();
 var simpleResponse = require("../../mock").simpleResponse;
 
 describe("lib/graph/Program.js", function () {
-    describe("Programs", function () {
+    describe("Program", function () {
         var program = client.program("abc");
 
-        describe("#get(params, callback)", function () {
+        describe("#get(callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/programs/abc", simpleResponse);
 
-                programs.get(done);
+                program.get(done);
             });
         });
     });

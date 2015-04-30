@@ -32,6 +32,7 @@ require("./lib/graph/HoursSet");
 require("./lib/graph/Moderation");
 require("./lib/graph/News");
 require("./lib/graph/Opportunity");
+require("./lib/graph/Program");
 require("./lib/graph/Organization");
 require("./lib/graph/Submission");
 require("./lib/graph/Url");
