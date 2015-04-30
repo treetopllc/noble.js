@@ -136,6 +136,38 @@ describe("lib/graph/Organization.js", function () {
             });
         });
 
+        describe("#programs([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/programs", simpleResponse);
+
+                organization.programs(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/programs?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.programs({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
+
+        describe("#program([id])", function () {
+            it("should create a Program with Organization as its owner", function () {
+                var sub = organization.program();
+                expect(sub).to.be.a(client.Program);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
+
         describe("#groups([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/organizations/abc/groups", simpleResponse);
