@@ -1,7 +1,7 @@
 {
   "name": "noble.js",
   "repository": "treetopllc/noble.js",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/domify": "*",
@@ -44,6 +44,7 @@
     "lib/graph/Opportunity.js",
     "lib/graph/Organization.js",
     "lib/graph/Project.js",
+    "lib/graph/Program.js",
     "lib/graph/Submission.js",
     "lib/graph/Url.js",
     "lib/graph/User.js",
