@@ -11,6 +11,7 @@ require("./lib/search");
 require("./lib/participation");
 require("./lib/graph/mixin");
 require("./lib/graph/Vertex");
+require("./lib/graph/Affiliation");
 require("./lib/graph/Alert");
 require("./lib/graph/Asset");
 require("./lib/graph/Community");

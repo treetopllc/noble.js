@@ -31,6 +31,7 @@
   "scripts": [
     "index.js",
     "lib/Client.js",
+    "lib/graph/Affiliation.js",
     "lib/graph/Alert.js",
     "lib/graph/Asset.js",
     "lib/graph/Community.js",
