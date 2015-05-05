@@ -168,6 +168,38 @@ describe("lib/graph/Organization.js", function () {
             });
         });
 
+        describe("#affiliations([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/affiliations", simpleResponse);
+
+                organization.affiliations(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/affiliations?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.affiliations({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
+
+        describe("#affiliation([id])", function () {
+            it("should create a Affiliation with Organization as it's owner", function () {
+                var sub = organization.affiliation();
+                expect(sub).to.be.a(client.Affiliation);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
+
         describe("#groups([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/organizations/abc/groups", simpleResponse);

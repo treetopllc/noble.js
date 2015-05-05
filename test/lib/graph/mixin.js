@@ -4,6 +4,7 @@ var client = require("../../utils").createClient();
 describe("lib/graph/mixin.js", function () {
     describe("Client", function () {
         each({
+            "affiliation":  "Affiliation",
             "asset":        "Asset",
             "community":    "Community",
             "customer":     "Customer",
