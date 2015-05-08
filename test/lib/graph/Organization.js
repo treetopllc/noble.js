@@ -44,6 +44,48 @@ describe("lib/graph/Organization.js", function () {
             });
         });
 
+        describe("#user([id])", function () {
+            it("should create a User with Organization as it's owner", function () {
+                var sub = organization.user();
+                expect(sub).to.be.a(client.User);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
+
+        describe("#users([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/users", simpleResponse);
+
+                organization.users(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/organizations/abc/users?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return {
+                            id: chance.guid()
+                        };
+                    }))
+                ]);
+
+                organization.users({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
+
+        describe("#submission([id])", function () {
+            it("should create a Submission with Organization as it's owner", function () {
+                var sub = organization.submission();
+                expect(sub).to.be.a(client.Submission);
+                expect(sub.owner).to.equal(organization);
+            });
+        });
+
         describe("#submissions([query], callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/organizations/abc/submissions", simpleResponse);
@@ -93,14 +135,6 @@ describe("lib/graph/Organization.js", function () {
                     expect(results.length).to.equal(5);
                     done();
                 });
-            });
-        });
-
-        describe("#submission([id])", function () {
-            it("should create a Submission with Organization as it's owner", function () {
-                var sub = organization.submission();
-                expect(sub).to.be.a(client.Submission);
-                expect(sub.owner).to.equal(organization);
             });
         });
 
