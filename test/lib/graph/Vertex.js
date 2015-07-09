@@ -70,6 +70,13 @@ describe("lib/graph/Vertex.js", function () {
             });
         });
 
+        describe("#head(callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("HEAD", "/vertices/abc", simpleResponse);
+                vertex.head(done);
+            });
+        });
+
         describe("#create(data, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("POST", "/vertices", [
