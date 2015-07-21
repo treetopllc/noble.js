@@ -196,6 +196,14 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#roleUpdate(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/submissions", simpleResponse);
+
+                user.roleUpdate({}, done);
+            });
+        });
+
         describe("#role([entity], callback)", function () {
             it("should pass a smoke test (no entity)", function (done) {
                 server.respondWith("/users/abc/role", simpleResponse);
