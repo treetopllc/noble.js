@@ -204,6 +204,14 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#roleDelete(obj, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/network/obj", simpleResponse);
+
+                user.roleDelete("obj", done);
+            });
+        });
+
         describe("#role([entity], callback)", function () {
             it("should pass a smoke test (no entity)", function (done) {
                 server.respondWith("/users/abc/role", simpleResponse);

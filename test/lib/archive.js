@@ -32,7 +32,7 @@ describe("lib/archive.js", function () {
 
     describe("Client#bulkArchive()", function () {
          it("should pass a smoke test", function (done) {
-            server.respondWith("/vertices/archive/", simpleResponse);
+            server.respondWith("/vertices/archive", simpleResponse);
 
             client.bulkArchive(done);
         });
