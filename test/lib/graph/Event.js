@@ -1,5 +1,9 @@
-var client = require("../../utils").createClient();
-var simpleResponse = require("../../mock").simpleResponse;
+var utils = require("../../utils");
+var mock = require("../../mock");
+var client = utils.createClient();
+var createArray = utils.createArray;
+var simpleResponse = mock.simpleResponse;
+var defaultHeaders = mock.defaultHeaders;
 
 describe("lib/graph/Event.js", function () {
     describe("Events", function () {
@@ -10,6 +14,32 @@ describe("lib/graph/Event.js", function () {
                 server.respondWith("/events/abc", simpleResponse);
 
                 event.get(done);
+            });
+        });
+
+        describe("#users([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/events/abc/users", simpleResponse);
+
+                event.users(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/events/abc/users?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return {
+                            id: chance.guid()
+                        };
+                    }))
+                ]);
+
+                event.users({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
             });
         });
     });
