@@ -291,5 +291,13 @@ describe("lib/graph/Organization.js", function () {
                 expect(sub.owner).to.equal(organization);
             });
         });
+
+        describe("#reportPartners(callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/report/partners", simpleResponse);
+
+                organization.reportPartners(done);
+            });
+        });
     });
 });
