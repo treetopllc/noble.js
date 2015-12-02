@@ -44,7 +44,7 @@ describe("lib/archive.js", function () {
 
     describe("Client#bulkUnArchive()", function () {
          it("should pass a smoke test", function (done) {
-            server.respondWith("/vertices/unarchive/", simpleResponse);
+            server.respondWith("/vertices/unarchive", simpleResponse);
 
             client.bulkUnArchive(done);
         });
