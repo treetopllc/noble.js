@@ -261,11 +261,11 @@ describe("lib/graph/User.js", function () {
             });
         });
 
-        describe("#emailUpdate(params, callback)", function () {
+        describe("#emailUpdate(params, email, callback)", function () {
             it("should pass a smoke test", function (done) {
-                server.respondWith("/users/abc/emails", simpleResponse);
+                server.respondWith("/users/abc/emails/email", simpleResponse);
 
-                user.emailUpdate({}, done);
+                user.emailUpdate({}, "email", done);
             });
         });
 
