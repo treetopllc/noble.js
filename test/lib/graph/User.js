@@ -261,6 +261,14 @@ describe("lib/graph/User.js", function () {
             });
         });
 
+        describe("#emailUpdate(params, callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/users/abc/emails", simpleResponse);
+
+                user.emailUpdate({}, done);
+            });
+        });
+
         describe("#emailDelete(obj, callback)", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/users/abc/emails/obj", simpleResponse);
