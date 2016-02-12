@@ -72,22 +72,14 @@ describe("lib/Client.js", function () {
             var client = createClient();
             client.auth = { access_token: "foo" };
 
-            it("should add access_token to query string", function (done) {
+            it("should add access_token to query string", function () {
                 var req = client.request("/test");
                 expect(req._query[0]).to.equal("access_token=foo");
-                req.end(function (err, res) {
-                    done();
-                });
-                req.abort();
             });
 
-            it("should return a Request object", function (done) {
+            it("should return a Request object", function () {
                 var req = client.request("/test");
                 expect(req).to.be.a(Request);
-                req.end(function (err, res) {
-                    done();
-                });
-                req.abort();
             });
         });
 
@@ -166,7 +158,6 @@ describe("lib/Client.js", function () {
 
                 client.login("not", "real", function (err, body, res) {
                     expect(err.body).to.equal(body);
-                    expect(body.details).to.equal("invalid user name or password");
                     done();
                 });
             });

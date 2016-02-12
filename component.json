@@ -1,7 +1,7 @@
 {
   "name": "noble.js",
   "repository": "treetopllc/noble.js",
-  "version": "0.10.16",
+  "version": "0.10.18",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/domify": "*",
@@ -9,7 +9,7 @@
     "component/inherit": "*",
     "component/map": "*",
     "eivindfjeldstad/iframe-multipart": "*",
-    "ianstormtaylor/to-constant-case": "*",
+    "treetopllc/to-constant-case": "master",
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
