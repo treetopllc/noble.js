@@ -1,7 +1,7 @@
 {
   "name": "noble.js",
   "repository": "treetopllc/noble.js",
-  "version": "0.10.18",
+  "version": "0.10.19",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/domify": "*",
@@ -13,7 +13,7 @@
     "segmentio/extend": "*",
     "segmentio/isodate-traverse": "*",
     "segmentio/to-iso-string": "*",
-    "visionmedia/superagent": "*",
+    "visionmedia/superagent": "v1.7.2",
     "aprilb/superagent-no-cache": "master"
   },
   "development": {
