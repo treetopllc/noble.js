@@ -1,7 +1,7 @@
 {
   "name": "noble.js",
   "repository": "treetopllc/noble.js",
-  "version": "0.10.19",
+  "version": "0.11.0",
   "description": "JS client library for the NobleHour API",
   "dependencies": {
     "component/domify": "*",
@@ -11,7 +11,7 @@
     "eivindfjeldstad/iframe-multipart": "*",
     "treetopllc/to-constant-case": "master",
     "segmentio/extend": "*",
-    "segmentio/isodate-traverse": "*",
+    "treetopllc/isodate-traverse": "0.3.4",
     "segmentio/to-iso-string": "*",
     "visionmedia/superagent": "v1.7.2",
     "aprilb/superagent-no-cache": "master"
