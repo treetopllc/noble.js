@@ -40,9 +40,8 @@ required for this constructor.
 | Parameter       | Type     | Description                             |
 | --------------- | -------- | --------------------------------------- |
 | `auth`          | `Object` | (same as result of login)               |
-| `access_token`  | `String` | Predefined access_token                 |
-| `client_id`     | `String` | (if not using `access_token` or `auth`) |
-| `client_secret` | `String` | (if not using `access_token` or `auth`) |
+| `client_id`     | `String` | (if not using `auth`) |
+| `client_secret` | `String` | (if not using `auth`) |
 
 **Returns**: `Client` object instance
 
