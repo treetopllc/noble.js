@@ -35,19 +35,10 @@ describe("lib/Client.js", function () {
             expect(client.auth.foo).to.equal("bar");
         });
 
-        it("should set optional access_token param", function () {
-            var client = api("http://example.com", {
-                access_token: "blah"
-            });
-
-            expect(client.auth.access_token).to.equal("blah");
-        });
-
         it("should create a me property reflecting the user_id", function () {
             var client = api("http://example.com", {
                 auth: {
-                    user_id: "foo",
-                    access_token: "bar"
+                    user_id: "foo"
                 }
             });
 
@@ -70,12 +61,6 @@ describe("lib/Client.js", function () {
 
         describe("#request()", function () {
             var client = createClient();
-            client.auth = { access_token: "foo" };
-
-            it("should add access_token to query string", function () {
-                var req = client.request("/test");
-                expect(req._query[0]).to.equal("access_token=foo");
-            });
 
             it("should return a Request object", function () {
                 var req = client.request("/test");
@@ -117,7 +102,6 @@ describe("lib/Client.js", function () {
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "abc123",
                         refresh_token: "def456",
                         expires_in: 1000
                     })
@@ -133,7 +117,6 @@ describe("lib/Client.js", function () {
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "abc123",
                         refresh_token: "def456",
                         expires_in: 1000
                     })
@@ -168,7 +151,6 @@ describe("lib/Client.js", function () {
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "abc123",
                         refresh_token: "def456",
                         expires_in: 1000
                     })
@@ -187,17 +169,15 @@ describe("lib/Client.js", function () {
             it("should return a Request object", function (done) {
                 var client = api("/", {
                     auth: {
-                        access_token: "a",
                         refresh_token: "b"
                     }
                 });
 
-                server.respondWith("POST", "/oauth/token?access_token=a", [
+                server.respondWith("POST", "/oauth/token", [
                     200,
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "c",
                         refresh_token: "d",
                         expires_in: 1000
                     })
@@ -210,17 +190,15 @@ describe("lib/Client.js", function () {
             it("should attach the returned auth data to the client object", function (done) {
                 var client = api("/", {
                     auth: {
-                        access_token: "a",
                         refresh_token: "b"
                     }
                 });
 
-                server.respondWith("POST", "/oauth/token?access_token=a", [
+                server.respondWith("POST", "/oauth/token", [
                     200,
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "c",
                         refresh_token: "d",
                         expires_in: 1000
                     })
@@ -236,17 +214,15 @@ describe("lib/Client.js", function () {
             it("should create a me property reflecting the user_id", function (done) {
                 var client = api("/", {
                     auth: {
-                        access_token: "a",
                         refresh_token: "b"
                     }
                 });
 
-                server.respondWith("POST", "/oauth/token?access_token=a", [
+                server.respondWith("POST", "/oauth/token", [
                     200,
                     defaultHeaders,
                     JSON.stringify({
                         user_id: "testuser-uuid",
-                        access_token: "abc123",
                         refresh_token: "def456",
                         expires_in: 1000
                     })
