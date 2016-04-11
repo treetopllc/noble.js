@@ -400,7 +400,7 @@ describe("lib/graph/Organization.js", function () {
             it("should pass a smoke test", function (done) {
                 server.respondWith("/organizations/abc/hours/contributors", simpleResponse);
 
-                organization.contributions(done);
+                organization.contributors(done);
             });
 
             it("should pass additional query string arguments", function (done) {
@@ -412,7 +412,7 @@ describe("lib/graph/Organization.js", function () {
                     }))
                 ]);
 
-                organization.contributions({ statuses: 1 }, function (err, results) {
+                organization.contributors({ statuses: 1 }, function (err, results) {
                     if (err) return done(err);
                     expect(results.length).to.equal(1);
                     done();
@@ -421,3 +421,4 @@ describe("lib/graph/Organization.js", function () {
         });
     });
 });
+
