@@ -12,6 +12,8 @@ var cov = require("coverage")("noble.js");
 // exposes window.mocha + other test globals (describe, it, before, etc)
 require("mocha");
 
+window.initMochaPhantomJS && window.initMochaPhantomJS()
+
 mocha.setup("bdd");
 mocha.slow(150);
 

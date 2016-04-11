@@ -54,5 +54,29 @@ describe("lib/graph/Group.js", function () {
                 });
             });
         });
+
+        describe("#partnerships([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/groups/abc/partnerships", simpleResponse);
+
+                group.partnerships(done);
+            });
+
+            it("should pass additional querystring arguments", function (done) {
+                server.respondWith("/groups/abc/partnerships?limit=5", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(5, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                group.partnerships({ limit: 5 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(5);
+                    done();
+                });
+            });
+        });
     });
 });
