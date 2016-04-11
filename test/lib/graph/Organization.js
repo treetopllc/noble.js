@@ -299,5 +299,126 @@ describe("lib/graph/Organization.js", function () {
                 organization.reportPartners(done);
             });
         });
+
+        describe("#destinations([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/destinations", simpleResponse);
+
+                organization.destinations(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/destinations?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.destinations({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
+
+        describe("#opportunities([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/opportunities", simpleResponse);
+
+                organization.opportunities(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/opportunities?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.opportunities({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
+
+        describe("#hosts([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/hosts", simpleResponse);
+
+                organization.hosts(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/hosts?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.hosts({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
+
+        describe("#statuses([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/statuses", simpleResponse);
+
+                organization.statuses(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/statuses?destinations=12345", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.statuses({ destinations: 12345 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
+
+        describe("#contributors([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/contributors", simpleResponse);
+
+                organization.contributors(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/contributors?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.contributors({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
     });
 });
+
