@@ -419,6 +419,54 @@ describe("lib/graph/Organization.js", function () {
                 });
             });
         });
+
+        describe("#membersdetails([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/membersdetails", simpleResponse);
+
+                organization.membersdetails(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/membersdetails?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.membersdetails({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
+
+        describe("#groupsdetails([query], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/organizations/abc/hours/groupsdetails", simpleResponse);
+
+                organization.groupsdetails(done);
+            });
+
+            it("should pass additional query string arguments", function (done) {
+                server.respondWith("/organizations/abc/hours/groupsdetails?statuses=1", [
+                    200,
+                    defaultHeaders,
+                    JSON.stringify(createArray(1, function () {
+                        return { id: chance.guid() };
+                    }))
+                ]);
+
+                organization.groupsdetails({ statuses: 1 }, function (err, results) {
+                    if (err) return done(err);
+                    expect(results.length).to.equal(1);
+                    done();
+                });
+            });
+        });
     });
 });
 
