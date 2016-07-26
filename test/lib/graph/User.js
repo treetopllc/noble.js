@@ -51,6 +51,14 @@ describe("lib/graph/User.js", function() {
             });
         });
 
+        describe("#incomingSubmissions([query], callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/submissions/incoming", simpleResponse);
+
+                user.incomingSubmissions(done);
+            });
+        });
+
         describe("#projects([query], callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/projects", simpleResponse);
