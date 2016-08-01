@@ -59,6 +59,14 @@ describe("lib/graph/User.js", function() {
             });
         });
 
+        describe("#receivedInvites([query], callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/invites/received", simpleResponse);
+
+                user.receivedInvites(done);
+            });
+        });
+        
         describe("#projects([query], callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/projects", simpleResponse);
