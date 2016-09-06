@@ -553,5 +553,12 @@ describe("lib/graph/User.js", function() {
                 user.activity(done);
             });
         });
+
+        describe("#oppHoursSummary(id, params, callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/opportunities/123/hours/summary", simpleResponse);
+                user.oppHoursSummary(id, {}, done);
+            });
+        });
     });
 });
