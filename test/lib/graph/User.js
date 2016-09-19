@@ -59,6 +59,30 @@ describe("lib/graph/User.js", function() {
             });
         });
 
+        describe("#incomingRoleSubmissions([query], callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/submissions/incoming_roles", simpleResponse);
+
+                user.incomingRoleSubmissions(done);
+            });
+        });
+
+        describe("#receivedInvites([query], callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/invites/received", simpleResponse);
+
+                user.receivedInvites(done);
+            });
+        });
+
+        describe("#sentInvites([query], callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/invites/sent", simpleResponse);
+
+                user.sentInvites(done);
+            });
+        });
+
         describe("#projects([query], callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/projects", simpleResponse);
@@ -527,6 +551,13 @@ describe("lib/graph/User.js", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/activity", simpleResponse);
                 user.activity(done);
+            });
+        });
+
+        describe("#oppHoursSummary(id, params, callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/opportunities/123/hours/summary", simpleResponse);
+                user.oppHoursSummary(id, {}, done);
             });
         });
     });
