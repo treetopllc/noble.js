@@ -42,5 +42,19 @@ describe("lib/graph/Event.js", function () {
                 });
             });
         });
+
+        describe("#participation([key], [entity], callback)", function () {
+            it("should pass a smoke test", function (done) {
+                server.respondWith("/events/abc/participation", simpleResponse);
+
+                event.participation(done);
+            });
+
+            it("should pass a smoke test (with key)", function (done) {
+                server.respondWith("/events/abc/participation/impact", simpleResponse);
+
+                event.participation("impact", done);
+            });
+        });
     });
 });
