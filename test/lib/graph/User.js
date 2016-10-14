@@ -561,6 +561,13 @@ describe("lib/graph/User.js", function() {
             });
         });
 
+        describe("#oppHoursByStatus(params, callback)", function() {
+            it("should pass a smoke test", function(done) {
+                server.respondWith("/users/abc/opportunities/123/hours/by_status", simpleResponse);
+                user.oppHoursByStatus(id, {}, done);
+            });
+        });
+
         describe("#oppsWorked(params, callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/opportunities/worked", simpleResponse);
