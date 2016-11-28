@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.11.14 (11/28/2016)
+ * Adding `HoursSet.hours()` method
+ * Adding `User#oppsHoursByStatus` method
+
 ## 0.11.13 (10/31/2016)
  * Adding `Users.postRelationship()` method
  * Adding `Users.updateRelationship()` method
