@@ -199,7 +199,6 @@ describe("lib/graph/User.js", function() {
             });
         });
 
-
         describe("#moderationsSummary(query, callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/moderations/summary", simpleResponse);
@@ -207,7 +206,6 @@ describe("lib/graph/User.js", function() {
                 user.moderationsSummary(done);
             });
         });
-
 
         describe("#moderation([id])", function() {
             it("should create a Moderation with User as it's owner", function() {
@@ -372,7 +370,6 @@ describe("lib/graph/User.js", function() {
                 user.alerts(done);
             });
         });
-
 
         describe("#emailList(callback)", function() {
             it("should pass a smoke test", function(done) {
