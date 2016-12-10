@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.15 (12/10/2016)
+ * Adding User's public content method
+
 ## 0.11.14 (11/28/2016)
  * Adding `HoursSet.hours()` method
  * Adding `User#oppsHoursByStatus` method
