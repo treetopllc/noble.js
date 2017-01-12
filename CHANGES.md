@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.16 (01/12/2017)
+ * Adding portal search method
+
 ## 0.11.15 (12/10/2016)
  * Adding User's public content method
 
