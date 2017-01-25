@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.17 (01/25/2017)
+ * Adding query params to `Vertex.get()`
+
 ## 0.11.16 (01/12/2017)
  * Adding portal search method
 
