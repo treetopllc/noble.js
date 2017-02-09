@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.18 (02/07/2017)
+ * Adding portal POST method
+
 ## 0.11.17 (01/25/2017)
  * Adding query params to `Vertex.get()`
 
