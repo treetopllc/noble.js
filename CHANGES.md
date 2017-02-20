@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.19 (02/07/2017)
+ * Return success callback on Vertex DELETE
+
 ## 0.11.18 (02/07/2017)
  * Adding portal POST method
 
