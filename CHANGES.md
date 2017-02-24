@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.21 (02/21/2017)
+ * Adding missing dependency
+
 ## 0.11.20 (02/21/2017)
  * Adding `Organizations.publicActivities()` method
  
