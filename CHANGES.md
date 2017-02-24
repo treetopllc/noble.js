@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.20 (02/21/2017)
+ * Adding `Organizations.publicActivities()` method
+ 
 ## 0.11.19 (02/07/2017)
  * Return success callback on Vertex DELETE
 
