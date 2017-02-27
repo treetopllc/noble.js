@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.11.21 (02/27/2017)
+ * Updating `Organizations.publicActivities()` method
+
 ## 0.11.20 (02/21/2017)
  * Adding `Organizations.publicActivities()` method
  
