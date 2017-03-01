@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.11.22 (03/01/2017)
+ * Adding `Users.Activities)` method
+ * Adding `Users.Courses)` method
+
 ## 0.11.21 (02/27/2017)
  * Updating `Organizations.publicActivities()` method
 
