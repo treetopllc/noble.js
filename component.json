@@ -59,6 +59,8 @@
     "lib/sso.js",
     "lib/search.js",
     "lib/supports.js",
-    "lib/utils.js"
+    "lib/utils.js",
+    "lib/graph/Noblehour.js",
+    "lib/graph/Noblehour/User.js"
   ]
 }
