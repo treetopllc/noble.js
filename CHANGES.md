@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.0 (04/07/2017)
+ * Adding product specific endpoints
+
 ## 0.11.22 (03/01/2017)
  * Adding `Users.Activities)` method
  * Adding `Users.Courses)` method
