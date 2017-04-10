@@ -61,6 +61,8 @@
     "lib/supports.js",
     "lib/utils.js",
     "lib/graph/Noblehour.js",
-    "lib/graph/Noblehour/User.js"
+    "lib/graph/Noblehour/User.js",
+    "lib/graph/Collaboratory.js",
+    "lib/graph/Collaboratory/Portal.js"
   ]
 }
