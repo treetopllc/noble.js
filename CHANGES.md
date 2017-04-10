@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.1 (04/10/2017)
+ * Adding Collaboratory `Portal.collaborators()` method
+
 ## 0.12.0 (04/07/2017)
  * Adding product specific endpoints
 
@@ -12,7 +15,7 @@ Version History
 
 ## 0.11.20 (02/21/2017)
  * Adding `Organizations.publicActivities()` method
- 
+
 ## 0.11.19 (02/07/2017)
  * Return success callback on Vertex DELETE
 
