@@ -1,5 +1,10 @@
 Version History
 ===============
+## 0.12.2 (04/12/2017)
+ * Adding Collaboratory `Users.activities()` method
+ * Adding Collaboratory `Users.courses()` method
+ * Adding Collaboratory `Users.publicContent()` methods
+
 ## 0.12.1 (04/10/2017)
  * Adding Collaboratory `Portal.collaborators()` method
 
