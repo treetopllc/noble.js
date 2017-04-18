@@ -45,7 +45,6 @@
     "lib/graph/News.js",
     "lib/graph/Opportunity.js",
     "lib/graph/Organization.js",
-    "lib/graph/Portal.js",
     "lib/graph/Project.js",
     "lib/graph/Program.js",
     "lib/graph/Submission.js",
