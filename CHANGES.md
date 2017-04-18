@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.12.3 (04/18/2017)
+ * Adding Collabratory `Portal.activityCollaborators()` method
+ * include correct scope for instantiating graph entities in product-specific endpoints
+
 ## 0.12.2 (04/12/2017)
  * Adding Collaboratory `Users.activities()` method
  * Adding Collaboratory `Users.courses()` method
