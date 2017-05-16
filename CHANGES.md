@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.4 (05/16/2017)
+ * Added new endpoint `HoursSets.preview()` to dryrun a patch and preview changes.
+
 ## 0.12.3 (04/18/2017)
  * Adding Collabratory `Portal.activityCollaborators()` method
  * include correct scope for instantiating graph entities in product-specific endpoints
