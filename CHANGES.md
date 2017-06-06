@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.5 (06/06/2017)
+ * fix dependency: chancejs -> 1.0.6
+
 ## 0.12.4 (05/16/2017)
  * Added new endpoint `HoursSets.preview()` to dryrun a patch and preview changes.
 
