@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.7 (07/11/2017)
+ * Added new `Opportunity.Types()` endpoint
+
 ## 0.12.6 (07/11/2017)
  * Added new `Groups.deleteContent()` endpoint
 
