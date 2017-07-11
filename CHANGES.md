@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.6 (07/11/2017)
+ * Added new `Groups.deleteContent()` endpoint
+
 ## 0.12.5 (06/06/2017)
  * fix dependency: chancejs -> 1.0.6
 
