@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.8 (07/12/2017)
+ * Added new Collab `User.Content()` endpoint
+
 ## 0.12.7 (07/11/2017)
  * Added new `Opportunity.Types()` endpoint
 
@@ -68,13 +71,13 @@ Version History
 
 ## 0.11.10 (09/08/2016)
  * Adding `Invite.open()` method
- 
+
 ## 0.11.9 (09/05/2016)
  * Adding `Users.oppHoursSummary()` method
 
 ## 0.11.8 (08/16/2016)
  * Adding `Users.incomingRoleSubmissions()` method
- 
+
 ## 0.11.7 (08/01/2016)
  * Adding `Users.sentInvites()` method
 
