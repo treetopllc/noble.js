@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.9 (08/03/2017)
+ * Added new `Orgs.GroupsDetailed()` endpoint
+
 ## 0.12.8 (07/12/2017)
  * Added new Collab `User.Content()` endpoint
 
