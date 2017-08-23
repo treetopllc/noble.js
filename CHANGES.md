@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.10 (08/23/2017)
+ * Added new `Orgs.Hosts()` endpoint
+
 ## 0.12.9 (08/03/2017)
  * Added new `Orgs.GroupsDetailed()` endpoint
 
