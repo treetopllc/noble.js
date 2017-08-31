@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.11 (09/12/2017)
+ * Added new `Users.deleteFromNetwork()` endpoint
+
 ## 0.12.10 (08/23/2017)
  * Added new `Orgs.Hosts()` endpoint
 
