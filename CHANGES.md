@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.12 (09/13/2017)
+ * Added new `Opportunity.userAsset()` endpoint to upload assets to an opp
+
 ## 0.12.11 (09/12/2017)
  * Added new `Users.deleteFromNetwork()` endpoint
 
