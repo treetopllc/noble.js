@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.13 (10/31/2017)
+ * Changes `Organization.hosts` to use new endpoint `hosts/of_contributed_hours`
+
 ## 0.12.12 (09/13/2017)
  * Added new `Opportunity.userAsset()` endpoint to upload assets to an opp
 
