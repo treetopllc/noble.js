@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.14 (11/01/2017)
+ * Remove depracated opportunity assets POST endpoint
+
 ## 0.12.13 (10/31/2017)
  * Changes `Organization.hosts` to use new endpoint `hosts/of_contributed_hours`
 
