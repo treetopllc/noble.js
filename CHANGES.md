@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.15 (11/06/2017)
+ * Update the organization.opportunities endpoint url
+
 ## 0.12.14 (11/01/2017)
  * Remove depracated opportunity assets POST endpoint
 
