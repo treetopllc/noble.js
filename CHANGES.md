@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.16 (11/13/2017)
+ * Add new Collab `Invite.post()` method
+
 ## 0.12.15 (11/06/2017)
  * Update the organization.opportunities endpoint url
 
