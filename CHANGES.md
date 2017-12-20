@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.17 (12/20/2017)
+ * Adds new `Orgs.submitOpp(oppID)` endpoint to submit an opp for moderation
+
 ## 0.12.16 (11/13/2017)
  * Add new Collab `Invite.post()` method
 
