@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.18 (12/27/2017)
+ * Add new `User.get()` method
+
 ## 0.12.17 (12/20/2017)
  * Adds new `Orgs.submitOpp(oppID)` endpoint to submit an opp for moderation
 
