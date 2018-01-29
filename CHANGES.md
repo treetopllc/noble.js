@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.19 (01/29/2019)
+ * Add optional `override` (bool) param to `User.get(id).role()` method
+
 ## 0.12.18 (12/27/2017)
  * Add new `User.get()` method
 
