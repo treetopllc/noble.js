@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.20 (02/09/2019)
+ * Add generic `COL_Portal.get()` method to get Portal resource
+
 ## 0.12.19 (01/29/2019)
  * Add optional `override` (bool) param to `User.get(id).role()` method
 
