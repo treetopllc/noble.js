@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.12.22 (02/13/2018)
+ * New lists domain for endpoints that fetch mutliple vertices by their IDs
+ * Opportunities -> new endpoint to fetch opps by array of IDs
+
 ## 0.12.21 (02/12/2018)
  * Swap endpoints for hosted opps and opp hosts
 
