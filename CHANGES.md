@@ -1,9 +1,12 @@
 Version History
 ===============
-## 0.12.20 (02/09/2019)
+## 0.12.21 (02/12/2018)
+ * Swap endpoints for hosted opps and opp hosts
+
+## 0.12.20 (02/09/2018)
  * Add generic `COL_Portal.get()` method to get Portal resource
 
-## 0.12.19 (01/29/2019)
+## 0.12.19 (01/29/2018)
  * Add optional `override` (bool) param to `User.get(id).role()` method
 
 ## 0.12.18 (12/27/2017)
