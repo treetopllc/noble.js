@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.23 (02/15/2018)
+ * Groups -> new endpoints to fetch list of opportunities contributing to this group's hours and hosts of opportunities contributing to this group's hours
+
 ## 0.12.22 (02/13/2018)
  * New lists domain for endpoints that fetch mutliple vertices by their IDs
  * Opportunities -> new endpoint to fetch opps by array of IDs
