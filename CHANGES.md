@@ -1,7 +1,7 @@
 Version History
 ===============
 ## 0.12.24 (02/26/2018)
- * Add new `Opportunity.impact` endpoint
+ * Add new `Opportunity.impact()` endpoint
 
 ## 0.12.23 (02/15/2018)
  * Groups -> new endpoints to fetch list of opportunities contributing to this group's hours and hosts of opportunities contributing to this group's hours
