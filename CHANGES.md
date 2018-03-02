@@ -1,6 +1,6 @@
 Version History
 ===============
-## 0.12.24 (02/26/2018)
+## 0.12.25 (02/26/2018)
  * Add new `Opportunity.impact()` endpoint
 
 ## 0.12.23 (02/15/2018)
