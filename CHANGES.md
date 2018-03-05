@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.12.26 (03/05/2018)
+ * Change impact endpoint to `Opportunity.participation() and provide 'impact' as a key`
+
 ## 0.12.25 (02/26/2018)
  * Add new `Opportunity.impact()` endpoint
 
