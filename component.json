@@ -64,6 +64,7 @@
     "lib/graph/Noblehour/User.js",
     "lib/graph/Collaboratory.js",
     "lib/graph/Collaboratory/Course.js",
+    "lib/graph/Collaboratory/Class.js",
     "lib/graph/Collaboratory/Portal.js",
     "lib/graph/Collaboratory/User.js"
   ]
