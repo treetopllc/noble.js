@@ -1,5 +1,9 @@
 Version History
 ===============
+
+## 0.12.27 (03/08/2018)
+ * Implement new endpoints for Collaboratory Courses/Classes/Portals/Users/Units
+
 ## 0.12.26 (03/05/2018)
  * Change impact endpoint to `Opportunity.participation()` and provide 'impact' as a key
 
