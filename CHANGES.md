@@ -1,6 +1,9 @@
 Version History
 ===============
 
+## 0.12.28 (03/19/2018)
+ * Add new `User.roles()` endpoint
+
 ## 0.12.27 (03/08/2018)
  * Implement new endpoints for Collaboratory Courses/Classes/Portals/Users/Units
 
