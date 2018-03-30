@@ -1,10 +1,11 @@
 Version History
 ===============
-## 0.12.29 (03/26/2018)
- * Add new `COL_Unit.postCoursePrefix()` endpoint
 
 ## 0.12.30 (03/30/2018)
  * Add new `Opportunity.relationships()` endpoint
+
+## 0.12.29 (03/26/2018)
+ * Add new `COL_Unit.postCoursePrefix()` endpoint
 
 ## 0.12.28 (03/19/2018)
  * Add new `User.roles()` endpoint
