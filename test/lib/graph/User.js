@@ -83,33 +83,6 @@ describe("lib/graph/User.js", function() {
             });
         });
 
-        describe("#projects([query], callback)", function() {
-            it("should pass a smoke test", function(done) {
-                server.respondWith("/users/abc/projects", simpleResponse);
-
-                user.projects(done);
-            });
-
-            it("should pass additional query string arguments", function(done) {
-                server.respondWith("/users/abc/projects?limit=5", [
-                    200,
-                    defaultHeaders,
-                    JSON.stringify(createArray(5, function() {
-                        return {
-                            id: chance.guid()
-                        };
-                    }))]);
-
-                user.projects({
-                    limit: 5
-                }, function(err, results) {
-                    if (err) return done(err);
-                    expect(results.length).to.equal(5);
-                    done();
-                });
-            });
-        });
-
         describe("#relationships([query], callback)", function() {
             it("should pass a smoke test", function(done) {
                 server.respondWith("/users/abc/relationships", simpleResponse);
