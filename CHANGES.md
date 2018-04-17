@@ -1,5 +1,7 @@
 Version History
 ===============
+## 0.13.00 (04/17/2018)
+ * Rename `Projects` endpoint to `Activities`
 
 ## 0.12.30 (03/30/2018)
  * Add new `Opportunity.relationships()` endpoint
