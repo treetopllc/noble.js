@@ -1,5 +1,26 @@
 Version History
 ===============
+## 0.13.00 (04/17/2018)
+ * Rename `Projects` endpoint to `Activities`
+
+## 0.12.30 (03/30/2018)
+ * Add new `Opportunity.relationships()` endpoint
+
+## 0.12.29 (03/26/2018)
+ * Add new `COL_Unit.postCoursePrefix()` endpoint
+
+## 0.12.28 (03/19/2018)
+ * Add new `User.roles()` endpoint
+
+## 0.12.27 (03/08/2018)
+ * Implement new endpoints for Collaboratory Courses/Classes/Portals/Users/Units
+
+## 0.12.26 (03/05/2018)
+ * Change impact endpoint to `Opportunity.participation()` and provide 'impact' as a key
+
+## 0.12.25 (02/26/2018)
+ * Add new `Opportunity.impact()` endpoint
+
 ## 0.12.23 (02/15/2018)
  * Groups -> new endpoints to fetch list of opportunities contributing to this group's hours and hosts of opportunities contributing to this group's hours
 
