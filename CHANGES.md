@@ -1,5 +1,7 @@
 Version History
 ===============
+## 0.13.01 (05/01/2018)
+ * Add `User.postSubmissions()` endpoint
 ## 0.13.00 (04/17/2018)
  * Rename `Projects` endpoint to `Activities`
 
