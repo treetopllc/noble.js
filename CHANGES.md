@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.13.04 (05/14/2018)
+ * Remove  `User.groups()` endpoint
+
 ## 0.13.03 (05/08/2018)
  * Separate classCollaborators from generic entityCollaborators
 ## 0.13.02 (05/04/2018)
