@@ -1,10 +1,18 @@
 Version History
 ===============
-## 0.13.02 (05/04/2018)
+## 0.14.05 (05/15/2018)
+ * Add `User.moderationsCoursesAndSections()` endpoint
+
+## 0.14.03 (05/08/2018)
+ * Separate classCollaborators from generic entityCollaborators
+
+## 0.14.02 (05/04/2018)
  * Create generic entityCollaborators endpoint for portal
-## 0.13.01 (05/01/2018)
+
+## 0.14.01 (05/01/2018)
  * Add `User.postSubmissions()` endpoint
-## 0.13.00 (04/17/2018)
+
+## 0.14.00 (04/17/2018)
  * Rename `Projects` endpoint to `Activities`
 
 ## 0.12.30 (03/30/2018)
