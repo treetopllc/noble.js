@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.06 (05/18/2018)
+ * Add `retain_hours` flag/param to `User.deleteFromNetwork()` endpoint
+
 ## 0.14.05 (05/15/2018)
  * Add `User.moderationsCoursesAndSections()` endpoint
 
