@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.07 (05/24/2018)
+ * Return full response with error callbacks
+
 ## 0.14.06 (05/18/2018)
  * Add `retain_hours` flag/param to `User.deleteFromNetwork()` endpoint
 
