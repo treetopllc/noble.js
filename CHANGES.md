@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.08 (06/6/2018)
+ * Add portal.search() endpoint
+
 ## 0.14.07 (05/24/2018)
  * Return full response with error callbacks
 
