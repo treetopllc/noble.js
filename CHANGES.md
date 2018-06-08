@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.09 (06/8/2018)
+ * Add portal.internalContent() endpoint
+
 ## 0.14.08 (06/6/2018)
  * Add portal.search() endpoint
 
