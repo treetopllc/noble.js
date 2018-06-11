@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.10 (06/11/2018)
+ * Add new nh moderations endpoints
+
 ## 0.14.09 (06/8/2018)
  * Add portal.internalContent() endpoint
 
