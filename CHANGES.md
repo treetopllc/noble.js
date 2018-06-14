@@ -1,5 +1,10 @@
 Version History
 ===============
+## 0.14.11 (06/12/2018)
+ * moderations endpoints to community
+ * fix syntax errors
+ * expose community
+
 ## 0.14.10 (06/11/2018)
  * Add new nh moderations endpoints
 
