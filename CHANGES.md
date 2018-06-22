@@ -1,15 +1,44 @@
 Version History
 ===============
-## 0.13.04 (05/14/2018)
- * Remove  `User.groups()` endpoint
+## 0.14.13 (06/21/2018)
+ * User roles get passes params as query
 
-## 0.13.03 (05/08/2018)
+## 0.14.12 (06/14/2018)
+ * User network delete passes params as query
+
+## 0.14.11 (06/12/2018)
+ * Moderations endpoints to community
+ * Fix syntax errors
+ * Expose community
+
+## 0.14.10 (06/11/2018)
+ * Add new nh moderations endpoints
+
+## 0.14.09 (06/8/2018)
+ * Add portal.internalContent() endpoint
+
+## 0.14.08 (06/6/2018)
+ * Add portal.search() endpoint
+
+## 0.14.07 (05/24/2018)
+ * Return full response with error callbacks
+
+## 0.14.06 (05/18/2018)
+ * Add `retain_hours` flag/param to `User.deleteFromNetwork()` endpoint
+
+## 0.14.05 (05/15/2018)
+ * Add `User.moderationsCoursesAndSections()` endpoint
+
+## 0.14.03 (05/08/2018)
  * Separate classCollaborators from generic entityCollaborators
-## 0.13.02 (05/04/2018)
+
+## 0.14.02 (05/04/2018)
  * Create generic entityCollaborators endpoint for portal
-## 0.13.01 (05/01/2018)
+
+## 0.14.01 (05/01/2018)
  * Add `User.postSubmissions()` endpoint
-## 0.13.00 (04/17/2018)
+
+## 0.14.00 (04/17/2018)
  * Rename `Projects` endpoint to `Activities`
 
 ## 0.12.30 (03/30/2018)
