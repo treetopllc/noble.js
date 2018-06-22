@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.13 (06/21/2018)
+ * User roles get passes params as query
+
 ## 0.14.12 (06/14/2018)
  * User network delete passes params as query
 
