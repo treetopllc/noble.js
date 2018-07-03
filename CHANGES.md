@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.14 (07/02/2018)
+* Adding query params to Noblehour Moderation endpoints
+
 ## 0.14.13 (06/21/2018)
  * User roles get passes params as query
 
