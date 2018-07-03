@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.15 (07/03/2018)
+ * Add Submission unpublish method
+
 ## 0.14.13 (06/21/2018)
  * User roles get passes params as query
 
