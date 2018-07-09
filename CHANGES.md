@@ -1,5 +1,22 @@
 Version History
 ===============
+## 0.14.15 (07/09/2018)
+ * Remove deprecated classCollaborators endpoint
+
+## 0.14.14 (07/02/2018)
+* Adding query params to Noblehour Moderation endpoints
+
+## 0.14.13 (06/21/2018)
+ * User roles get passes params as query
+
+## 0.14.12 (06/14/2018)
+ * User network delete passes params as query
+
+## 0.14.11 (06/12/2018)
+ * Moderations endpoints to community
+ * Fix syntax errors
+ * Expose community
+
 ## 0.14.10 (06/11/2018)
  * Add new nh moderations endpoints
 
