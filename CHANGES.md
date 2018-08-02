@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.16 (08/02/2018)
+ * Add internal entityCollaborators endpoint
+
 ## 0.14.15 (07/09/2018)
  * Remove deprecated classCollaborators endpoint
 
