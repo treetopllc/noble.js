@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.17 (10/26/2018)
+ * Add hourSet create and modify endpoints
+
 ## 0.14.16 (08/02/2018)
  * Add internal entityCollaborators endpoint
 
