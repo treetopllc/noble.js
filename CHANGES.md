@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.14.17 (11/28/2018)
+ * Add hourSuggestions endpoint
+
 ## 0.14.16 (08/02/2018)
  * Add internal entityCollaborators endpoint
 
