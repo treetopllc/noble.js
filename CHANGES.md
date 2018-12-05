@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.15.0 (12/05/2018)
+ * Swap groupSuggestions with contributionSuggestions endpoint
+
 ## 0.14.18 (11/28/2018)
  * Add hourSuggestions endpoint
 
