@@ -1,5 +1,9 @@
 Version History
 ===============
+## 0.15.1 (03/14/2019)
+ * Add prospectiveCollaborators endpoint
+ * Remove collaborators endpoint
+
 ## 0.15.0 (12/05/2018)
  * Swap groupSuggestions with contributionSuggestions endpoint
 
