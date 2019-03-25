@@ -1,5 +1,8 @@
 Version History
 ===============
+## 0.15.2 (03/25/2019)
+ * Add Activity review endpoint
+
 ## 0.15.1 (03/14/2019)
  * Add prospectiveCollaborators endpoint
  * Remove collaborators endpoint
