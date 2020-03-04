@@ -8,7 +8,7 @@
     "component/each": "*",
     "component/inherit": "*",
     "component/map": "*",
-    "eivindfjeldstad/iframe-multipart": "*",
+    "treetopllc/iframe-multipart": "*",
     "treetopllc/to-constant-case": "master",
     "segmentio/extend": "*",
     "treetopllc/isodate-traverse": "0.3.4",
@@ -21,7 +21,7 @@
       "dominicbarnes/expect.js": "master",
       "ianstormtaylor/sinon": "59a0bdc92e071aeb705d71176734618867440602",
       "victorquinn/chancejs": "1.0.6",
-      "visionmedia/debug": "*",
+      "visionmedia/debug": "2.2.0",
       "mochajs/mocha": "*"
     },
     "scripts": [
